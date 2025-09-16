@@ -1,7 +1,12 @@
 import { Insight } from '@/lib/api'
 import { LightBulbIcon, ChartBarIcon } from '@heroicons/react/24/outline'
 
-export default function InsightCard({ insight }:{insight: Insight}){
+type InsightCardProps = {
+  insight: Insight
+  index?: number
+}
+
+export default function InsightCard({ insight, index }: InsightCardProps){
   const getConfidenceColor = (score?: number) => {
     if (!score) return 'text-neutral-400'
     if (score >= 0.8) return 'text-success-600'
@@ -16,10 +21,17 @@ export default function InsightCard({ insight }:{insight: Insight}){
     return 'bg-error-50'
   }
 
+  const badgeLabel = typeof index === 'number' ? String(index + 1).padStart(2, '0') : null
+
   return (
-    <div className="card group hover:shadow-medium transition-all duration-300">
-      <div className="flex items-start gap-4 mb-4">
-        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary-100 group-hover:bg-primary-200 transition-colors duration-200">
+    <div className="card group transition-all duration-300 hover:shadow-medium">
+      {badgeLabel && (
+        <div className="absolute right-8 top-8 rounded-full bg-neutral-100 px-3 py-1 text-xs font-semibold text-neutral-500">
+          Insight {badgeLabel}
+        </div>
+      )}
+      <div className="mb-4 flex items-start gap-4">
+        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary-100 transition-colors duration-200 group-hover:bg-primary-200">
           <LightBulbIcon className="h-5 w-5 text-primary-600" />
         </div>
         <div className="flex-1">
@@ -27,20 +39,18 @@ export default function InsightCard({ insight }:{insight: Insight}){
         </div>
       </div>
 
-      <p className="text-neutral-700 leading-relaxed mb-4">{insight.summary}</p>
+      <p className="mb-4 leading-relaxed text-neutral-700">{insight.summary}</p>
 
       {typeof insight.score === 'number' && (
-        <div className="flex items-center justify-between pt-4 border-t border-neutral-100">
+        <div className="flex items-center justify-between border-t border-neutral-100 pt-4">
           <div className="flex items-center gap-2">
             <ChartBarIcon className="h-4 w-4 text-neutral-400" />
             <span className="text-sm text-neutral-600">Confidence Score</span>
           </div>
           <div className={`flex items-center gap-2 rounded-full px-3 py-1 ${getConfidenceBg(insight.score)}`}>
-            <div
-              className={`h-2 w-2 rounded-full ${getConfidenceColor(insight.score).replace('text-', 'bg-')}`}
-            ></div>
+            <div className={`h-2 w-2 rounded-full ${getConfidenceColor(insight.score).replace('text-', 'bg-')}`}></div>
             <span className={`text-sm font-medium ${getConfidenceColor(insight.score)}`}>
-              {(insight.score*100).toFixed(0)}%
+              {(insight.score * 100).toFixed(0)}%
             </span>
           </div>
         </div>

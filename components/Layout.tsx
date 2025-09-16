@@ -37,10 +37,8 @@ export default function Layout({ children }:{children: ReactNode}){
   return (
     <div className="min-h-screen bg-gradient-subtle">
       <div className="mx-auto flex max-w-7xl gap-8 p-6">
-        {/* Modern Sidebar */}
         <aside className="w-64 flex-shrink-0">
           <div className="sticky top-6">
-            {/* Logo/Brand Section */}
             <div className="mb-8 flex items-center gap-3 rounded-2xl bg-white/80 p-4 shadow-soft backdrop-blur-sm">
               <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-primary shadow-glow">
                 <DocumentTextIcon className="h-6 w-6 text-white" />
@@ -51,7 +49,6 @@ export default function Layout({ children }:{children: ReactNode}){
               </div>
             </div>
 
-            {/* Navigation */}
             <div className="glass rounded-2xl p-4">
               <div className="mb-4 px-2">
                 <h3 className="text-xs font-semibold uppercase tracking-wide text-neutral-500">
@@ -69,22 +66,10 @@ export default function Layout({ children }:{children: ReactNode}){
                 ))}
               </nav>
             </div>
-
-            {/* Status Indicator */}
-            <div className="mt-6 rounded-2xl bg-white/60 p-4 shadow-soft backdrop-blur-sm">
-              <div className="flex items-center gap-3">
-                <div className="h-3 w-3 rounded-full bg-success-500 animate-pulse-slow"></div>
-                <div className="flex-1">
-                  <p className="text-sm font-medium text-neutral-900">System Online</p>
-                  <p className="text-xs text-neutral-500">Ready for analysis</p>
-                </div>
-              </div>
-            </div>
           </div>
         </aside>
 
-        {/* Main Content Area */}
-        <main className="flex-1 min-w-0">
+        <main className="min-w-0 flex-1">
           <div className="animate-fade-in">
             <div className="glass rounded-3xl p-8 shadow-soft">
               {children}

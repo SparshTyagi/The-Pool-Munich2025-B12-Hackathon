@@ -3,7 +3,7 @@ import TopKPI from '@/components/TopKPI'
 import InsightCard from '@/components/InsightCard'
 import PDFDownloadButton from '@/components/PDFDownloadButton'
 import { getReportPdfUrl, getResults } from '@/lib/api'
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useRouter } from 'next/router'
 import { ArrowLeftIcon, DocumentTextIcon, SparklesIcon } from '@heroicons/react/24/outline'
 
@@ -18,17 +18,34 @@ export default function ResultsPage(){
     getResults(id).then(res => { setData(res); setLoading(false) })
   }, [jobId])
 
+  const insights = data?.insights || []
+  const main = insights[0]
+  const supportingInsights = insights.slice(1)
+
+  const confidence = useMemo(() => {
+    if (!main || typeof main.score !== 'number') return null
+    return Math.round(main.score * 100)
+  }, [main])
+
+  const recommendationSegments = useMemo(() => {
+    if (!main?.summary) return []
+    return main.summary
+      .split(/;|\./)
+      .map((part: string) => part.trim())
+      .filter(Boolean)
+  }, [main])
+
   if (loading || !data) {
     return (
       <Layout>
-        <div className="flex flex-col items-center justify-center min-h-[400px] space-y-6">
+        <div className="flex min-h-[400px] flex-col items-center justify-center space-y-6">
           <div className="flex items-center gap-3">
             <div className="h-8 w-8 animate-spin rounded-full border-2 border-primary-500 border-t-transparent"></div>
             <span className="text-lg text-neutral-600">Loading analysis results...</span>
           </div>
           <div className="w-full max-w-md">
-            <div className="h-4 bg-neutral-200 rounded-full overflow-hidden">
-              <div className="h-full bg-primary-500 rounded-full animate-pulse" style={{width: '60%'}}></div>
+            <div className="h-4 overflow-hidden rounded-full bg-neutral-200">
+              <div className="h-full w-3/5 animate-pulse rounded-full bg-primary-500"></div>
             </div>
           </div>
         </div>
@@ -36,83 +53,150 @@ export default function ResultsPage(){
     )
   }
 
-  const [main, ...rest] = data.insights || []
+  const primaryRecommendation = recommendationSegments[0] || main?.summary || 'Analysis complete'
+  const additionalActions = recommendationSegments.slice(1)
+
+  const focusAreas = supportingInsights.slice(0, 3)
+  const focusAreaThemes = ['Growth signals', 'Financial outlook', 'Risk watchlist']
 
   return (
     <Layout>
-      {/* Header Section */}
-      <div className="mb-8">
-        <div className="flex items-center gap-4 mb-6">
-          <button
-            onClick={() => router.back()}
-            className="btn btn-ghost p-2"
-          >
-            <ArrowLeftIcon className="h-5 w-5" />
-          </button>
-          <div>
-            <h1 className="text-3xl font-bold text-gradient">Analysis Results</h1>
-            <p className="text-neutral-600 mt-1">Comprehensive investment analysis completed</p>
-          </div>
-        </div>
-
-        {/* Main KPI Section */}
-        <div className="flex justify-center mb-8">
-          <div className="animate-fade-in">
-            <TopKPI
-              label={data.mainKpi?.label || 'Investment Readiness'}
-              value={data.mainKpi?.value || 'B+'}
-              context={data.mainKpi?.context || 'Strong traction with moderate technical risk'}
-            />
-          </div>
-        </div>
-      </div>
-
-      {/* Main Recommendation */}
-      {main && (
-        <div className="mb-8">
-          <div className="flex items-center gap-3 mb-6">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent-100">
-              <SparklesIcon className="h-5 w-5 text-accent-600" />
+      <div className="space-y-12">
+        <section className="border-b border-neutral-200 pb-8">
+          <div className="flex flex-wrap items-center gap-4">
+            <button
+              onClick={() => router.back()}
+              className="btn btn-ghost p-2"
+            >
+              <ArrowLeftIcon className="h-5 w-5" />
+            </button>
+            <div>
+              <h1 className="text-3xl font-bold text-gradient">Analysis Results</h1>
+              <p className="mt-1 text-neutral-600">Comprehensive investment analysis completed</p>
             </div>
-            <h2 className="text-2xl font-bold text-neutral-900">Key Recommendation</h2>
           </div>
-          <div className="animate-slide-in">
-            <InsightCard
-              insight={{
-                title: main.title || 'Primary Recommendation',
-                summary: main.summary || 'Analysis complete with actionable insights',
-                score: main.score
-              }}
-            />
-          </div>
-        </div>
-      )}
+        </section>
 
-      {/* Additional Insights */}
-      {rest.length > 0 && (
-        <div className="mb-8">
-          <div className="flex items-center gap-3 mb-6">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary-100">
-              <DocumentTextIcon className="h-5 w-5 text-primary-600" />
-            </div>
-            <h2 className="text-2xl font-bold text-neutral-900">Detailed Insights</h2>
-          </div>
-          <div className="grid grid-cols-1 gap-6 lg:grid-cols-2 xl:grid-cols-3">
-            {rest.slice(0, 6).map((ins: any, idx: number) => (
-              <div key={idx} className="animate-fade-in" style={{animationDelay: `${idx * 100}ms`}}>
-                <InsightCard insight={ins} />
+        <section className="grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)]">
+          <TopKPI
+            label={data.mainKpi?.label || 'Investment Readiness'}
+            value={data.mainKpi?.value || 'B+'}
+            context={data.mainKpi?.context || 'Strong traction with moderate technical risk'}
+            className="h-full text-left"
+          />
+
+          <div className="card h-full">
+            <h3 className="text-lg font-semibold text-neutral-900">Analysis Snapshot</h3>
+            <p className="mt-2 text-sm leading-relaxed text-neutral-600">
+              A summary of how the agents evaluated your submission across growth, financial health, and operational risks.
+            </p>
+
+            {confidence !== null && (
+              <div className="mt-6">
+                <div className="flex items-center justify-between text-sm font-medium text-neutral-900">
+                  <span>Confidence Score</span>
+                  <span>{confidence}%</span>
+                </div>
+                <div className="mt-2 h-2 w-full rounded-full bg-neutral-200">
+                  <div
+                    className="h-full rounded-full bg-success-500"
+                    style={{ width: `${Math.min(100, Math.max(0, confidence))}%` }}
+                  />
+                </div>
+                <p className="mt-2 text-xs text-neutral-500">
+                  Indicates how strongly the platform supports the recommendation based on the uploaded material.
+                </p>
               </div>
-            ))}
-          </div>
-        </div>
-      )}
+            )}
 
-      {/* Download Section */}
-      <div className="flex justify-center pt-8 border-t border-neutral-200">
-        <div className="animate-fade-in">
+            {focusAreas.length > 0 && (
+              <div className="mt-6">
+                <p className="text-sm font-semibold uppercase tracking-wide text-neutral-500">Focus areas</p>
+                <div className="mt-4 grid gap-4">
+                  {focusAreas.map((insight: any, index: number) => {
+                    const tone = index === 2 ? 'warning' : index === 1 ? 'primary' : 'success'
+                    const bg = tone === 'warning' ? 'bg-warning-50 border-warning-100' : tone === 'primary' ? 'bg-primary-50 border-primary-100' : 'bg-success-50 border-success-100'
+                    const text = tone === 'warning' ? 'text-warning-800' : tone === 'primary' ? 'text-primary-800' : 'text-success-800'
+                    return (
+                      <div key={`${insight.title}-${index}`} className={`rounded-2xl border ${bg} p-4`}>
+                        <p className={`text-xs font-semibold uppercase tracking-wide ${text}`}>
+                          {focusAreaThemes[index] || insight.title}
+                        </p>
+                        <p className="mt-2 text-sm leading-relaxed text-neutral-700">{insight.summary}</p>
+                      </div>
+                    )
+                  })}
+                </div>
+              </div>
+            )}
+          </div>
+        </section>
+
+        {main && (
+          <section className="space-y-4">
+            <div className="flex items-center gap-3">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent-100">
+                <SparklesIcon className="h-5 w-5 text-accent-600" />
+              </div>
+              <h2 className="text-2xl font-bold text-neutral-900">Key Recommendation</h2>
+            </div>
+            <div className="rounded-3xl border border-accent-200 bg-accent-50/70 p-6 shadow-soft">
+              <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
+                <div className="max-w-3xl">
+                  <p className="text-lg font-semibold text-neutral-900">
+                    {primaryRecommendation}
+                  </p>
+                  {additionalActions.length > 0 && (
+                    <div className="mt-4">
+                      <p className="text-sm font-semibold text-neutral-800">Supporting actions</p>
+                      <ul className="mt-2 space-y-2 text-sm text-neutral-700">
+                        {additionalActions.map((item: string, idx: number) => (
+                          <li key={`${item}-${idx}`} className="flex items-start gap-2">
+                            <span className="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-accent-400" aria-hidden="true"></span>
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </div>
+                {confidence !== null && (
+                  <div className="flex items-center gap-2 self-start rounded-full bg-white/80 px-4 py-2 text-sm font-semibold text-success-700 shadow-soft">
+                    <span className="h-2 w-2 rounded-full bg-success-500"></span>
+                    Confidence {confidence}%
+                  </div>
+                )}
+              </div>
+            </div>
+          </section>
+        )}
+
+        {supportingInsights.length > 0 && (
+          <section className="space-y-4">
+            <div className="flex items-center gap-3">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary-100">
+                <DocumentTextIcon className="h-5 w-5 text-primary-600" />
+              </div>
+              <h2 className="text-2xl font-bold text-neutral-900">Detailed Insights</h2>
+            </div>
+            <p className="max-w-3xl text-sm text-neutral-600">
+              Dive deeper into the findings that informed this recommendation. Each card highlights one of the high-impact observations surfaced by the agents.
+            </p>
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
+              {supportingInsights.map((ins: any, idx: number) => (
+                <div key={idx} className="animate-fade-in" style={{ animationDelay: `${idx * 120}ms` }}>
+                  <InsightCard insight={ins} index={idx} />
+                </div>
+              ))}
+            </div>
+          </section>
+        )}
+
+        <section className="flex justify-center pt-8 border-t border-neutral-200">
           <PDFDownloadButton href={data.reportUrl || getReportPdfUrl(String(jobId || 'demo'))} />
-        </div>
+        </section>
       </div>
     </Layout>
   )
 }
+

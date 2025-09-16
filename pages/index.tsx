@@ -6,7 +6,44 @@ import StartButton from '@/components/StartButton'
 import AgentStatusCard from '@/components/AgentStatusCard'
 import { startAnalysis, getJobStatus, AgentStatus } from '@/lib/api'
 import { useRouter } from 'next/router'
-import { SparklesIcon, DocumentTextIcon, CpuChipIcon } from '@heroicons/react/24/outline'
+import { SparklesIcon, DocumentTextIcon, CpuChipIcon, ShieldCheckIcon, ClockIcon } from '@heroicons/react/24/outline'
+
+const heroHighlights = [
+  {
+    title: 'Document Analysis',
+    description: 'Upload pitch decks, financials, and business plans',
+    icon: DocumentTextIcon,
+    iconWrapper: 'bg-primary-100',
+    iconColor: 'text-primary-600'
+  },
+  {
+    title: 'AI-Powered Insights',
+    description: 'Get detailed analysis from specialized AI agents',
+    icon: SparklesIcon,
+    iconWrapper: 'bg-accent-100',
+    iconColor: 'text-accent-600'
+  },
+  {
+    title: 'Comprehensive Reports',
+    description: 'Receive detailed investment recommendations',
+    icon: CpuChipIcon,
+    iconWrapper: 'bg-success-100',
+    iconColor: 'text-success-600'
+  }
+]
+
+const actionCallouts = [
+  {
+    title: 'Secure by default',
+    description: 'Documents are encrypted in transit and removed after analysis completes.',
+    icon: ShieldCheckIcon
+  },
+  {
+    title: 'Fast turnaround',
+    description: 'Agents usually deliver a first pass in under three minutes once you submit.',
+    icon: ClockIcon
+  }
+]
 
 export default function InputPage(){
   const router = useRouter()
@@ -16,7 +53,6 @@ export default function InputPage(){
   const [agents, setAgents] = useState<AgentStatus[]>([])
   const [starting, setStarting] = useState(false)
 
-  // Load saved preferences (from settings page) just to show how to include them in payload
   const settings = useMemo(()=>{
     if (typeof window === 'undefined') return {}
     try { return JSON.parse(localStorage.getItem('vc-settings') || '{}') } catch { return {} }
@@ -39,7 +75,6 @@ export default function InputPage(){
     }
   }, [files, context, settings])
 
-  // Poll job status
   useEffect(()=>{
     if (!jobId) return
     const t = setInterval(async ()=>{
@@ -62,81 +97,83 @@ export default function InputPage(){
 
   return (
     <Layout>
-      {/* Welcome Header */}
-      <div className="mb-8 animate-fade-in">
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-gradient mb-4">
+      <section className="mb-12 animate-fade-in">
+        <div className="mb-10 text-center">
+          <h1 className="mb-4 text-4xl font-bold text-gradient">
             Investment Analysis Platform
           </h1>
-          <p className="text-xl text-neutral-600 max-w-2xl mx-auto">
+          <p className="mx-auto max-w-2xl text-xl text-neutral-600">
             Upload your startup documents and let our AI agents provide comprehensive investment analysis
           </p>
         </div>
 
-        {/* Quick Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          <div className="card text-center">
-            <div className="flex justify-center mb-3">
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary-100">
-                <DocumentTextIcon className="h-6 w-6 text-primary-600" />
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+          {heroHighlights.map(({ title, description, icon: Icon, iconWrapper, iconColor }) => (
+            <div key={title} className="card text-left">
+              <div className="flex items-start gap-4">
+                <div className={`flex h-12 w-12 items-center justify-center rounded-xl ${iconWrapper}`}>
+                  <Icon className={`h-6 w-6 ${iconColor}`} />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-neutral-900">{title}</h3>
+                  <p className="mt-1 text-sm leading-relaxed text-neutral-600">{description}</p>
+                </div>
               </div>
             </div>
-            <h3 className="font-semibold text-neutral-900">Document Analysis</h3>
-            <p className="text-sm text-neutral-600 mt-1">Upload pitch decks, financials, and business plans</p>
-          </div>
+          ))}
+        </div>
+      </section>
 
-          <div className="card text-center">
-            <div className="flex justify-center mb-3">
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-accent-100">
-                <SparklesIcon className="h-6 w-6 text-accent-600" />
+      <section className="mt-6 border-t border-neutral-200 pt-12">
+        <div className="mb-10 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+          <div>
+            <p className="text-sm font-medium uppercase tracking-wide text-primary-600">Submission</p>
+            <h2 className="mt-2 text-3xl font-semibold text-neutral-900">Upload materials and share context</h2>
+            <p className="mt-3 max-w-2xl text-neutral-600">
+              Provide the documents and narrative your partners need. Combine board decks, financials, product notes, and add any additional color so the agents can tailor their diligence.
+            </p>
+          </div>
+          <div className="grid gap-4 sm:grid-cols-2">
+            {actionCallouts.map(({ title, description, icon: Icon }) => (
+              <div key={title} className="rounded-2xl border border-neutral-200 bg-white/80 p-4 shadow-soft">
+                <div className="mb-3 flex items-center gap-2 text-sm font-semibold text-neutral-900">
+                  <Icon className="h-5 w-5 text-primary-500" />
+                  <span>{title}</span>
+                </div>
+                <p className="text-sm leading-relaxed text-neutral-600">{description}</p>
               </div>
-            </div>
-            <h3 className="font-semibold text-neutral-900">AI-Powered Insights</h3>
-            <p className="text-sm text-neutral-600 mt-1">Get detailed analysis from specialized AI agents</p>
-          </div>
-
-          <div className="card text-center">
-            <div className="flex justify-center mb-3">
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-success-100">
-                <CpuChipIcon className="h-6 w-6 text-success-600" />
-              </div>
-            </div>
-            <h3 className="font-semibold text-neutral-900">Comprehensive Reports</h3>
-            <p className="text-sm text-neutral-600 mt-1">Receive detailed investment recommendations</p>
+            ))}
           </div>
         </div>
-      </div>
 
-      {/* Main Input Section */}
-      <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
-        <div className="lg:col-span-2 animate-slide-in">
-          <Dropzone onFiles={setFiles} />
+        <div className="grid grid-cols-1 gap-8 xl:grid-cols-[minmax(0,1.7fr)_minmax(0,1fr)]">
+          <div className="animate-slide-in">
+            <Dropzone onFiles={setFiles} />
+          </div>
+          <div className="animate-slide-in" style={{ animationDelay: '120ms' }}>
+            <ContextField value={context} onChange={setContext} />
+          </div>
         </div>
-        <div className="animate-slide-in" style={{animationDelay: '200ms'}}>
-          <ContextField value={context} onChange={setContext} />
-        </div>
-      </div>
 
-      {/* Start Analysis Section */}
-      <div className="my-8 text-center animate-fade-in" style={{animationDelay: '400ms'}}>
-        <div className="max-w-md mx-auto">
+        <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <StartButton
             onClick={handleStart}
-            disabled={starting || !canStart}
+            disabled={!canStart}
+            loading={starting}
+            className="self-start"
           />
-          {!canStart && (
-            <p className="text-sm text-neutral-500 mt-3">
-              Upload documents or provide context to start analysis
-            </p>
-          )}
+          <p className="text-sm text-neutral-500">
+            {canStart
+              ? 'Review your inputs before launching the analysis. You can adjust files or context at any time.'
+              : 'Upload at least one document or add contextual notes to enable the analysis button.'}
+          </p>
         </div>
-      </div>
+      </section>
 
-      {/* Agent Status Section */}
       {agents.length > 0 && (
-        <div className="animate-fade-in" style={{animationDelay: '600ms'}}>
+        <section className="mt-12 animate-fade-in" style={{ animationDelay: '200ms' }}>
           <div className="mb-6">
-            <h2 className="text-2xl font-bold text-neutral-900 mb-2">Analysis Progress</h2>
+            <h2 className="mb-2 text-2xl font-bold text-neutral-900">Analysis Progress</h2>
             <p className="text-neutral-600">Our AI agents are analyzing your documents</p>
           </div>
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -144,24 +181,7 @@ export default function InputPage(){
               <AgentStatusCard key={a.name} agent={a} />
             ))}
           </div>
-        </div>
-      )}
-
-      {/* Initial State */}
-      {agents.length === 0 && !starting && (
-        <div className="text-center py-12 animate-fade-in">
-          <div className="max-w-md mx-auto">
-            <div className="flex justify-center mb-4">
-              <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-primary-100">
-                <SparklesIcon className="h-8 w-8 text-primary-600" />
-              </div>
-            </div>
-            <h3 className="text-lg font-semibold text-neutral-900 mb-2">Ready to Analyze</h3>
-            <p className="text-neutral-600">
-              Configure your analysis agents in Settings, then upload your documents to begin
-            </p>
-          </div>
-        </div>
+        </section>
       )}
     </Layout>
   )

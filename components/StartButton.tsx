@@ -1,29 +1,37 @@
 import { PlayIcon, ArrowPathIcon } from '@heroicons/react/24/outline'
 
-export default function StartButton({ onClick, disabled }:{onClick:()=>void, disabled?:boolean}){
+type StartButtonProps = {
+  onClick: () => void
+  disabled?: boolean
+  loading?: boolean
+  className?: string
+}
+
+export default function StartButton({ onClick, disabled, loading, className }: StartButtonProps){
+  const isDisabled = Boolean(disabled || loading)
+
   return (
-    <div className="flex justify-center">
-      <button
-        className={`btn btn-primary text-lg font-semibold px-8 py-4 ${
-          disabled ? 'opacity-75 cursor-not-allowed' : 'hover:scale-105'
-        }`}
-        onClick={onClick}
-        disabled={!!disabled}
-      >
-        <div className="flex items-center gap-3">
-          {disabled ? (
-            <>
-              <ArrowPathIcon className="h-6 w-6 animate-spin" />
-              <span>Starting Analysis...</span>
-            </>
-          ) : (
-            <>
-              <PlayIcon className="h-6 w-6" />
-              <span>Start Analysis</span>
-            </>
-          )}
-        </div>
-      </button>
-    </div>
+    <button
+      className={`btn btn-primary text-lg font-semibold px-8 py-4 ${
+        isDisabled ? 'cursor-not-allowed opacity-80' : 'hover:scale-[1.02]'
+      } ${className ?? ''}`}
+      onClick={onClick}
+      disabled={isDisabled}
+      aria-busy={loading}
+    >
+      <div className="flex items-center gap-3">
+        {loading ? (
+          <>
+            <ArrowPathIcon className="h-6 w-6 animate-spin" />
+            <span>Starting Analysis...</span>
+          </>
+        ) : (
+          <>
+            <PlayIcon className="h-6 w-6" />
+            <span>Start Analysis</span>
+          </>
+        )}
+      </div>
+    </button>
   )
 }
