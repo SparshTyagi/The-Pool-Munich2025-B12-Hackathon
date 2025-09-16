@@ -1,0 +1,32 @@
+{
+  "mainKpi": {
+    "label": "Investment Readiness",
+    "value": "B+",
+    "context": "Strong traction, moderate tech risk"
+  },
+  "insights": [
+    {
+      "title": "Main Recommendation",
+      "summary": "Proceed to partner meeting; require security review; request 18-month runway plan.",
+      "score": 0.82
+    },
+    {
+      "title": "Insight 1",
+      "summary": "Demand signals strong in DACH with 120% YoY growth."
+    },
+    {
+      "title": "Insight 2",
+      "summary": "Gross margin sustainable at 68% per cohort analysis."
+    },
+    {
+      "title": "Insight 3",
+      "summary": "Two critical IP dependencies; escrow or alternative vendors needed."
+    }
+  ],
+  "reportUrl": "",
+  "agents": [
+    { "name": "Market Fit Agent" },
+    { "name": "Financials Agent" },
+    { "name": "Tech Diligence Agent" }
+  ]
+}
