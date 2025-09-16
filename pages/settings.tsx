@@ -12,11 +12,13 @@ import {
 
 type Prefs = {
   language: 'en' | 'de' | 'fr'
+  riskProfile: 'low' | 'medium' | 'high'
   agents: { marketFit: boolean; financials: boolean; tech: boolean; legal: boolean }
 }
 
 const DEFAULTS: Prefs = {
   language: 'en',
+  riskProfile: 'medium',
   agents: { marketFit: true, financials: true, tech: true, legal: false }
 }
 
@@ -58,6 +60,33 @@ const languageLabels: Record<Prefs['language'], string> = {
   fr: 'French'
 }
 
+const riskProfiles: Array<{
+  value: Prefs['riskProfile']
+  label: string
+  description: string
+}> = [
+  {
+    value: 'low',
+    label: 'Low',
+    description: 'Prioritise capital preservation and de-risked plays.'
+  },
+  {
+    value: 'medium',
+    label: 'Balanced',
+    description: 'Blend resilient growth with healthy downside protection.'
+  },
+  {
+    value: 'high',
+    label: 'High',
+    description: 'Optimise for aggressive growth and higher volatility.'
+  }
+]
+
+const riskProfileLabels = riskProfiles.reduce<Record<Prefs['riskProfile'], string>>((map, profile) => {
+  map[profile.value] = profile.label
+  return map
+}, { low: 'Low', medium: 'Balanced', high: 'High' })
+
 export default function SettingsPage(){
   const [prefs, setPrefs] = useState<Prefs>(DEFAULTS)
   const [saved, setSaved] = useState(false)
@@ -65,15 +94,18 @@ export default function SettingsPage(){
 
   useEffect(()=>{
     try {
-      const s = JSON.parse(localStorage.getItem('vc-settings') || 'null')
-      if (s) setPrefs(s)
+      const raw = JSON.parse(localStorage.getItem('vc-settings') || 'null')
+      if (raw) {
+        setPrefs({ ...DEFAULTS, ...raw })
+      }
     } catch {}
   }, [])
 
   useEffect(() => {
     try {
-      const stored = JSON.parse(localStorage.getItem('vc-settings') || 'null') || DEFAULTS
-      setHasChanges(JSON.stringify(prefs) !== JSON.stringify(stored))
+      const stored = JSON.parse(localStorage.getItem('vc-settings') || 'null')
+      const merged = stored ? { ...DEFAULTS, ...stored } : DEFAULTS
+      setHasChanges(JSON.stringify(prefs) !== JSON.stringify(merged))
     } catch {
       setHasChanges(true)
     }
@@ -119,9 +151,9 @@ export default function SettingsPage(){
               <p className="text-sm text-neutral-600">Controls report output and UI labels</p>
             </div>
             <div className="rounded-2xl border border-neutral-200 bg-white p-4 shadow-soft">
-              <p className="text-xs font-semibold uppercase tracking-wide text-neutral-500">Storage</p>
-              <p className="mt-2 text-2xl font-semibold text-neutral-900">Local only</p>
-              <p className="text-sm text-neutral-600">Preferences stay on this device</p>
+              <p className="text-xs font-semibold uppercase tracking-wide text-neutral-500">Risk profile</p>
+              <p className="mt-2 text-2xl font-semibold text-neutral-900">{riskProfileLabels[prefs.riskProfile]}</p>
+              <p className="text-sm text-neutral-600">Guides how assertive recommendations should be</p>
             </div>
           </div>
         </header>
@@ -191,7 +223,7 @@ export default function SettingsPage(){
                 </div>
                 <div>
                   <h2 className="text-xl font-semibold text-neutral-900">General</h2>
-                  <p className="text-sm text-neutral-600">Language and storage preferences.</p>
+                  <p className="text-sm text-neutral-600">Language and risk targeting preferences.</p>
                 </div>
               </div>
 
@@ -214,10 +246,36 @@ export default function SettingsPage(){
                   </p>
                 </div>
 
-                <div className="rounded-2xl border border-neutral-200 bg-neutral-50 p-4">
-                  <p className="text-sm font-semibold text-neutral-800">Storage</p>
-                  <p className="mt-1 text-sm text-neutral-600">
-                    Preferences are stored locally in your browser and never leave this device.
+                <div>
+                  <span className="mb-2 block text-sm font-medium text-neutral-900">Target risk profile</span>
+                  <div className="grid gap-3 sm:grid-cols-3">
+                    {riskProfiles.map(({ value, label, description }) => {
+                      const active = prefs.riskProfile === value
+                      return (
+                        <label
+                          key={value}
+                          className={`group flex cursor-pointer flex-col rounded-2xl border p-4 text-left transition-all duration-200 ${
+                            active
+                              ? 'border-primary-200 bg-primary-50/70 shadow-soft'
+                              : 'border-neutral-200 bg-white hover:border-primary-200 hover:bg-primary-50/50'
+                          }`}
+                        >
+                          <input
+                            type="radio"
+                            name="risk-profile"
+                            value={value}
+                            checked={active}
+                            onChange={() => setPrefs(p => ({ ...p, riskProfile: value }))}
+                            className="sr-only"
+                          />
+                          <span className="text-sm font-semibold text-neutral-900">{label}</span>
+                          <span className="mt-1 text-xs text-neutral-500 leading-relaxed">{description}</span>
+                        </label>
+                      )
+                    })}
+                  </div>
+                  <p className="mt-2 text-sm text-neutral-500">
+                    Determines how assertive the recommendations and diligence depth should be.
                   </p>
                 </div>
 
@@ -242,10 +300,6 @@ export default function SettingsPage(){
                       'Save preferences'
                     )}
                   </button>
-                  <p className="mt-3 flex items-center gap-2 text-sm text-neutral-500">
-                    <span className="h-2 w-2 rounded-full bg-success-500"></span>
-                    Saved locally in your browser
-                  </p>
                 </div>
               </div>
             </div>

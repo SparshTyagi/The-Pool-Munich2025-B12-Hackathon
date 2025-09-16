@@ -45,6 +45,8 @@ const actionCallouts = [
   }
 ]
 
+const isDemoEnvironment = !process.env.NEXT_PUBLIC_API_BASE_URL
+
 export default function InputPage(){
   const router = useRouter()
   const [files, setFiles] = useState<File[]>([])
@@ -67,7 +69,16 @@ export default function InputPage(){
     try {
       const res = await startAnalysis(form)
       setJobId(res.jobId)
-      setAgents(res.agents)
+      const incomingAgents = res.agents ?? []
+      const normalizedAgents = isDemoEnvironment
+        ? incomingAgents.map((agent, index) => ({
+            ...agent,
+            status: agent.status === 'queued' ? 'running' : agent.status,
+            progress: agent.progress && agent.progress > 0 ? agent.progress : Math.min(90, 30 + index * 20),
+            note: agent.note || 'Analyzing uploaded materials'
+          }))
+        : incomingAgents
+      setAgents(normalizedAgents)
     } catch (e) {
       alert('Failed to start analysis. Check console.'); console.error(e)
     } finally {
@@ -93,7 +104,9 @@ export default function InputPage(){
     return ()=> clearInterval(t)
   }, [jobId, router])
 
-  const canStart = files.length > 0 || context.trim().length > 0
+  const baseCanStart = files.length > 0 || context.trim().length > 0
+  const canStart = isDemoEnvironment || baseCanStart
+  const showDemoPrompt = isDemoEnvironment && !baseCanStart
 
   return (
     <Layout>
@@ -146,7 +159,7 @@ export default function InputPage(){
           </div>
         </div>
 
-        <div className="grid grid-cols-1 gap-8 xl:grid-cols-[minmax(0,1.7fr)_minmax(0,1fr)]">
+        <div className="mx-auto max-w-4xl space-y-8">
           <div className="animate-slide-in">
             <Dropzone onFiles={setFiles} />
           </div>
@@ -163,9 +176,11 @@ export default function InputPage(){
             className="self-start"
           />
           <p className="text-sm text-neutral-500">
-            {canStart
-              ? 'Review your inputs before launching the analysis. You can adjust files or context at any time.'
-              : 'Upload at least one document or add contextual notes to enable the analysis button.'}
+            {showDemoPrompt
+              ? 'This interactive demo will use sample data if you start without uploads.'
+              : baseCanStart
+                ? 'Review your inputs before launching the analysis. You can adjust files or context at any time.'
+                : 'Upload at least one document or add contextual notes to enable the analysis button.'}
           </p>
         </div>
       </section>
