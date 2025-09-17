@@ -1,0 +1,12 @@
+{
+  "analysis_agents": {
+    "market_fit": true,
+    "financials": true,
+    "tech": true,
+    "legal": false
+  },
+  "general": {
+    "interface_language": "English (US)",
+    "target_risk_profile": "Balanced"
+  }
+}
