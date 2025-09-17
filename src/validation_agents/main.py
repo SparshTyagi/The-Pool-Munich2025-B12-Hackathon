@@ -23,7 +23,7 @@ class OrchestratorAgent:
         model = "openrouter/sonoma-sky-alpha"
 
         if not llm_api_key or not tavily_api_key:
-            raise ValueError(f"API keys not found. Check your .env file at {dotenv_path}")
+            raise ValueError(f"API keys not found. Check your .env file")
 
         # Instantiate all specialized agents
         self.decomposer = DecomposerAgent(model=model, api_key=llm_api_key)
