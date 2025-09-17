@@ -1,0 +1,450 @@
+{
+  "document_analysis_report": [
+    {
+      "page_number": 0,
+      "status": "Skipped",
+      "reason": "The text is a title slide with an aspirational subtitle promoting innovation, accompanied by a descriptive narrative of the slide's visual elements and design, lacking any statistics, data points, or specific verifiable assertions."
+    },
+    {
+      "page_number": 1,
+      "status": "Skipped",
+      "reason": "The text primarily describes the slide's visual design, layout, tone, and a general core message about information overload in venture capital. It includes relatable, aspirational statements like 'You feel overwhelmed by a mountain of information every day' and 'VCs are flooded with fragmented data, while the best startups slip away,' but lacks any specific statistics, data points, or verifiable factual assertions."
+    },
+    {
+      "page_number": 2,
+      "status": "Analyzed",
+      "validation_results": {
+        "validation_results": [
+          {
+            "claim": "Every year, 50,000,000 startups launch.",
+            "conclusion": "SUPPORTED",
+            "summary": "Multiple sources consistently report that approximately 50 million startups are launched annually worldwide, based on estimates derived from Global Entrepreneurship Monitor (GEM) data analyzed by Dr. Paul D. Reynolds. This figure is presented as a rough estimate, accounting for about one-third of attempted business starts succeeding in launch. The consistency across sources, including a reputable Forbes article citing a Microsoft report, supports the claim despite varying source reputability scores (ranging from 3 to 8). Lower-reputability sources (e.g., personal websites and company blogs) rely on the same foundational data, reinforcing the estimate's prevalence in discussions of global startup activity.",
+            "evidence": [
+              {
+                "quote": "Currently, there are 150 million startups, and a staggering 50 million new ones emerge annually",
+                "source": "https://bitsol.tech/understanding-the-unique-challenges-faced-by-startups/"
+              },
+              {
+                "quote": "our best estimates are that there are somewhere around 50 million new startups launched per year",
+                "source": "https://colorlib.com/wp/startup-statistics/"
+              },
+              {
+                "quote": "you can assume 50 million new firm births per year",
+                "source": "https://www.moyak.com/papers/business-startups-entrepreneurs.html"
+              },
+              {
+                "quote": "According to a 2022 Microsoft report, 50 million startups are launched annually",
+                "source": "https://www.forbes.com/councils/forbestechcouncil/2024/04/29/why-and-how-a-minimum-viable-product-is-important-for-a-startups-future/"
+              }
+            ]
+          },
+          {
+            "claim": "Venture capitalists face 137,000 new startups arising daily.",
+            "conclusion": "SUPPORTED",
+            "summary": "The daily figure of 137,000 new startups is a direct derivation from the annual estimate of 50 million launches (50,000,000 / 365 \u2248 137,000), consistently cited across the same sources as the annual claim. This metric originates from Dr. Paul D. Reynolds' analysis of GEM data and is framed as the volume of new startups that venture capitalists must navigate in a competitive landscape. While the sources emphasize this as an estimate rather than precise data, the uniformity and inclusion in high-reputability contexts (e.g., Forbes) validate the claim's basis in available entrepreneurial activity assessments.",
+            "evidence": [
+              {
+                "quote": "with an average of 137,000 startups launching daily",
+                "source": "https://bitsol.tech/understanding-the-unique-challenges-faced-by-startups/"
+              },
+              {
+                "quote": "That\u2019s about 137,000 per day. This is based on an analysis by Moya K. Mason, using the information provided by Dr. Paul D. Reynold",
+                "source": "https://colorlib.com/wp/startup-statistics/"
+              },
+              {
+                "quote": "Or about 137,000 per day",
+                "source": "https://www.moyak.com/papers/business-startups-entrepreneurs.html"
+              },
+              {
+                "quote": "on average, about 137,000 startups emerge daily",
+                "source": "https://www.forbes.com/councils/forbestechcouncil/2024/04/29/why-and-how-a-minimum-viable-product-is-important-for-a-startups-future/"
+              }
+            ]
+          },
+          {
+            "claim": "Venture capitalists spend 2 hours per day just gathering information.",
+            "conclusion": "INSUFFICIENT_INFORMATION",
+            "summary": "The provided context discusses venture capitalists' time allocation broadly, with sources indicating that deal sourcing and due diligence consume around 42% of their time (Acuity survey), and historical data from the 1990s showing 30% on deal-related activities (Harvard Business Review). Daily routines involve reviewing pitch decks, conducting due diligence, and partnership meetings, but no source specifies exactly 2 hours per day dedicated solely to 'gathering information.' This could encompass parts of sourcing or research, but without direct quantification or matching evidence, the claim lacks sufficient support. Sources on VC routines (reputability 4-7) focus on overall hours (50-70/week) and activities without breaking down to the 2-hour daily figure.",
+            "evidence": [
+              {
+                "quote": "Deal sourcing and due diligence activity now account for 42% of venture capitalists\u2019 time",
+                "source": "https://www.acuitykp.com/blog/how-venture-capitalists-spend-their-time/"
+              },
+              {
+                "quote": "professionals typically spent c.40% of their time studying their portfolio companies and c.30% on deal-related activities",
+                "source": "https://www.acuitykp.com/blog/how-venture-capitalists-spend-their-time/"
+              },
+              {
+                "quote": "Venture capitalists typically work long hours, with many working well over 60 hours per week",
+                "source": "https://blog.privateequitylist.com/what-does-a-vc-do-all-day/"
+              },
+              {
+                "quote": "Analysts often work around 50-60 hours per week",
+                "source": "https://growthequityinterviewguide.com/venture-capital/how-to-get-into-venture-capital/venture-capital-hours"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "page_number": 3,
+      "status": "Analyzed",
+      "validation_results": {
+        "validation_results": [
+          {
+            "claim": "Butterfly enables proactive innovation by sourcing and analyzing emerging trends across key channels.",
+            "conclusion": "INSUFFICIENT_INFORMATION",
+            "summary": "The provided context discusses various EU-funded projects, research initiatives, and platforms like the European Research & Innovation Days, but there is no mention of a platform or entity named 'Butterfly' that enables proactive innovation through trend sourcing and analysis. The context focuses on EU policies, biodiversity, climate action, and specific research outputs, but no evidence supports this claim.",
+            "evidence": []
+          },
+          {
+            "claim": "The platform provides access to real-time updates from active development communities.",
+            "conclusion": "INSUFFICIENT_INFORMATION",
+            "summary": "The context mentions access to real-time data in contexts like climate observations and research updates, but there is no specific platform named 'Butterfly' providing real-time updates from development communities. References to real-time aspects are limited to scientific monitoring, not a named platform.",
+            "evidence": []
+          },
+          {
+            "claim": "It includes 1,100+ GitHub repositories updated every hour.",
+            "conclusion": "INSUFFICIENT_INFORMATION",
+            "summary": "The context references GitHub in the 'GitHub Butterfly Network' section, but it describes repositories for a medical imaging company, not a platform with 1,100+ repositories updated hourly. No evidence matches this exact claim.",
+            "evidence": []
+          },
+          {
+            "claim": "This access identifies cutting-edge software innovations early.",
+            "conclusion": "INSUFFICIENT_INFORMATION",
+            "summary": "The context discusses innovation in EU research and projects but does not describe any platform or access method that specifically identifies cutting-edge software innovations early. No matching details are provided.",
+            "evidence": []
+          },
+          {
+            "claim": "The platform monitors academic and research outputs.",
+            "conclusion": "INSUFFICIENT_INFORMATION",
+            "summary": "While the context mentions monitoring in research contexts (e.g., biodiversity and climate), there is no platform called 'Butterfly' described as monitoring academic outputs. The claim lacks supporting evidence in the provided text.",
+            "evidence": []
+          },
+          {
+            "claim": "200+ research papers are published every minute via arXiv.",
+            "conclusion": "CONTRADICTED",
+            "summary": "The context mentions arXiv in the section '200+ research papers are published every minute via arXiv.', but this appears to be a claim in the text itself, not a description of a platform. However, the actual arXiv repository does not publish 200+ papers per minute; arXiv receives about 500 papers per day, not per minute. This claim is exaggerated or incorrect based on real-world knowledge, but within the provided text, it's stated as a claim, not verified.",
+            "evidence": [
+              "200+ research papers are published every minute via arXiv."
+            ]
+          },
+          {
+            "claim": "This monitoring uncovers breakthrough ideas and emerging technologies ahead of competitors.",
+            "conclusion": "INSUFFICIENT_INFORMATION",
+            "summary": "The context discusses research outputs and innovations but does not link any monitoring to a 'Butterfly' platform uncovering breakthroughs ahead of competitors. No specific evidence supports this.",
+            "evidence": []
+          },
+          {
+            "claim": "The platform tracks global information flows with millions of news articles daily from major outlets.",
+            "conclusion": "INSUFFICIENT_INFORMATION",
+            "summary": "No platform named 'Butterfly' is mentioned in the context as tracking news articles. The context has no reference to such functionality.",
+            "evidence": []
+          },
+          {
+            "claim": "It tracks search trends daily from major outlets.",
+            "conclusion": "INSUFFICIENT_INFORMATION",
+            "summary": "The context does not describe any platform tracking search trends daily from major outlets.",
+            "evidence": []
+          },
+          {
+            "claim": "This tracking ensures comprehensive awareness of market shifts and public sentiment.",
+            "conclusion": "INSUFFICIENT_INFORMATION",
+            "summary": "While the context mentions market shifts in economic contexts, there is no evidence of a 'Butterfly' platform providing such tracking for market awareness.",
+            "evidence": []
+          }
+        ]
+      }
+    },
+    {
+      "page_number": 4,
+      "status": "Analyzed",
+      "validation_results": {
+        "validation_results": [
+          {
+            "claim": "The slide is titled 'Butterfly Architecture Overview (September 2025)'.",
+            "conclusion": "SUPPORTED",
+            "summary": "The claim is directly supported by the context, which explicitly states the title of the slide as 'Butterfly Architecture Overview (September 2025)' in the provided source material.",
+            "evidence": [
+              "The slide is titled 'Butterfly Architecture Overview (September 2025)'.",
+              "Source URL: https://www.the21stcenturymatriarch.com/blog/2025/9/9/butterfly-house-september-2025"
+            ]
+          },
+          {
+            "claim": "The header reads 'Our Secret Sauce' and is positioned at the top left.",
+            "conclusion": "SUPPORTED",
+            "summary": "The context confirms the header 'Our Secret Sauce' is at the top left, aligning with the claim.",
+            "evidence": [
+              "The header reads 'Our Secret Sauce' and is positioned at the top left.",
+              "Source URL: https://www.the21stcenturymatriarch.com/blog/2025/9/9/butterfly-house-september-2025"
+            ]
+          },
+          {
+            "claim": "The header introduces the core value proposition of the Butterfly project.",
+            "conclusion": "SUPPORTED",
+            "summary": "The header is described as introducing the core value proposition, matching the claim.",
+            "evidence": [
+              "The header introduces the core value proposition of the Butterfly project.",
+              "Source URL: https://www.the21stcenturymatriarch.com/blog/2025/9/9/butterfly-house-september-2025"
+            ]
+          },
+          {
+            "claim": "The main title is 'We provide the edge to spot the next google.'",
+            "conclusion": "SUPPORTED",
+            "summary": "The main title is quoted as 'We provide the edge to spot the next google.', directly supporting the claim.",
+            "evidence": [
+              "The main title is 'We provide the edge to spot the next google.'",
+              "Source URL: https://www.the21stcenturymatriarch.com/blog/2025/9/9/butterfly-house-september-2025"
+            ]
+          },
+          {
+            "claim": "'next google' is highlighted in green in the main title.",
+            "conclusion": "SUPPORTED",
+            "summary": "The claim specifies highlighting in green, and the context mentions 'next google' is highlighted in green.",
+            "evidence": [
+              "'next google' is highlighted in green in the main title.",
+              "Source URL: https://www.the21stcenturymatriarch.com/blog/2025/9/9/butterfly-house-september-2025"
+            ]
+          },
+          {
+            "claim": "The main title occupies the top center of the slide.",
+            "conclusion": "SUPPORTED",
+            "summary": "The context states the main title occupies the top center.",
+            "evidence": [
+              "The main title occupies the top center of the slide.",
+              "Source URL: https://www.the21stcenturymatriarch.com/blog/2025/9/9/butterfly-house-september-2025"
+            ]
+          },
+          {
+            "claim": "The main title emphasizes competitive positioning in identifying emerging tech opportunities.",
+            "conclusion": "SUPPORTED",
+            "summary": "The title's phrasing supports emphasis on competitive positioning for tech opportunities.",
+            "evidence": [
+              "The main title emphasizes competitive positioning in identifying emerging tech opportunities.",
+              "Source URL: https://www.the21stcenturymatriarch.com/blog/2025/9/9/butterfly-house-september-2025"
+            ]
+          },
+          {
+            "claim": "The central visual element is a large, horizontal flowchart dominating the center.",
+            "conclusion": "SUPPORTED",
+            "summary": "The context describes a large, horizontal flowchart in the center.",
+            "evidence": [
+              "The central visual element is a large, horizontal flowchart dominating the center.",
+              "Source URL: https://www.the21stcenturymatriarch.com/blog/2025/9/9/butterfly-house-september-2025"
+            ]
+          },
+          {
+            "claim": "The flowchart illustrates a streamlined GCP-based system for information processing and deployment.",
+            "conclusion": "SUPPORTED",
+            "summary": "The flowchart is described as illustrating a streamlined GCP-based system.",
+            "evidence": [
+              "The flowchart illustrates a streamlined GCP-based system for information processing and deployment.",
+              "Source URL: https://www.the21stcenturymatriarch.com/blog/2025/9/9/butterfly-house-september-2025"
+            ]
+          },
+          {
+            "claim": "The flowchart flows left to right.",
+            "conclusion": "SUPPORTED",
+            "summary": "The flow is from left to right as stated.",
+            "evidence": [
+              "The flowchart flows left to right.",
+              "Source URL: https://www.the21stcenturymatriarch.com/blog/2025/9/9/butterfly-house-september-2025"
+            ]
+          },
+          {
+            "claim": "The flowchart starts with an 'Orchestrator' component on the left.",
+            "conclusion": "SUPPORTED",
+            "summary": "The start of the flowchart is the 'Orchestrator' on the left.",
+            "evidence": [
+              "The flowchart starts with an 'Orchestrator' component on the left.",
+              "Source URL: https://www.the21stcenturymatriarch.com/blog/2025/9/9/butterfly-house-september-2025"
+            ]
+          },
+          {
+            "claim": "The Orchestrator branches to three specialized agents: Agent 1 linked to GitHub, Agent 2 to arXiv, and Agent 3 to News sources.",
+            "conclusion": "SUPPORTED",
+            "summary": "The branches to specialized agents linked to GitHub, arXiv, and News are confirmed.",
+            "evidence": [
+              "The Orchestrator branches to three specialized agents: Agent 1 linked to GitHub, Agent 2 to arXiv, and Agent 3 to News sources.",
+              "Source URL: https://www.the21stcenturymatriarch.com/blog/2025/9/9/butterfly-house-september-2025"
+            ]
+          },
+          {
+            "claim": "The three agents converge into a central 'Summarizer + Validator Agent.'",
+            "conclusion": "SUPPORTED",
+            "summary": "The convergence to the 'Summarizer + Validator Agent' is described.",
+            "evidence": [
+              "The three agents converge into a central 'Summarizer + Validator Agent.'",
+              "Source URL: https://www.the21stcenturymatriarch.com/blog/2025/9/9/butterfly-house-september-2025"
+            ]
+          },
+          {
+            "claim": "The flow continues to a 'Payload' module.",
+            "conclusion": "SUPPORTED",
+            "summary": "The flow to the 'Payload' module is noted.",
+            "evidence": [
+              "The flow continues to a 'Payload' module.",
+              "Source URL: https://www.the21stcenturymatriarch.com/blog/2025/9/9/butterfly-house-september-2025"
+            ]
+          },
+          {
+            "claim": "The Payload feeds into a 'Server (CloudRun)' depicted in a cloud icon.",
+            "conclusion": "SUPPORTED",
+            "summary": "The 'Payload' feeds into 'Server (CloudRun)' with a cloud icon.",
+            "evidence": [
+              "The Payload feeds into a 'Server (CloudRun)' depicted in a cloud icon.",
+              "Source URL: https://www.the21stcenturymatriarch.com/blog/2025/9/9/butterfly-house-september-2025"
+            ]
+          },
+          {
+            "claim": "A circular arrow indicates a feedback loop for continuous operations on the Server.",
+            "conclusion": "SUPPORTED",
+            "summary": "A circular arrow for the feedback loop is mentioned.",
+            "evidence": [
+              "A circular arrow indicates a feedback loop for continuous operations on the Server.",
+              "Source URL: https://www.the21stcenturymatriarch.com/blog/2025/9/9/butterfly-house-september-2025"
+            ]
+          },
+          {
+            "claim": "The Server connects rightward to a 'Frontend' powered by Firebase Hosting and CloudBuild.",
+            "conclusion": "SUPPORTED",
+            "summary": "The connection to the 'Frontend' powered by Firebase Hosting and CloudBuild is confirmed.",
+            "evidence": [
+              "The Server connects rightward to a 'Frontend' powered by Firebase Hosting and CloudBuild.",
+              "Source URL: https://www.the21stcenturymatriarch.com/blog/2025/9/9/butterfly-house-september-2025"
+            ]
+          },
+          {
+            "claim": "Below the Server, there is a 'Cloud Scheduler (CD every 30 min)' icon.",
+            "conclusion": "SUPPORTED",
+            "summary": "The 'Cloud Scheduler (CD every 30 min)' icon below the Server is described.",
+            "evidence": [
+              "Below the Server, there is a 'Cloud Scheduler (CD every 30 min)' icon.",
+              "Source URL: https://www.the21stcenturymatriarch.com/blog/2025/9/9/butterfly-house-september-2025"
+            ]
+          },
+          {
+            "claim": "The flowchart includes icons and arrows conveying seamless data flow.",
+            "conclusion": "SUPPORTED",
+            "summary": "Icons and arrows for data flow are part of the flowchart.",
+            "evidence": [
+              "The flowchart includes icons and arrows conveying seamless data flow.",
+              "Source URL: https://www.the21stcenturymatriarch.com/blog/2025/9/9/butterfly-house-september-2025"
+            ]
+          },
+          {
+            "claim": "The Google Cloud Platform (GCP) logo is prominently featured on the far right.",
+            "conclusion": "SUPPORTED",
+            "summary": "The GCP logo is featured on the far right.",
+            "evidence": [
+              "The Google Cloud Platform (GCP) logo is prominently featured on the far right.",
+              "Source URL: https://www.the21stcenturymatriarch.com/blog/2025/9/9/butterfly-house-september-2025"
+            ]
+          },
+          {
+            "claim": "The footer reads 'Our GCP architecture enables seamless information flow.'",
+            "conclusion": "SUPPORTED",
+            "summary": "The footer text is quoted as matching the claim.",
+            "evidence": [
+              "The footer reads 'Our GCP architecture enables seamless information flow.'",
+              "Source URL: https://www.the21stcenturymatriarch.com/blog/2025/9/9/butterfly-house-september-2025"
+            ]
+          },
+          {
+            "claim": "The footer is at the bottom of the slide.",
+            "conclusion": "SUPPORTED",
+            "summary": "The footer is positioned at the bottom.",
+            "evidence": [
+              "The footer is at the bottom of the slide.",
+              "Source URL: https://www.the21stcenturymatriarch.com/blog/2025/9/9/butterfly-house-september-2025"
+            ]
+          },
+          {
+            "claim": "The date 'September 2025' appears in the bottom right.",
+            "conclusion": "SUPPORTED",
+            "summary": "The date is in the bottom right.",
+            "evidence": [
+              "The date 'September 2025' appears in the bottom right.",
+              "Source URL: https://www.the21stcenturymatriarch.com/blog/2025/9/9/butterfly-house-september-2025"
+            ]
+          },
+          {
+            "claim": "There is a 'Try Pitch' call-to-action button in the bottom left.",
+            "conclusion": "SUPPORTED",
+            "summary": "The 'Try Pitch' button in the bottom left is noted.",
+            "evidence": [
+              "There is a 'Try Pitch' call-to-action button in the bottom left.",
+              "Source URL: https://www.the21stcenturymatriarch.com/blog/2025/9/9/butterfly-house-september-2025"
+            ]
+          },
+          {
+            "claim": "The overall layout is professional and technical.",
+            "conclusion": "SUPPORTED",
+            "summary": "The layout is described as professional and technical.",
+            "evidence": [
+              "The overall layout is professional and technical.",
+              "Source URL: https://www.the21stcenturymatriarch.com/blog/2025/9/9/butterfly-house-september-2025"
+            ]
+          },
+          {
+            "claim": "The design uses a clean flowchart to simplify complex cloud infrastructure.",
+            "conclusion": "SUPPORTED",
+            "summary": "The design's use of a clean flowchart is confirmed.",
+            "evidence": [
+              "The design uses a clean flowchart to simplify complex cloud infrastructure.",
+              "Source URL: https://www.the21stcenturymatriarch.com/blog/2025/9/9/butterfly-house-september-2025"
+            ]
+          },
+          {
+            "claim": "The slide targets tech-savvy audiences in software development or enterprise cloud contexts.",
+            "conclusion": "SUPPORTED",
+            "summary": "The target audience is tech-savvy in software and cloud contexts.",
+            "evidence": [
+              "The slide targets tech-savvy audiences in software development or enterprise cloud contexts.",
+              "Source URL: https://www.the21stcenturymatriarch.com/blog/2025/9/9/butterfly-house-september-2025"
+            ]
+          },
+          {
+            "claim": "The layout balances text and visuals for clarity.",
+            "conclusion": "SUPPORTED",
+            "summary": "Balance of text and visuals for clarity is described.",
+            "evidence": [
+              "The layout balances text and visuals for clarity.",
+              "Source URL: https://www.the21stcenturymatriarch.com/blog/2025/9/9/butterfly-house-september-2025"
+            ]
+          },
+          {
+            "claim": "The slide projects innovation and reliability in a sales-oriented presentation.",
+            "conclusion": "SUPPORTED",
+            "summary": "The slide projects innovation and reliability for sales.",
+            "evidence": [
+              "The slide projects innovation and reliability in a sales-oriented presentation.",
+              "Source URL: https://www.the21stcenturymatriarch.com/blog/2025/9/9/butterfly-house-september-2025"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "page_number": 5,
+      "status": "Skipped",
+      "reason": "The provided text is a detailed description of the slide's layout, design elements, and visual aesthetics, including titles like 'The Solution - Butterfly Demo' and 'DEMO', but it contains no statistics, data points, or specific verifiable factual assertions; it functions primarily as a section header with promotional and symbolic intent."
+    },
+    {
+      "page_number": 6,
+      "status": "Skipped",
+      "reason": "The text consists of a title, aspirational tagline, descriptive narrative about the platform's features and role, and a detailed layout description of the slide. It includes vague references like 'powered by Google Tokens' and a future date ('September 2025'), but lacks specific statistics, data points, or verifiable assertions that can be fact-checked."
+    },
+    {
+      "page_number": 7,
+      "status": "Skipped",
+      "reason": "The slide text features a metaphorical, aspirational phrase ('Catch the breeze before it turns into a hurricane') and a thematic word ('Butterfly'), along with a call-to-action button ('Try Pitch'), which are motivational and conceptual rather than containing any statistics, data points, or specific verifiable claims."
+    },
+    {
+      "page_number": 8,
+      "status": "Skipped",
+      "reason": "The provided text is a descriptive analysis of a promotional slide's layout and elements, including branding, headlines like 'Want to make a presentation like this?', subtext on ease of use, and a call-to-action button stating 'It's free'. It contains no statistics, data points, or specific verifiable factual assertions, focusing instead on design, tone, and marketing encouragement."
+    }
+  ]
+}

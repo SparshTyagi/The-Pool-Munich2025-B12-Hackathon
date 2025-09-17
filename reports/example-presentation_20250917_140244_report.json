@@ -1,0 +1,553 @@
+{
+  "document_analysis_report": [
+    {
+      "page_number": 0,
+      "status": "Skipped",
+      "reason": "The provided text describes a slide's title 'Butterfly' and subtitle 'Supercharging Europe\u2019s innovation ecosystem by uncovering opportunities driving next gen startups,' which are aspirational and marketing-oriented statements outlining a goal without any specific statistics, data points, or verifiable facts. The rest of the text is a visual design description, not containing claims."
+    },
+    {
+      "page_number": 1,
+      "status": "Skipped",
+      "reason": "The text is a descriptive narrative of a slide's visual and thematic elements, with the central message being a general, empathetic statement about information overload in the VC and startup space. It lacks specific statistics, data points, or verifiable assertions, functioning as a marketing or aspirational highlight of a common challenge rather than factual claims."
+    },
+    {
+      "page_number": 2,
+      "status": "Analyzed",
+      "analyzed_claims": [
+        {
+          "claim": "Data remains scattered across various applications and channels.",
+          "conclusion": "INTERNAL_STATEMENT_RECORDED",
+          "summary": "This is a claim made by the document about itself. It has been recorded in the knowledge base for future consistency checks.",
+          "evidence": [
+            {
+              "source": "Document Page 2"
+            }
+          ]
+        },
+        {
+          "claim": "Missed opportunities multiply into significant costs.",
+          "conclusion": "INTERNAL_STATEMENT_RECORDED",
+          "summary": "This is a claim made by the document about itself. It has been recorded in the knowledge base for future consistency checks.",
+          "evidence": [
+            {
+              "source": "Document Page 2"
+            }
+          ]
+        },
+        {
+          "claim": "Every overlooked signal represents a lost deal and diminished ROI.",
+          "conclusion": "INTERNAL_STATEMENT_RECORDED",
+          "summary": "This is a claim made by the document about itself. It has been recorded in the knowledge base for future consistency checks.",
+          "evidence": [
+            {
+              "source": "Document Page 2"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "page_number": 3,
+      "status": "Analyzed",
+      "analyzed_claims": [
+        {
+          "claim": "Butterfly sources news from Financial Times.",
+          "conclusion": "INSUFFICIENT_INFORMATION",
+          "summary": "The provided context does not mention 'Butterfly' at all, nor does it reference sourcing news from the Financial Times. The AI.Nexus source discusses AI news and mentions various topics like venture capital funding from Crunchbase data, but no connection to Butterfly or Financial Times is evident.",
+          "evidence": []
+        },
+        {
+          "claim": "Butterfly sources news from TechCrunch.",
+          "conclusion": "INSUFFICIENT_INFORMATION",
+          "summary": "There is no mention of 'Butterfly' in the context. While AI.Nexus daily briefs reference 'Crunchbase data' for venture capital funding information, TechCrunch is not explicitly mentioned as a source, and no link to Butterfly exists.",
+          "evidence": [
+            {
+              "quote": "According to Crunchbase data, Global venture capital funding took a hit in Q2 2023.",
+              "url": "https://ai.nexus/"
+            }
+          ]
+        },
+        {
+          "claim": "Butterfly sources news from Google News.",
+          "conclusion": "INSUFFICIENT_INFORMATION",
+          "summary": "The context lacks any reference to 'Butterfly'. AI.Nexus aggregates AI news but does not specify Google News as a source; mentions include OpenAI, DeepMind, and other direct announcements, with no indication of Butterfly's involvement.",
+          "evidence": []
+        },
+        {
+          "claim": "Butterfly sources news from Medium.",
+          "conclusion": "INSUFFICIENT_INFORMATION",
+          "summary": "No occurrence of 'Butterfly' appears in the provided context. AI.Nexus provides news briefs on AI topics without citing Medium as a source, and other sources like GitHub repos focus on data analysis and topics without relevant connections.",
+          "evidence": []
+        },
+        {
+          "claim": "Butterfly sources 1,100+ GitHub repositories.",
+          "conclusion": "INSUFFICIENT_INFORMATION",
+          "summary": "The context includes GitHub repositories and topics like data-aggregation and venture-capital, but there is no mention of 'Butterfly' sourcing any repositories, let alone 1,100+. The data-aggregation topic lists 136 public repositories, but this does not relate to Butterfly.",
+          "evidence": [
+            {
+              "quote": "Here are 136 public repositories matching this topic...",
+              "url": "https://github.com/topics/data-aggregation"
+            }
+          ]
+        },
+        {
+          "claim": "Butterfly draws research from platforms like arXiv.",
+          "conclusion": "INSUFFICIENT_INFORMATION",
+          "summary": "Although the context includes a GitHub repo 'awesome-arxiv' curating resources for arXiv, there is no reference to 'Butterfly' drawing research from arXiv or similar platforms. The repo describes tools and datasets for arXiv papers, but no connection to Butterfly is made.",
+          "evidence": [
+            {
+              "quote": "A curated list of tools, libraries, datasets and resources for discovering, reading and working with papers from arXiv",
+              "url": "https://github.com/artnitolog/awesome-arxiv"
+            }
+          ]
+        },
+        {
+          "claim": "Butterfly detects innovation potential before competitors do.",
+          "conclusion": "INTERNAL_STATEMENT_RECORDED",
+          "summary": "This is a claim made by the document about itself. It has been recorded in the knowledge base for future consistency checks.",
+          "evidence": [
+            {
+              "source": "Document Page 3"
+            }
+          ]
+        },
+        {
+          "claim": "Butterfly provides real-time access to emerging trends across key data sources.",
+          "conclusion": "INTERNAL_STATEMENT_RECORDED",
+          "summary": "This is a claim made by the document about itself. It has been recorded in the knowledge base for future consistency checks.",
+          "evidence": [
+            {
+              "source": "Document Page 3"
+            }
+          ]
+        },
+        {
+          "claim": "Butterfly features a clean, three-column layout.",
+          "conclusion": "INTERNAL_STATEMENT_RECORDED",
+          "summary": "This is a claim made by the document about itself. It has been recorded in the knowledge base for future consistency checks.",
+          "evidence": [
+            {
+              "source": "Document Page 3"
+            }
+          ]
+        },
+        {
+          "claim": "Butterfly uses teal/green accents.",
+          "conclusion": "INTERNAL_STATEMENT_RECORDED",
+          "summary": "This is a claim made by the document about itself. It has been recorded in the knowledge base for future consistency checks.",
+          "evidence": [
+            {
+              "source": "Document Page 3"
+            }
+          ]
+        },
+        {
+          "claim": "Butterfly has a professional, forward-thinking aesthetic.",
+          "conclusion": "INTERNAL_STATEMENT_RECORDED",
+          "summary": "This is a claim made by the document about itself. It has been recorded in the knowledge base for future consistency checks.",
+          "evidence": [
+            {
+              "source": "Document Page 3"
+            }
+          ]
+        },
+        {
+          "claim": "Butterfly processes millions of news articles daily.",
+          "conclusion": "INTERNAL_STATEMENT_RECORDED",
+          "summary": "This is a claim made by the document about itself. It has been recorded in the knowledge base for future consistency checks.",
+          "evidence": [
+            {
+              "source": "Document Page 3"
+            }
+          ]
+        },
+        {
+          "claim": "Butterfly processes search trends daily.",
+          "conclusion": "INTERNAL_STATEMENT_RECORDED",
+          "summary": "This is a claim made by the document about itself. It has been recorded in the knowledge base for future consistency checks.",
+          "evidence": [
+            {
+              "source": "Document Page 3"
+            }
+          ]
+        },
+        {
+          "claim": "GitHub repositories are updated every hour in Butterfly.",
+          "conclusion": "INTERNAL_STATEMENT_RECORDED",
+          "summary": "This is a claim made by the document about itself. It has been recorded in the knowledge base for future consistency checks.",
+          "evidence": [
+            {
+              "source": "Document Page 3"
+            }
+          ]
+        },
+        {
+          "claim": "Butterfly uses icons to highlight active development trends.",
+          "conclusion": "INTERNAL_STATEMENT_RECORDED",
+          "summary": "This is a claim made by the document about itself. It has been recorded in the knowledge base for future consistency checks.",
+          "evidence": [
+            {
+              "source": "Document Page 3"
+            }
+          ]
+        },
+        {
+          "claim": "Butterfly tracks 200+ research papers published every minute.",
+          "conclusion": "INTERNAL_STATEMENT_RECORDED",
+          "summary": "This is a claim made by the document about itself. It has been recorded in the knowledge base for future consistency checks.",
+          "evidence": [
+            {
+              "source": "Document Page 3"
+            }
+          ]
+        },
+        {
+          "claim": "Butterfly identifies innovation signals from research papers.",
+          "conclusion": "INTERNAL_STATEMENT_RECORDED",
+          "summary": "This is a claim made by the document about itself. It has been recorded in the knowledge base for future consistency checks.",
+          "evidence": [
+            {
+              "source": "Document Page 3"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "page_number": 4,
+      "status": "Analyzed",
+      "analyzed_claims": [
+        {
+          "claim": "- The slide is titled 'Our Secret Sauce'.",
+          "conclusion": "INTERNAL_STATEMENT_RECORDED",
+          "summary": "This is a claim made by the document about itself. It has been recorded in the knowledge base for future consistency checks.",
+          "evidence": [
+            {
+              "source": "Document Page 4"
+            }
+          ]
+        },
+        {
+          "claim": "- The slide highlights the company's core value proposition under the 'Butterfly' branding.",
+          "conclusion": "INTERNAL_STATEMENT_RECORDED",
+          "summary": "This is a claim made by the document about itself. It has been recorded in the knowledge base for future consistency checks.",
+          "evidence": [
+            {
+              "source": "Document Page 4"
+            }
+          ]
+        },
+        {
+          "claim": "- The slide is dated September 2025.",
+          "conclusion": "INTERNAL_STATEMENT_RECORDED",
+          "summary": "This is a claim made by the document about itself. It has been recorded in the knowledge base for future consistency checks.",
+          "evidence": [
+            {
+              "source": "Document Page 4"
+            }
+          ]
+        },
+        {
+          "claim": "- The central tagline is 'We provide the edge to spot the next google.'",
+          "conclusion": "INTERNAL_STATEMENT_RECORDED",
+          "summary": "This is a claim made by the document about itself. It has been recorded in the knowledge base for future consistency checks.",
+          "evidence": [
+            {
+              "source": "Document Page 4"
+            }
+          ]
+        },
+        {
+          "claim": "- The slide features a prominent flow diagram illustrating the technical foundation.",
+          "conclusion": "INTERNAL_STATEMENT_RECORDED",
+          "summary": "This is a claim made by the document about itself. It has been recorded in the knowledge base for future consistency checks.",
+          "evidence": [
+            {
+              "source": "Document Page 4"
+            }
+          ]
+        },
+        {
+          "claim": "- The flow diagram is divided into two connected sections with arrows indicating bidirectional information flow.",
+          "conclusion": "INTERNAL_STATEMENT_RECORDED",
+          "summary": "This is a claim made by the document about itself. It has been recorded in the knowledge base for future consistency checks.",
+          "evidence": [
+            {
+              "source": "Document Page 4"
+            }
+          ]
+        },
+        {
+          "claim": "- The left section is labeled 'Data Aggregation' and depicts sources such as GitHub, arXiv, and News.",
+          "conclusion": "INTERNAL_STATEMENT_RECORDED",
+          "summary": "This is a claim made by the document about itself. It has been recorded in the knowledge base for future consistency checks.",
+          "evidence": [
+            {
+              "source": "Document Page 4"
+            }
+          ]
+        },
+        {
+          "claim": "- The left section includes agent icons (Agent 1, Agent 2, Agent 3) and an orchestrator within a dashed boundary.",
+          "conclusion": "INTERNAL_STATEMENT_RECORDED",
+          "summary": "This is a claim made by the document about itself. It has been recorded in the knowledge base for future consistency checks.",
+          "evidence": [
+            {
+              "source": "Document Page 4"
+            }
+          ]
+        },
+        {
+          "claim": "- The left section represents coordinated data collection and processing.",
+          "conclusion": "INTERNAL_STATEMENT_RECORDED",
+          "summary": "This is a claim made by the document about itself. It has been recorded in the knowledge base for future consistency checks.",
+          "evidence": [
+            {
+              "source": "Document Page 4"
+            }
+          ]
+        },
+        {
+          "claim": "- Person icons in the left section emphasize human-like agents in the workflow.",
+          "conclusion": "INTERNAL_STATEMENT_RECORDED",
+          "summary": "This is a claim made by the document about itself. It has been recorded in the knowledge base for future consistency checks.",
+          "evidence": [
+            {
+              "source": "Document Page 4"
+            }
+          ]
+        },
+        {
+          "claim": "- The right section is labeled 'Cloud Processing and Delivery'.",
+          "conclusion": "INTERNAL_STATEMENT_RECORDED",
+          "summary": "This is a claim made by the document about itself. It has been recorded in the knowledge base for future consistency checks.",
+          "evidence": [
+            {
+              "source": "Document Page 4"
+            }
+          ]
+        },
+        {
+          "claim": "- The right section shows a CloudRun server linked to Firebase Hosting and CloudBuild for frontend deployment.",
+          "conclusion": "INTERNAL_STATEMENT_RECORDED",
+          "summary": "This is a claim made by the document about itself. It has been recorded in the knowledge base for future consistency checks.",
+          "evidence": [
+            {
+              "source": "Document Page 4"
+            }
+          ]
+        },
+        {
+          "claim": "- The right section includes a Cloud Scheduler automating continuous deployment (CD) every 30 minutes.",
+          "conclusion": "INTERNAL_STATEMENT_RECORDED",
+          "summary": "This is a claim made by the document about itself. It has been recorded in the knowledge base for future consistency checks.",
+          "evidence": [
+            {
+              "source": "Document Page 4"
+            }
+          ]
+        },
+        {
+          "claim": "- Icons in the right section include a cloud for services, a clock for scheduling, and a laptop for user-facing delivery.",
+          "conclusion": "INTERNAL_STATEMENT_RECORDED",
+          "summary": "This is a claim made by the document about itself. It has been recorded in the knowledge base for future consistency checks.",
+          "evidence": [
+            {
+              "source": "Document Page 4"
+            }
+          ]
+        },
+        {
+          "claim": "- The design uses a professional color palette of blues, grays, and whites.",
+          "conclusion": "INTERNAL_STATEMENT_RECORDED",
+          "summary": "This is a claim made by the document about itself. It has been recorded in the knowledge base for future consistency checks.",
+          "evidence": [
+            {
+              "source": "Document Page 4"
+            }
+          ]
+        },
+        {
+          "claim": "- The design features clean typography and visual hierarchy to guide the viewer from input aggregation to output delivery.",
+          "conclusion": "INTERNAL_STATEMENT_RECORDED",
+          "summary": "This is a claim made by the document about itself. It has been recorded in the knowledge base for future consistency checks.",
+          "evidence": [
+            {
+              "source": "Document Page 4"
+            }
+          ]
+        },
+        {
+          "claim": "- The concluding text is 'Our GCP architecture enables seamless information flow.'",
+          "conclusion": "INTERNAL_STATEMENT_RECORDED",
+          "summary": "This is a claim made by the document about itself. It has been recorded in the knowledge base for future consistency checks.",
+          "evidence": [
+            {
+              "source": "Document Page 4"
+            }
+          ]
+        },
+        {
+          "claim": "- There is a 'Try Pitch' button in the bottom left of the slide.",
+          "conclusion": "INTERNAL_STATEMENT_RECORDED",
+          "summary": "This is a claim made by the document about itself. It has been recorded in the knowledge base for future consistency checks.",
+          "evidence": [
+            {
+              "source": "Document Page 4"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "page_number": 5,
+      "status": "Skipped",
+      "reason": "The text is a descriptive analysis of the slide's visual layout, design elements, themes, and a projected timeline, which is aspirational and not verifiable as a current fact. No statistics, data points, or specific empirical assertions are present; it functions as an introductory and marketing-oriented description."
+    },
+    {
+      "page_number": 6,
+      "status": "Skipped",
+      "reason": "The text is a descriptive summary of a slide's content and visual design, including aspirational statements about innovation and detailed layout elements, but lacks any statistics, data points, or specific verifiable factual assertions."
+    },
+    {
+      "page_number": 7,
+      "status": "Skipped",
+      "reason": "The text describes an inspirational quote slide with abstract visuals and a motivational quote attributed to 'Butterfly,' focusing on themes of change and awareness. It contains no statistics, data points, charts, graphs, or specific factual assertions, serving purely as a philosophical or aspirational statement."
+    },
+    {
+      "page_number": 8,
+      "status": "Skipped",
+      "reason": "The text describes a promotional slide with a call-to-action, feature highlights like 'fully customizable template' and 'easily share,' and a 'free' offer, but these are subjective marketing statements without statistics, data points, or specific verifiable assertions."
+    }
+  ],
+  "final_knowledge_base": [
+    {
+      "claim": "Data remains scattered across various applications and channels.",
+      "page": 2
+    },
+    {
+      "claim": "Missed opportunities multiply into significant costs.",
+      "page": 2
+    },
+    {
+      "claim": "Every overlooked signal represents a lost deal and diminished ROI.",
+      "page": 2
+    },
+    {
+      "claim": "Butterfly detects innovation potential before competitors do.",
+      "page": 3
+    },
+    {
+      "claim": "Butterfly provides real-time access to emerging trends across key data sources.",
+      "page": 3
+    },
+    {
+      "claim": "Butterfly features a clean, three-column layout.",
+      "page": 3
+    },
+    {
+      "claim": "Butterfly uses teal/green accents.",
+      "page": 3
+    },
+    {
+      "claim": "Butterfly has a professional, forward-thinking aesthetic.",
+      "page": 3
+    },
+    {
+      "claim": "Butterfly processes millions of news articles daily.",
+      "page": 3
+    },
+    {
+      "claim": "Butterfly processes search trends daily.",
+      "page": 3
+    },
+    {
+      "claim": "GitHub repositories are updated every hour in Butterfly.",
+      "page": 3
+    },
+    {
+      "claim": "Butterfly uses icons to highlight active development trends.",
+      "page": 3
+    },
+    {
+      "claim": "Butterfly tracks 200+ research papers published every minute.",
+      "page": 3
+    },
+    {
+      "claim": "Butterfly identifies innovation signals from research papers.",
+      "page": 3
+    },
+    {
+      "claim": "- The slide is titled 'Our Secret Sauce'.",
+      "page": 4
+    },
+    {
+      "claim": "- The slide highlights the company's core value proposition under the 'Butterfly' branding.",
+      "page": 4
+    },
+    {
+      "claim": "- The slide is dated September 2025.",
+      "page": 4
+    },
+    {
+      "claim": "- The central tagline is 'We provide the edge to spot the next google.'",
+      "page": 4
+    },
+    {
+      "claim": "- The slide features a prominent flow diagram illustrating the technical foundation.",
+      "page": 4
+    },
+    {
+      "claim": "- The flow diagram is divided into two connected sections with arrows indicating bidirectional information flow.",
+      "page": 4
+    },
+    {
+      "claim": "- The left section is labeled 'Data Aggregation' and depicts sources such as GitHub, arXiv, and News.",
+      "page": 4
+    },
+    {
+      "claim": "- The left section includes agent icons (Agent 1, Agent 2, Agent 3) and an orchestrator within a dashed boundary.",
+      "page": 4
+    },
+    {
+      "claim": "- The left section represents coordinated data collection and processing.",
+      "page": 4
+    },
+    {
+      "claim": "- Person icons in the left section emphasize human-like agents in the workflow.",
+      "page": 4
+    },
+    {
+      "claim": "- The right section is labeled 'Cloud Processing and Delivery'.",
+      "page": 4
+    },
+    {
+      "claim": "- The right section shows a CloudRun server linked to Firebase Hosting and CloudBuild for frontend deployment.",
+      "page": 4
+    },
+    {
+      "claim": "- The right section includes a Cloud Scheduler automating continuous deployment (CD) every 30 minutes.",
+      "page": 4
+    },
+    {
+      "claim": "- Icons in the right section include a cloud for services, a clock for scheduling, and a laptop for user-facing delivery.",
+      "page": 4
+    },
+    {
+      "claim": "- The design uses a professional color palette of blues, grays, and whites.",
+      "page": 4
+    },
+    {
+      "claim": "- The design features clean typography and visual hierarchy to guide the viewer from input aggregation to output delivery.",
+      "page": 4
+    },
+    {
+      "claim": "- The concluding text is 'Our GCP architecture enables seamless information flow.'",
+      "page": 4
+    },
+    {
+      "claim": "- There is a 'Try Pitch' button in the bottom left of the slide.",
+      "page": 4
+    }
+  ]
+}

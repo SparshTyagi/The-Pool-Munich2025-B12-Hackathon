@@ -1,0 +1,559 @@
+{
+  "document_analysis_report": [
+    {
+      "page_number": 0,
+      "status": "Skipped",
+      "reason": "The text provides a descriptive and visual overview of the slide, using aspirational and metaphorical language to introduce the 'Butterfly' initiative. It includes no statistics, data points, or specific verifiable assertions about external facts, focusing instead on promotional themes, symbolic elements, and design details."
+    },
+    {
+      "page_number": 1,
+      "status": "Skipped",
+      "reason": "The text describes a slide's visual elements and overlays a general empathetic statement about information overload, asserting challenges for VCs without any specific statistics, data points, or verifiable facts. It functions as a marketing or problem-setting narrative rather than factual content."
+    },
+    {
+      "page_number": 2,
+      "status": "Analyzed",
+      "analyzed_claims": [
+        {
+          "claim": "Butterfly Initiative is launching in September 2025",
+          "conclusion": "INTERNAL_STATEMENT_RECORDED",
+          "summary": "This is a claim made by the document about itself. It will be audited for verifiable facts in a final pass.",
+          "evidence": [
+            {
+              "source": "Document Page 2"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "page_number": 3,
+      "status": "Analyzed",
+      "analyzed_claims": [
+        {
+          "claim": "Butterfly provides real-time access to emerging trends and insights.",
+          "conclusion": "INSUFFICIENT_INFORMATION",
+          "summary": "The provided context mentions various entities named 'Butterfly' or 'Butterflies,' such as Butterfly Network (a medical ultrasound company), Butterflies (a social network for AIs and humans), and the North American Butterfly Monitoring Network (a scientific organization tracking butterflies). None describe a tool or service called 'Butterfly' that provides real-time access to emerging trends and insights. The AI.Nexus source discusses AI news and trends but is not associated with 'Butterfly.' No direct evidence supports or contradicts this claim.",
+          "evidence": []
+        },
+        {
+          "claim": "Butterfly allows access to millions of news articles and search trends daily.",
+          "conclusion": "INSUFFICIENT_INFORMATION",
+          "summary": "No entity in the context named 'Butterfly' is described as providing access to millions of news articles or search trends. AI.Nexus is an AI news aggregator with daily briefs and articles, but it is not called 'Butterfly' and does not specify millions of articles daily. Other sources like TechCrunch (Butterflies social network) and Yahoo News focus on unrelated topics. No supporting or contradicting evidence exists.",
+          "evidence": []
+        },
+        {
+          "claim": "News articles are sourced from credible outlets like Financial Times, TechCrunch, Google News, and Medium.",
+          "conclusion": "INSUFFICIENT_INFORMATION",
+          "summary": "The context includes articles from TechCrunch (about Butterflies social network) and Yahoo (about Butterfly Network and python hunting), but no 'Butterfly' entity is described as sourcing news from Financial Times, TechCrunch, Google News, or Medium. AI.Nexus links to sources like a16z and IEEE Spectrum, but again, not tied to 'Butterfly.' The claim cannot be validated or refuted based on the context.",
+          "evidence": [
+            {
+              "quote": "Former Snap engineer launches Butterflies, a social network where AIs and humans coexist",
+              "source": "https://techcrunch.com/2024/06/18/former-snap-engineer-launches-butterflies-a-social-network-where-ais-and-humans-coexist/"
+            }
+          ]
+        },
+        {
+          "claim": "Butterfly monitors 1,100+ GitHub repositories.",
+          "conclusion": "INSUFFICIENT_INFORMATION",
+          "summary": "The context includes a low-reputability GitHub Gist (Wk2_Submission.ipynb), but no 'Butterfly' is mentioned as monitoring GitHub repositories. Other sources discuss butterflies in biological or tech contexts but not repository monitoring. No evidence supports this claim.",
+          "evidence": [
+            {
+              "quote": "Wk2_Submission.ipynb - GitHub Gist",
+              "source": "https://gist.github.com/patternproject/c8e973abeebc9238cdedae219168bfdd?short_path=ec271db"
+            }
+          ]
+        },
+        {
+          "claim": "GitHub repositories are updated every hour.",
+          "conclusion": "INSUFFICIENT_INFORMATION",
+          "summary": "The context mentions one GitHub Gist but provides no information about update frequencies for any repositories, let alone those monitored by 'Butterfly.' No connection to 'Butterfly' or hourly updates.",
+          "evidence": []
+        },
+        {
+          "claim": "Butterfly identifies cutting-edge developments in real time.",
+          "conclusion": "INSUFFICIENT_INFORMATION",
+          "summary": "While AI.Nexus discusses cutting-edge AI developments in daily briefs, it is not called 'Butterfly.' The Butterflies social network involves AI personas posting updates, but not explicitly identifying developments in real time. Butterfly Network (medical) and insect monitoring do not relate. Insufficient evidence.",
+          "evidence": [
+            {
+              "quote": "This is your Daily Brief from AI.Nexus, the best source of Fun and up-to-date news, analysis, and discussions about artificial intelligence.",
+              "source": "https://ai.nexus/"
+            }
+          ]
+        },
+        {
+          "claim": "Butterfly tracks 200+ research papers published every minute.",
+          "conclusion": "INSUFFICIENT_INFORMATION",
+          "summary": "The context includes an MDPI research paper on butterfly flight and mentions of studies in AI.Nexus, but no 'Butterfly' entity tracks research papers at this scale or frequency. The North American Butterfly Monitoring Network tracks butterfly populations, not papers. No supporting evidence.",
+          "evidence": [
+            {
+              "quote": "Kinematic and Aerodynamic Investigation of the Butterfly in Forward Free Flight for the Butterfly-Inspired Flapping Wing Air Vehicle",
+              "source": "https://www.mdpi.com/2076-3417/11/6/2620"
+            }
+          ]
+        },
+        {
+          "claim": "Butterfly enables proactive identification of breakthroughs across academic and technical domains.",
+          "conclusion": "INSUFFICIENT_INFORMATION",
+          "summary": "AI.Nexus covers AI breakthroughs, and the MDPI paper discusses technical aspects of butterfly flight, but neither is tied to a 'Butterfly' tool enabling proactive identification. The Butterflies social network allows AI interactions but not breakthrough identification. No direct evidence in the context.",
+          "evidence": [
+            {
+              "quote": "A recent study conducted by the University of Montana showed that OpenAI's GPT-4 demonstrated creativity on par with the top 1% of human thinkers.",
+              "source": "https://ai.nexus/"
+            }
+          ]
+        },
+        {
+          "claim": "Butterfly has a clean, modern interface featuring teal accents and structured sections.",
+          "conclusion": "INTERNAL_STATEMENT_RECORDED",
+          "summary": "This is a claim made by the document about itself. It will be audited for verifiable facts in a final pass.",
+          "evidence": [
+            {
+              "source": "Document Page 3"
+            }
+          ]
+        },
+        {
+          "claim": "Butterfly promotes a professional yet approachable tone focused on foresight and strategic advantage.",
+          "conclusion": "INTERNAL_STATEMENT_RECORDED",
+          "summary": "This is a claim made by the document about itself. It will be audited for verifiable facts in a final pass.",
+          "evidence": [
+            {
+              "source": "Document Page 3"
+            }
+          ]
+        },
+        {
+          "claim": "Butterfly is associated with September 2025.",
+          "conclusion": "INTERNAL_STATEMENT_RECORDED",
+          "summary": "This is a claim made by the document about itself. It will be audited for verifiable facts in a final pass.",
+          "evidence": [
+            {
+              "source": "Document Page 3"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "page_number": 4,
+      "status": "Analyzed",
+      "analyzed_claims": [
+        {
+          "claim": "- The slide is titled 'Our Secret Sauce.'",
+          "conclusion": "INTERNAL_STATEMENT_RECORDED",
+          "summary": "This is a claim made by the document about itself. It will be audited for verifiable facts in a final pass.",
+          "evidence": [
+            {
+              "source": "Document Page 4"
+            }
+          ]
+        },
+        {
+          "claim": "- The slide is under the banner of 'Butterfly.'",
+          "conclusion": "INTERNAL_STATEMENT_RECORDED",
+          "summary": "This is a claim made by the document about itself. It will be audited for verifiable facts in a final pass.",
+          "evidence": [
+            {
+              "source": "Document Page 4"
+            }
+          ]
+        },
+        {
+          "claim": "- The projected date is September 2025.",
+          "conclusion": "INTERNAL_STATEMENT_RECORDED",
+          "summary": "This is a claim made by the document about itself. It will be audited for verifiable facts in a final pass.",
+          "evidence": [
+            {
+              "source": "Document Page 4"
+            }
+          ]
+        },
+        {
+          "claim": "- The slide states: 'We provide the edge to spot the next google.'",
+          "conclusion": "INTERNAL_STATEMENT_RECORDED",
+          "summary": "This is a claim made by the document about itself. It will be audited for verifiable facts in a final pass.",
+          "evidence": [
+            {
+              "source": "Document Page 4"
+            }
+          ]
+        },
+        {
+          "claim": "- The slide asserts: 'Our GCP architecture enables seamless information flow.'",
+          "conclusion": "INTERNAL_STATEMENT_RECORDED",
+          "summary": "This is a claim made by the document about itself. It will be audited for verifiable facts in a final pass.",
+          "evidence": [
+            {
+              "source": "Document Page 4"
+            }
+          ]
+        },
+        {
+          "claim": "- The layout is divided into two interconnected flow diagrams.",
+          "conclusion": "INTERNAL_STATEMENT_RECORDED",
+          "summary": "This is a claim made by the document about itself. It will be audited for verifiable facts in a final pass.",
+          "evidence": [
+            {
+              "source": "Document Page 4"
+            }
+          ]
+        },
+        {
+          "claim": "- The diagrams illustrate a system for data aggregation, processing, and deployment using Google Cloud Platform (GCP) components.",
+          "conclusion": "INTERNAL_STATEMENT_RECORDED",
+          "summary": "This is a claim made by the document about itself. It will be audited for verifiable facts in a final pass.",
+          "evidence": [
+            {
+              "source": "Document Page 4"
+            }
+          ]
+        },
+        {
+          "claim": "- The left section depicts a circular process diagram enclosed in a dashed boundary.",
+          "conclusion": "INTERNAL_STATEMENT_RECORDED",
+          "summary": "This is a claim made by the document about itself. It will be audited for verifiable facts in a final pass.",
+          "evidence": [
+            {
+              "source": "Document Page 4"
+            }
+          ]
+        },
+        {
+          "claim": "- The left section pipeline starts with input sources: GitHub, arXiv, and News.",
+          "conclusion": "INTERNAL_STATEMENT_RECORDED",
+          "summary": "This is a claim made by the document about itself. It will be audited for verifiable facts in a final pass.",
+          "evidence": [
+            {
+              "source": "Document Page 4"
+            }
+          ]
+        },
+        {
+          "claim": "- The left section flows via solid arrows to three interconnected Agents (Agent 1, Agent 2, Agent 3).",
+          "conclusion": "INTERNAL_STATEMENT_RECORDED",
+          "summary": "This is a claim made by the document about itself. It will be audited for verifiable facts in a final pass.",
+          "evidence": [
+            {
+              "source": "Document Page 4"
+            }
+          ]
+        },
+        {
+          "claim": "- The Agents connect to an Orchestrator.",
+          "conclusion": "INTERNAL_STATEMENT_RECORDED",
+          "summary": "This is a claim made by the document about itself. It will be audited for verifiable facts in a final pass.",
+          "evidence": [
+            {
+              "source": "Document Page 4"
+            }
+          ]
+        },
+        {
+          "claim": "- The Orchestrator feeds into a Summarizer + Validator Agent.",
+          "conclusion": "INTERNAL_STATEMENT_RECORDED",
+          "summary": "This is a claim made by the document about itself. It will be audited for verifiable facts in a final pass.",
+          "evidence": [
+            {
+              "source": "Document Page 4"
+            }
+          ]
+        },
+        {
+          "claim": "- The left section uses blue-toned circular elements and dashed outlines to convey an 'Agentic Code' workflow.",
+          "conclusion": "INTERNAL_STATEMENT_RECORDED",
+          "summary": "This is a claim made by the document about itself. It will be audited for verifiable facts in a final pass.",
+          "evidence": [
+            {
+              "source": "Document Page 4"
+            }
+          ]
+        },
+        {
+          "claim": "- The left section includes logos for GitHub, arXiv, News, and Google.",
+          "conclusion": "INTERNAL_STATEMENT_RECORDED",
+          "summary": "This is a claim made by the document about itself. It will be audited for verifiable facts in a final pass.",
+          "evidence": [
+            {
+              "source": "Document Page 4"
+            }
+          ]
+        },
+        {
+          "claim": "- The right section shows a linear flow with solid arrows.",
+          "conclusion": "INTERNAL_STATEMENT_RECORDED",
+          "summary": "This is a claim made by the document about itself. It will be audited for verifiable facts in a final pass.",
+          "evidence": [
+            {
+              "source": "Document Page 4"
+            }
+          ]
+        },
+        {
+          "claim": "- The right section routes a Payload to a Server hosted on CloudRun.",
+          "conclusion": "INTERNAL_STATEMENT_RECORDED",
+          "summary": "This is a claim made by the document about itself. It will be audited for verifiable facts in a final pass.",
+          "evidence": [
+            {
+              "source": "Document Page 4"
+            }
+          ]
+        },
+        {
+          "claim": "- The Server interfaces with a Frontend built on Firebase Hosting and CloudBuild.",
+          "conclusion": "INTERNAL_STATEMENT_RECORDED",
+          "summary": "This is a claim made by the document about itself. It will be audited for verifiable facts in a final pass.",
+          "evidence": [
+            {
+              "source": "Document Page 4"
+            }
+          ]
+        },
+        {
+          "claim": "- The right section culminates in delivery to an end-user laptop icon.",
+          "conclusion": "INTERNAL_STATEMENT_RECORDED",
+          "summary": "This is a claim made by the document about itself. It will be audited for verifiable facts in a final pass.",
+          "evidence": [
+            {
+              "source": "Document Page 4"
+            }
+          ]
+        },
+        {
+          "claim": "- A Cloud Scheduler triggers continuous deployment (CD) every 30 minutes.",
+          "conclusion": "INTERNAL_STATEMENT_RECORDED",
+          "summary": "This is a claim made by the document about itself. It will be audited for verifiable facts in a final pass.",
+          "evidence": [
+            {
+              "source": "Document Page 4"
+            }
+          ]
+        },
+        {
+          "claim": "- The right section includes Firebase-related logos.",
+          "conclusion": "INTERNAL_STATEMENT_RECORDED",
+          "summary": "This is a claim made by the document about itself. It will be audited for verifiable facts in a final pass.",
+          "evidence": [
+            {
+              "source": "Document Page 4"
+            }
+          ]
+        },
+        {
+          "claim": "- The bottom of the slide reinforces the GCP architecture's role in enabling 'seamless information flow.'",
+          "conclusion": "INTERNAL_STATEMENT_RECORDED",
+          "summary": "This is a claim made by the document about itself. It will be audited for verifiable facts in a final pass.",
+          "evidence": [
+            {
+              "source": "Document Page 4"
+            }
+          ]
+        },
+        {
+          "claim": "- There is a 'Try Pitch' button in the bottom left.",
+          "conclusion": "INTERNAL_STATEMENT_RECORDED",
+          "summary": "This is a claim made by the document about itself. It will be audited for verifiable facts in a final pass.",
+          "evidence": [
+            {
+              "source": "Document Page 4"
+            }
+          ]
+        },
+        {
+          "claim": "- The date 'September 2025' appears in the bottom right.",
+          "conclusion": "INTERNAL_STATEMENT_RECORDED",
+          "summary": "This is a claim made by the document about itself. It will be audited for verifiable facts in a final pass.",
+          "evidence": [
+            {
+              "source": "Document Page 4"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "page_number": 5,
+      "status": "Skipped",
+      "reason": "The text describes a slide with titles ('The Solution', 'Butterfly Demo'), a prominent 'DEMO' label, a visual icon, and a future date ('September 2025') indicating a planned timeline. These elements are structural, promotional, and aspirational, lacking statistics, data points, or verifiable factual assertions that can be checked against evidence."
+    },
+    {
+      "page_number": 6,
+      "status": "Skipped",
+      "reason": "The text is a descriptive narrative of the slide's visual design, layout, and features, such as colors, structure, and interactive elements, without including any statistics, data points, or specific factual assertions that can be independently verified."
+    },
+    {
+      "page_number": 7,
+      "status": "Skipped",
+      "reason": "The text consists of a motivational quote and a descriptive analysis of the slide's visual design elements, which are aspirational, artistic, and interpretive rather than containing any factual statistics, data points, or verifiable assertions."
+    },
+    {
+      "page_number": 8,
+      "status": "Skipped",
+      "reason": "The text is a detailed description of a promotional slide's design, layout, and marketing elements, including aspirational phrases like 'create a beautiful deck in minutes' and 'It's free,' which are promotional incentives rather than specific, verifiable facts, statistics, or data points. No charts, graphs, or empirical claims are present."
+    }
+  ],
+  "audit_validation_report": {
+    "validation_results": [
+      {
+        "claim": "Butterfly Initiative is launching in September 2025",
+        "conclusion": "INSUFFICIENT_INFORMATION",
+        "summary": "The context mentions 'Portfolio - Butterfly Ventures' multiple times, but there is no mention of 'Butterfly Initiative' anywhere. There is a reference to September 2025 in another source title, but no direct connection to a launch. The term 'Initiative' does not appear in relation to Butterfly, suggesting insufficient evidence for this specific claim.",
+        "evidence": [
+          "Portfolio - Butterfly Ventures (title of source, no mention of 'Initiative' or 'launching')",
+          "100 Top Data Aggregation Companies \u00b7 September 2025 - F6S (title mentions September 2025, but not Initiative or launch)"
+        ]
+      },
+      {
+        "claim": "Butterfly is associated with September 2025",
+        "conclusion": "SUPPORTED",
+        "summary": "The context directly associates 'Butterfly' with September 2025 in the title of a source and in the content, where the date is prominently featured in relation to Butterfly Ventures.",
+        "evidence": [
+          "Portfolio - Butterfly Ventures (source title linking Butterfly to the entity)",
+          "100 Top Data Aggregation Companies \u00b7 September 2025 - F6S (title explicitly includes September 2025)"
+        ]
+      },
+      {
+        "claim": "The projected date is September 2025",
+        "conclusion": "SUPPORTED",
+        "summary": "The context includes direct references to September 2025 as a projected date in the source material, aligning with the claim.",
+        "evidence": [
+          "The projected date is September 2025 (direct quote from context)"
+        ]
+      },
+      {
+        "claim": "The left section pipeline starts with input sources: GitHub, arXiv, and News",
+        "conclusion": "SUPPORTED",
+        "summary": "The context explicitly states this in the description of the pipeline structure.",
+        "evidence": [
+          "The left section pipeline starts with input sources: GitHub, arXiv, and News (direct quote from context)"
+        ]
+      },
+      {
+        "claim": "A Cloud Scheduler triggers continuous deployment (CD) every 30 minutes",
+        "conclusion": "SUPPORTED",
+        "summary": "The context directly describes this scheduling mechanism.",
+        "evidence": [
+          "A Cloud Scheduler triggers continuous deployment (CD) every 30 minutes (direct quote from context)"
+        ]
+      },
+      {
+        "claim": "The date 'September 2025' appears in the bottom right",
+        "conclusion": "SUPPORTED",
+        "summary": "The context confirms the appearance of 'September 2025' in the specified location.",
+        "evidence": [
+          "The date 'September 2025' appears in the bottom right (direct quote from context)"
+        ]
+      }
+    ]
+  },
+  "final_knowledge_base": [
+    {
+      "claim": "Butterfly Initiative is launching in September 2025",
+      "page": 2
+    },
+    {
+      "claim": "Butterfly has a clean, modern interface featuring teal accents and structured sections.",
+      "page": 3
+    },
+    {
+      "claim": "Butterfly promotes a professional yet approachable tone focused on foresight and strategic advantage.",
+      "page": 3
+    },
+    {
+      "claim": "Butterfly is associated with September 2025.",
+      "page": 3
+    },
+    {
+      "claim": "- The slide is titled 'Our Secret Sauce.'",
+      "page": 4
+    },
+    {
+      "claim": "- The slide is under the banner of 'Butterfly.'",
+      "page": 4
+    },
+    {
+      "claim": "- The projected date is September 2025.",
+      "page": 4
+    },
+    {
+      "claim": "- The slide states: 'We provide the edge to spot the next google.'",
+      "page": 4
+    },
+    {
+      "claim": "- The slide asserts: 'Our GCP architecture enables seamless information flow.'",
+      "page": 4
+    },
+    {
+      "claim": "- The layout is divided into two interconnected flow diagrams.",
+      "page": 4
+    },
+    {
+      "claim": "- The diagrams illustrate a system for data aggregation, processing, and deployment using Google Cloud Platform (GCP) components.",
+      "page": 4
+    },
+    {
+      "claim": "- The left section depicts a circular process diagram enclosed in a dashed boundary.",
+      "page": 4
+    },
+    {
+      "claim": "- The left section pipeline starts with input sources: GitHub, arXiv, and News.",
+      "page": 4
+    },
+    {
+      "claim": "- The left section flows via solid arrows to three interconnected Agents (Agent 1, Agent 2, Agent 3).",
+      "page": 4
+    },
+    {
+      "claim": "- The Agents connect to an Orchestrator.",
+      "page": 4
+    },
+    {
+      "claim": "- The Orchestrator feeds into a Summarizer + Validator Agent.",
+      "page": 4
+    },
+    {
+      "claim": "- The left section uses blue-toned circular elements and dashed outlines to convey an 'Agentic Code' workflow.",
+      "page": 4
+    },
+    {
+      "claim": "- The left section includes logos for GitHub, arXiv, News, and Google.",
+      "page": 4
+    },
+    {
+      "claim": "- The right section shows a linear flow with solid arrows.",
+      "page": 4
+    },
+    {
+      "claim": "- The right section routes a Payload to a Server hosted on CloudRun.",
+      "page": 4
+    },
+    {
+      "claim": "- The Server interfaces with a Frontend built on Firebase Hosting and CloudBuild.",
+      "page": 4
+    },
+    {
+      "claim": "- The right section culminates in delivery to an end-user laptop icon.",
+      "page": 4
+    },
+    {
+      "claim": "- A Cloud Scheduler triggers continuous deployment (CD) every 30 minutes.",
+      "page": 4
+    },
+    {
+      "claim": "- The right section includes Firebase-related logos.",
+      "page": 4
+    },
+    {
+      "claim": "- The bottom of the slide reinforces the GCP architecture's role in enabling 'seamless information flow.'",
+      "page": 4
+    },
+    {
+      "claim": "- There is a 'Try Pitch' button in the bottom left.",
+      "page": 4
+    },
+    {
+      "claim": "- The date 'September 2025' appears in the bottom right.",
+      "page": 4
+    }
+  ]
+}
