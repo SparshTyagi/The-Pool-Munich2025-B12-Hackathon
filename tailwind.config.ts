@@ -22,18 +22,44 @@ const config: Config = {
           900: "#0c4a6e",
           950: "#082f49"
         },
-        // Secondary accent colors
+        // Champagne/warm neutrals for sophistication
+        champagne: {
+          50: "#fefdfb",
+          100: "#fef9f1",
+          200: "#fdf2e1",
+          300: "#fbe8c8",
+          400: "#f7d7a3",
+          500: "#f2c078",
+          600: "#e8a547",
+          700: "#d4882a",
+          800: "#b06d1f",
+          900: "#8f571c"
+        },
+        // Secondary sophisticated colors
+        secondary: {
+          50: "#faf9fc",
+          100: "#f3f1f8",
+          200: "#e8e4f0",
+          300: "#d6cfe3",
+          400: "#bcb0d1",
+          500: "#9d8bb8",
+          600: "#826ba0",
+          700: "#6b5688",
+          800: "#5a4a70",
+          900: "#4a3f5c"
+        },
+        // Refined accent colors
         accent: {
-          50: "#fef3c7",
-          100: "#fde68a",
-          200: "#fcd34d",
-          300: "#fbbf24",
-          400: "#f59e0b",
-          500: "#d97706",
-          600: "#b45309",
-          700: "#92400e",
-          800: "#78350f",
-          900: "#451a03"
+          50: "#fef8f0",
+          100: "#fdeedd",
+          200: "#fad9b5",
+          300: "#f6bf82",
+          400: "#f09a4d",
+          500: "#ec7c2a",
+          600: "#dd611f",
+          700: "#b8471c",
+          800: "#93391e",
+          900: "#76301c"
         },
         // Neutral colors for text and backgrounds
         neutral: {

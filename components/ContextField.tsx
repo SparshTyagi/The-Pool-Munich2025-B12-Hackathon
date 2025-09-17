@@ -5,28 +5,21 @@ type Props = {
   onChange: (v: string) => void
 }
 
-const placeholder = `Share any relevant information that might help with the analysis.
-
-- Current funding round or stage
-- Key milestones achieved
-- Market challenges or opportunities
-- Technical risks or advantages
-- Team background or expertise
-- Competitive landscape
-- Growth metrics or KPIs`
+const placeholder = 'Add any helpful context for the review...'
 
 const tips = [
-  'Mention your current runway and burn rate',
-  'Highlight any red flags or risks the analysts should consider',
-  'Specify your target market size (TAM, SAM, SOM)',
-  'Include recent traction metrics or cohort data'
+  'Describe your funding stage and runway outlook',
+  'Call out key milestones and traction metrics',
+  'Highlight competitive dynamics or market challenges',
+  'Note material risks, dependencies, or compliance needs',
+  'Share strategic goals for the upcoming 12 months'
 ]
 
 export default function ContextField({ value, onChange }: Props){
   return (
     <div className="card h-full flex flex-col">
       <div className="mb-6 flex items-center gap-3">
-        <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary-100">
+        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary-100">
           <ChatBubbleLeftRightIcon className="h-5 w-5 text-primary-600" />
         </div>
         <div>
@@ -41,8 +34,8 @@ export default function ContextField({ value, onChange }: Props){
             value={value}
             onChange={(e) => onChange(e.target.value.slice(0, 1000))}
             placeholder={placeholder}
-            className="input min-h-[280px] w-full text-neutral-900 leading-relaxed placeholder:text-neutral-400"
-            rows={10}
+            className="input min-h-[220px] w-full text-neutral-900 leading-relaxed placeholder:text-neutral-400"
+            rows={8}
             maxLength={1000}
           />
           <div className="pointer-events-none absolute bottom-3 right-4 text-xs text-neutral-400">
