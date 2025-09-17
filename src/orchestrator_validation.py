@@ -23,7 +23,8 @@ class ValidationOrchestrator: # RENAMED CLASS
         self.reputability_checker = ReputabilityAgent(model=model, api_key=llm_api_key)
         self.validator = ValidationAgent(model=model, api_key=llm_api_key)
 
-    def run(self, text: str) -> dict:
+
+    def run(self, text: str, document_context: str | None = None) -> dict: # MODIFIED signature
         """
         Executes the full, multi-agent validation workflow from start to finish.
         """
@@ -33,9 +34,10 @@ class ValidationOrchestrator: # RENAMED CLASS
         if not claims: return {"error": "Validation failed: Could not decompose text into claims."}
         print(f"Successfully decomposed into {len(claims)} claims.")
 
-        queries = self.planner.plan(claims)
+        # MODIFIED: Pass the document context to the planner
+        queries = self.planner.plan(claims, document_context=document_context)
         if not queries: return {"error": "Validation failed: Could not create a search plan."}
-        print(f"Optimized plan created with {len(queries)} queries.")
+        print(f"Optimized plan created with {len(queries)} context-aware queries.")
 
         context, sources = self.searcher.search(queries)
         if not context: return {"error": "Validation failed: Failed to retrieve any content."}
