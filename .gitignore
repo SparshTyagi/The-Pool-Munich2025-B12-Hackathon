@@ -5,6 +5,5 @@ out/
 dist/
 build/
 *.log
-.env*
 /src/validation_agents/testing
 
