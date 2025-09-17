@@ -10,7 +10,7 @@ import {
   ScaleIcon
 } from '@heroicons/react/24/outline'
 import React from 'react'
-import { saveSettings, SaveSettingsRequest } from '@/lib/api'
+import { saveSettings, SaveSettingsRequest, loadSettings } from '@/lib/api'
 
 type Prefs = {
   language: 'en' | 'de' | 'fr'
@@ -91,29 +91,54 @@ const riskProfileLabels = riskProfiles.reduce<Record<Prefs['riskProfile'], strin
 
 export default function SettingsPage(){
   const [prefs, setPrefs] = useState<Prefs>(DEFAULTS)
+  const [initialPrefs, setInitialPrefs] = useState<Prefs>(DEFAULTS)
   const [saved, setSaved] = useState(false)
   const [hasChanges, setHasChanges] = useState(false)
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
   useEffect(()=>{
-    try {
-      const raw = JSON.parse(localStorage.getItem('vc-settings') || 'null')
-      if (raw) {
-        setPrefs({ ...DEFAULTS, ...raw })
-      }
-    } catch {}
+    let mounted = true
+    const hydrate = async () => {
+      try {
+        // Prefer Supabase
+        const remote = await loadSettings()
+        if (remote && mounted) {
+          const mapped: Prefs = {
+            language: remote.general.interface_language === 'German' ? 'de' : remote.general.interface_language === 'French' ? 'fr' : 'en',
+            riskProfile: remote.general.target_risk_profile === 'Low' ? 'low' : remote.general.target_risk_profile === 'High' ? 'high' : 'medium',
+            agents: {
+              marketFit: !!remote.analysis_agents.market_fit,
+              financials: !!remote.analysis_agents.financials,
+              tech: !!remote.analysis_agents.tech,
+              legal: !!remote.analysis_agents.legal
+            }
+          }
+          setPrefs({ ...DEFAULTS, ...mapped })
+          setInitialPrefs({ ...DEFAULTS, ...mapped })
+          // Mirror to localStorage as a cache
+          localStorage.setItem('vc-settings', JSON.stringify(mapped))
+          return
+        }
+      } catch {}
+
+      // Fallback to local cache
+      try {
+        const raw = JSON.parse(localStorage.getItem('vc-settings') || 'null')
+        if (raw && mounted) {
+          setPrefs({ ...DEFAULTS, ...raw })
+          setInitialPrefs({ ...DEFAULTS, ...raw })
+        }
+      } catch {}
+    }
+    hydrate()
+    return () => { mounted = false }
   }, [])
 
   useEffect(() => {
-    try {
-      const stored = JSON.parse(localStorage.getItem('vc-settings') || 'null')
-      const merged = stored ? { ...DEFAULTS, ...stored } : DEFAULTS
-      setHasChanges(JSON.stringify(prefs) !== JSON.stringify(merged))
-    } catch {
-      setHasChanges(true)
-    }
-  }, [prefs])
+    // Compare changes against the last loaded baseline (Supabase or local fallback)
+    setHasChanges(JSON.stringify(prefs) !== JSON.stringify(initialPrefs))
+  }, [prefs, initialPrefs])
 
   const save = async () => {
     setSaving(true)
@@ -132,6 +157,7 @@ export default function SettingsPage(){
       if (response.success) {
         // Save to localStorage as backup
         localStorage.setItem('vc-settings', JSON.stringify(prefs))
+        setInitialPrefs(prefs)
         setSaved(true)
         setHasChanges(false)
         setTimeout(() => setSaved(false), 2000)
@@ -143,6 +169,7 @@ export default function SettingsPage(){
       setError(err instanceof Error ? err.message : 'Failed to save settings')
       // Still save to localStorage as fallback
       localStorage.setItem('vc-settings', JSON.stringify(prefs))
+      setInitialPrefs(prefs)
       setSaved(true)
       setHasChanges(false)
       setTimeout(() => setSaved(false), 2000)

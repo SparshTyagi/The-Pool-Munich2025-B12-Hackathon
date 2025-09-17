@@ -1,4 +1,4 @@
-import Layout from '@/components/Layout'
+﻿import Layout from '@/components/Layout'
 import TopKPI from '@/components/TopKPI'
 import InsightCard from '@/components/InsightCard'
 import PDFDownloadButton from '@/components/PDFDownloadButton'
@@ -19,8 +19,10 @@ export default function ResultsPage(){
   }, [jobId])
 
   const insights = data?.insights || []
-  const main = insights[0]
-  const supportingInsights = insights.slice(1)
+  // New shape: "key recommendation" as a separate array
+  const mainArray = data?.["key recommendation"] || []
+  const main = mainArray[0] || insights[0]
+  const supportingInsights = insights
 
   const recommendationSegments = useMemo(() => {
     if (!main?.summary) return []
