@@ -1,0 +1,54 @@
+{
+  "analysis_result": {
+    "startup_name": "{Startup Name}",
+    "investment_readiness": {
+      "grade": "B+",
+      "tagline": "Strong traction, moderate tech risk",
+      "color_theme": "#2C7BE5",
+      "icon": "fa-hourglass-half"
+    },
+    "key_recommendation": {
+      "decision": "Proceed to partner meeting",
+      "supporting_actions": [
+        "Require security review",
+        "Request 18-month runway plan"
+      ],
+      "reference_tag": "Investment Readiness: B+"
+    },
+    "detailed_results": [
+      {
+        "category": "Idea and Market",
+        "score_percent": 75,
+        "icon": "fa-lightbulb",
+        "color": "#007ACC",
+        "reasoning_bullets": [
+          "Large addressable market",
+          "Early traction visible"
+        ],
+        "explanation": "The startup operates in a growing market segment with strong initial adoption."
+      },
+      {
+        "category": "Technology",
+        "score_percent": 65,
+        "icon": "fa-microchip",
+        "color": "#FFB300",
+        "reasoning_bullets": [
+          "Scalable cloud infrastructure",
+          "Small but skilled development team"
+        ],
+        "explanation": "Technology stack is modern and scalable, though the team remains lean."
+      },
+      {
+        "category": "Financials",
+        "score_percent": 55,
+        "icon": "fa-coins",
+        "color": "#E63946",
+        "reasoning_bullets": [
+          "Positive early revenue",
+          "Runway under 12 months"
+        ],
+        "explanation": "Financial outlook shows promise but requires additional capital for sustainability."
+      }
+    ]
+  }
+}
