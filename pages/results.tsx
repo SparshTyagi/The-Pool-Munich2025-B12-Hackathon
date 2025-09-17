@@ -94,10 +94,22 @@ export default function ResultsPage(){
                 <p className="text-sm font-semibold uppercase tracking-wide text-neutral-500">Focus areas</p>
                 <div className="mt-4 grid gap-4">
                   {focusAreas.map((insight: any, index: number) => {
-                    const accentColor = index === 0 ? 'bg-primary-50 text-primary-800 border-primary-100' : index === 1 ? 'bg-primary-50 text-primary-800 border-primary-100' : 'bg-neutral-50 text-neutral-700 border-neutral-200'
+                    // Subtle variations of blue and neutral tones only
+                    const colorThemes = [
+                      'bg-primary-50 text-primary-800 border-primary-100',
+                      'bg-primary-50/80 text-primary-800 border-primary-100', 
+                      'bg-neutral-50 text-neutral-800 border-neutral-200'
+                    ]
+                    const labelColors = [
+                      'text-primary-600',
+                      'text-primary-600',
+                      'text-neutral-600'
+                    ]
+                    const accentColor = colorThemes[index] || 'bg-primary-50 text-primary-800 border-primary-100'
+                    const labelColor = labelColors[index] || 'text-primary-600'
                     return (
                       <div key={`${insight.title}-${index}`} className={`rounded-2xl border ${accentColor} p-4`}>
-                        <p className="text-xs font-semibold uppercase tracking-wide text-neutral-500">
+                        <p className={`text-xs font-semibold uppercase tracking-wide ${labelColor}`}>
                           {focusAreaThemes[index] || insight.title}
                         </p>
                         <p className="mt-2 text-sm leading-relaxed text-neutral-700">{insight.summary}</p>
@@ -138,8 +150,8 @@ export default function ResultsPage(){
                     </div>
                   )}
                 </div>
-                <div className="flex items-center gap-2 self-start rounded-full bg-primary-50 px-4 py-2 text-sm font-semibold text-primary-700">
-                  <span className="h-2 w-2 rounded-full bg-primary-500"></span>
+                <div className="flex items-center gap-2 self-start rounded-full bg-champagne-50 px-4 py-2 text-sm font-semibold text-champagne-700">
+                  <span className="h-2 w-2 rounded-full bg-champagne-500"></span>
                   {`${readinessLabel}: ${readinessValue}`}
                 </div>
               </div>
@@ -159,11 +171,15 @@ export default function ResultsPage(){
               Dive deeper into the findings that informed this recommendation. Each card highlights one of the high-impact observations surfaced by the agents.
             </p>
             <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
-              {supportingInsights.map((ins: any, idx: number) => (
-                <div key={idx} className="animate-fade-in" style={{ animationDelay: `${idx * 120}ms` }}>
-                  <InsightCard insight={ins} index={idx} />
-                </div>
-              ))}
+              {supportingInsights.map((ins: any, idx: number) => {
+                // Use primary blue for most cards, champagne accent for first card only
+                const colorTheme: 'primary' | 'champagne' = idx === 0 ? 'champagne' : 'primary'
+                return (
+                  <div key={idx} className="animate-fade-in" style={{ animationDelay: `${idx * 120}ms` }}>
+                    <InsightCard insight={ins} index={idx} colorTheme={colorTheme} />
+                  </div>
+                )
+              })}
             </div>
           </section>
         )}

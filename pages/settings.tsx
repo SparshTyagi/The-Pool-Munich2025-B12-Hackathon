@@ -9,6 +9,7 @@ import {
   BanknotesIcon,
   ScaleIcon
 } from '@heroicons/react/24/outline'
+import React from 'react'
 
 type Prefs = {
   language: 'en' | 'de' | 'fr'
@@ -26,7 +27,7 @@ const agentOptions: Array<{
   key: keyof Prefs['agents']
   label: string
   description: string
-  icon: (props: { className?: string }) => JSX.Element
+  icon: React.ComponentType<React.SVGProps<SVGSVGElement>>
 }> = [
   {
     key: 'marketFit',
@@ -145,8 +146,8 @@ export default function SettingsPage(){
               <p className="mt-2 text-2xl font-semibold text-neutral-900">{selectedAgents}</p>
               <p className="text-sm text-neutral-600">of {agentOptions.length} available</p>
             </div>
-            <div className="rounded-2xl border border-neutral-200 bg-white p-4 shadow-soft">
-              <p className="text-xs font-semibold uppercase tracking-wide text-neutral-500">Language</p>
+            <div className="rounded-2xl border border-champagne-200 bg-champagne-50/70 p-4 shadow-soft">
+              <p className="text-xs font-semibold uppercase tracking-wide text-champagne-700">Language</p>
               <p className="mt-2 text-2xl font-semibold text-neutral-900">{languageLabels[prefs.language]}</p>
               <p className="text-sm text-neutral-600">Controls report output and UI labels</p>
             </div>
@@ -170,7 +171,7 @@ export default function SettingsPage(){
                   <p className="text-sm text-neutral-600">Choose which AI specialists contribute to each run.</p>
                 </div>
               </div>
-              <span className="rounded-full bg-neutral-100 px-3 py-1 text-xs font-medium text-neutral-600">
+              <span className="rounded-full bg-primary-100 px-3 py-1 text-xs font-medium text-primary-700">
                 {selectedAgents} active
               </span>
             </div>
@@ -255,8 +256,8 @@ export default function SettingsPage(){
                         key={value}
                         className={`group flex cursor-pointer flex-col rounded-2xl border p-4 text-left transition-all duration-200 ${
                           active
-                            ? 'border-primary-200 bg-primary-50/70 shadow-soft'
-                            : 'border-neutral-200 bg-white hover:border-primary-200 hover:bg-primary-50/50'
+                            ? 'border-champagne-200 bg-champagne-50/70 shadow-soft'
+                            : 'border-neutral-200 bg-white hover:border-champagne-200 hover:bg-champagne-50/50'
                         }`}
                       >
                         <input
