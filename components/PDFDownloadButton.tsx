@@ -1,9 +1,12 @@
 import { DocumentArrowDownIcon } from '@heroicons/react/24/outline'
 
 export default function PDFDownloadButton({ href }:{href:string}){
+  const filename = href.split('/').pop() || 'analysis-report.pdf'
+
   return (
     <a
       href={href}
+      download={filename}
       target="_blank"
       rel="noreferrer"
       className="btn btn-primary mx-auto block w-max group"

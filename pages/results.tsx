@@ -54,9 +54,6 @@ export default function ResultsPage(){
   const primaryRecommendation = recommendationSegments[0] || main?.summary || 'Analysis complete'
   const additionalActions = recommendationSegments.slice(1)
 
-  const focusAreas = supportingInsights.slice(0, 3)
-  const focusAreaThemes = ['Growth signals', 'Financial outlook', 'Risk watchlist']
-
   return (
     <Layout>
       <div className="space-y-12">
@@ -75,51 +72,13 @@ export default function ResultsPage(){
           </div>
         </section>
 
-        <section className="space-y-6">
+        <section>
           <TopKPI
             label={readinessLabel}
             value={readinessValue}
             context={data.mainKpi?.context || 'Strong traction with moderate technical risk'}
             className="mx-auto max-w-3xl"
           />
-
-          <div className="card mx-auto max-w-3xl">
-            <h3 className="text-lg font-semibold text-neutral-900">Analysis Snapshot</h3>
-            <p className="mt-2 text-sm leading-relaxed text-neutral-600">
-              A summary of how the agents evaluated your submission across growth, financial health, and operational risks.
-            </p>
-
-            {focusAreas.length > 0 && (
-              <div className="mt-6">
-                <p className="text-sm font-semibold uppercase tracking-wide text-neutral-500">Focus areas</p>
-                <div className="mt-4 grid gap-4">
-                  {focusAreas.map((insight: any, index: number) => {
-                    // Subtle variations of blue and neutral tones only
-                    const colorThemes = [
-                      'bg-primary-50 text-primary-800 border-primary-100',
-                      'bg-primary-50/80 text-primary-800 border-primary-100', 
-                      'bg-neutral-50 text-neutral-800 border-neutral-200'
-                    ]
-                    const labelColors = [
-                      'text-primary-600',
-                      'text-primary-600',
-                      'text-neutral-600'
-                    ]
-                    const accentColor = colorThemes[index] || 'bg-primary-50 text-primary-800 border-primary-100'
-                    const labelColor = labelColors[index] || 'text-primary-600'
-                    return (
-                      <div key={`${insight.title}-${index}`} className={`rounded-2xl border ${accentColor} p-4`}>
-                        <p className={`text-xs font-semibold uppercase tracking-wide ${labelColor}`}>
-                          {focusAreaThemes[index] || insight.title}
-                        </p>
-                        <p className="mt-2 text-sm leading-relaxed text-neutral-700">{insight.summary}</p>
-                      </div>
-                    )
-                  })}
-                </div>
-              </div>
-            )}
-          </div>
         </section>
 
         {main && (
@@ -150,8 +109,8 @@ export default function ResultsPage(){
                     </div>
                   )}
                 </div>
-                <div className="flex items-center gap-2 self-start rounded-full bg-champagne-50 px-4 py-2 text-sm font-semibold text-champagne-700">
-                  <span className="h-2 w-2 rounded-full bg-champagne-500"></span>
+                <div className="flex items-center gap-2 self-start rounded-full bg-primary-50 px-4 py-2 text-sm font-semibold text-primary-700">
+                  <span className="h-2 w-2 rounded-full bg-primary-500"></span>
                   {`${readinessLabel}: ${readinessValue}`}
                 </div>
               </div>
@@ -171,15 +130,11 @@ export default function ResultsPage(){
               Dive deeper into the findings that informed this recommendation. Each card highlights one of the high-impact observations surfaced by the agents.
             </p>
             <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
-              {supportingInsights.map((ins: any, idx: number) => {
-                // Use primary blue for most cards, champagne accent for first card only
-                const colorTheme: 'primary' | 'champagne' = idx === 0 ? 'champagne' : 'primary'
-                return (
-                  <div key={idx} className="animate-fade-in" style={{ animationDelay: `${idx * 120}ms` }}>
-                    <InsightCard insight={ins} index={idx} colorTheme={colorTheme} />
-                  </div>
-                )
-              })}
+              {supportingInsights.map((ins: any, idx: number) => (
+                <div key={idx} className="animate-fade-in" style={{ animationDelay: `${idx * 120}ms` }}>
+                  <InsightCard insight={ins} index={idx} colorTheme={idx === 0 ? 'champagne' : 'primary'} />
+                </div>
+              ))}
             </div>
           </section>
         )}
@@ -191,4 +146,3 @@ export default function ResultsPage(){
     </Layout>
   )
 }
-

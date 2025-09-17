@@ -12,18 +12,21 @@
     },
     {
       "title": "Insight 1",
-      "summary": "Demand signals strong in DACH with 120% YoY growth."
+      "summary": "Demand signals strong in DACH with 120% YoY growth.",
+      "score": 0.78
     },
     {
       "title": "Insight 2",
-      "summary": "Gross margin sustainable at 68% per cohort analysis."
+      "summary": "Gross margin sustainable at 68% per cohort analysis.",
+      "score": 0.74
     },
     {
       "title": "Insight 3",
-      "summary": "Two critical IP dependencies; escrow or alternative vendors needed."
+      "summary": "Two critical IP dependencies; escrow or alternative vendors needed.",
+      "score": 0.69
     }
   ],
-  "reportUrl": "",
+  "reportUrl": "/demo/report.pdf",
   "agents": [
     { "name": "Market Fit Agent" },
     { "name": "Financials Agent" },

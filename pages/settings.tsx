@@ -256,8 +256,8 @@ export default function SettingsPage(){
                         key={value}
                         className={`group flex cursor-pointer flex-col rounded-2xl border p-4 text-left transition-all duration-200 ${
                           active
-                            ? 'border-champagne-200 bg-champagne-50/70 shadow-soft'
-                            : 'border-neutral-200 bg-white hover:border-champagne-200 hover:bg-champagne-50/50'
+                            ? 'border-primary-200 bg-primary-50/70 shadow-soft'
+                            : 'border-neutral-200 bg-white hover:border-primary-200 hover:bg-primary-50/50'
                         }`}
                       >
                         <input

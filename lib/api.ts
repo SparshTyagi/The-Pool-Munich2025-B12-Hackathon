@@ -77,6 +77,6 @@ export async function getResults(jobId: string): Promise<Results> {
 }
 
 export function getReportPdfUrl(jobId: string): string {
-  if (!API_BASE) return '#';
+  if (!API_BASE) return '/demo/report.pdf';
   return `${API_BASE}/report/${jobId}.pdf`;
 }
