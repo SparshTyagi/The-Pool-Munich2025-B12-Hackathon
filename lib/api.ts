@@ -33,6 +33,46 @@ export async function startAnalysis(payload: FormData): Promise<StartResponse> {
   return res.json();
 }
 
+// Poll job status from server when available; otherwise simulate progress locally
+export async function getJobStatus(jobId: string): Promise<AgentStatus[]> {
+  if (API_BASE) {
+    const res = await fetch(`${API_BASE}/status/${jobId}`);
+    if (!res.ok) throw new Error('Failed to fetch job status');
+    return res.json();
+  }
+
+  // Demo simulation based on elapsed time
+  const agentNames: string[] = (demoData as any)?.agents?.map((a: any) => a.name) || [
+    'Market Fit Agent',
+    'Financials Agent',
+    'Tech Diligence Agent'
+  ];
+
+  const startKey = `job-start-${jobId}`;
+  let startedAt = Number(localStorage.getItem(startKey));
+  if (!startedAt) {
+    startedAt = Date.now();
+    localStorage.setItem(startKey, String(startedAt));
+  }
+  const elapsed = Date.now() - startedAt;
+  const totalMs = 15000; // complete in ~15s
+
+  const statuses: AgentStatus[] = agentNames.map((name, index) => {
+    const phaseDelay = index * 1200; // stagger each agent
+    const progressRatio = Math.max(0, Math.min(1, (elapsed - phaseDelay) / totalMs));
+    const progress = Math.round(progressRatio * 100);
+    const done = progress >= 100;
+    return {
+      name,
+      status: done ? 'done' : 'running',
+      progress: done ? 100 : Math.max(0, progress),
+      note: done ? 'Complete' : 'Analyzing uploaded materials'
+    };
+  });
+
+  return statuses;
+}
+
 export type Insight = {
   title: string;
   summary: string;
