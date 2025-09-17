@@ -1,5 +1,5 @@
 # agents/reputability_agent.py
-from base_agent import BaseAgent
+from .base_agent import BaseAgent
 
 class ReputabilityAgent(BaseAgent):
     """An agent that evaluates the credibility of a list of sources."""

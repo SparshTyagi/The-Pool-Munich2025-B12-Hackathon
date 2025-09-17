@@ -1,5 +1,5 @@
 # agents/planner_agent.py
-from base_agent import BaseAgent
+from .base_agent import BaseAgent
 
 class PlannerAgent(BaseAgent):
     """An agent that creates an efficient search query plan from a list of claims."""

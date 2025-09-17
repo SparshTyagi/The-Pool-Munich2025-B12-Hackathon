@@ -1,4 +1,4 @@
-from base_agent import BaseAgent
+from .base_agent import BaseAgent
 
 class DecomposerAgent(BaseAgent):
     """An agent that breaks down a block of text into a list of atomic claims."""
