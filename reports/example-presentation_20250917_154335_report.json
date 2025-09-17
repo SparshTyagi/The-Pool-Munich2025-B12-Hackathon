@@ -1,0 +1,109 @@
+{
+    "document_analysis_report": [
+        {
+            "page_number": 1,
+            "status": "Skipped",
+            "reason": "The text is a title or promotional tagline for an initiative named 'Butterfly,' presenting an aspirational description of its objectives without any statistics, data points, or specific verifiable assertions."
+        },
+        {
+            "page_number": 2,
+            "status": "Skipped",
+            "reason": "The text is a rhetorical, empathetic statement describing a general problem or pain point for VCs, using metaphorical language like 'mountain of information' and 'flooded with fragmented data,' without any specific statistics, data points, or verifiable assertions."
+        },
+        {
+            "page_number": 3,
+            "status": "Analyzed",
+            "validation_results": {
+                "validation_results": [
+                    {
+                        "claim": "50,000,000 startups are launching per year.",
+                        "conclusion": "INSUFFICIENT_INFORMATION",
+                        "summary": "The provided context does not contain any information, statistics, or data regarding the number of startups launching per year, including the figure of 50,000,000. The sources focus on topics such as startup ecosystems, funding, failure rates, and time spent searching for information, but none address or reference annual startup launch figures.",
+                        "evidence": []
+                    },
+                    {
+                        "claim": "137,000 startups are arising every day.",
+                        "conclusion": "SUPPORTED",
+                        "summary": "The claim is directly supported by a statement in the Demandsage source, which states that an average of 137K startups are launched every day, matching the number in the claim.",
+                        "evidence": [
+                            "\"On average, 137K startups are launched every day.\" --- Source (URL: https://www.demandsage.com/startup-statistics/) ---"
+                        ]
+                    },
+                    {
+                        "claim": "2 hours per day is spent on gathering information.",
+                        "conclusion": "SUPPORTED",
+                        "summary": "Multiple sources in the context confirm that employees spend approximately 2 hours per day searching and gathering information, with specific references to 1.8 hours (McKinsey) and 2.5 hours (IDC), closely aligning with the claim.",
+                        "evidence": [
+                            "According to a McKinsey report, employees spend 1.8 hours every day\u20149.3 hours per week, on average\u2014searching and gathering information.",
+                            "According to a McKinsey report, employees spend 1.8 hours every day\u20149.3 hours per week, on average\u2014searching and gathering information.",
+                            "According to a McKinsey report, employees spend 1.8 hours every day\u20149.3 hours per week, on average\u2014searching and gathering information.",
+                            "According to a study by IDC, knowledge workers spend an average of 2.5 hours per day searching for information, which adds up to 8.8 hours per week or more than one full workday. Another study by McKinsey found that employees spend up to 1.8 hours per day \u2014 or 9.3 hours per week \u2014 searching and gathering information.",
+                            "According to a McKinsey report, employees spend 1.8 hours every day\u20149.3 hours per week, on average\u2014searching and gathering information.",
+                            "According to a McKinsey report, employees spend an average of 1.8 hours per day - more than 9 hours per week - searching and gathering information."
+                        ]
+                    }
+                ]
+            }
+        },
+        {
+            "page_number": 4,
+            "status": "Analyzed",
+            "validation_results": {
+                "validation_results": [
+                    {
+                        "claim": "1,100+ GitHub repositories updated every hour.",
+                        "conclusion": "INSUFFICIENT_INFORMATION",
+                        "summary": "The provided context does not mention GitHub repositories, updates to repositories, or any statistics related to the number of updates. The sources discuss topics like API rate limits, scientific publications, news websites, and general trends, but none address the claim.",
+                        "evidence": []
+                    },
+                    {
+                        "claim": "200+ research papers published every minute.",
+                        "conclusion": "CONTRADICTED",
+                        "summary": "The provided context indicates that total worldwide S&E publication output reached 3.3 million articles in 2022, which equates to approximately 6 papers per minute. This directly contradicts the claim of 200+ papers per minute, as 3.3 million annually is far below the 105 million that would be required for 200 per minute.",
+                        "evidence": [
+                            {
+                                "quote": "Total worldwide S&E publication output reached 3.3 million articles in 2022, based on entries in the Scopus database.",
+                                "source": "--- Source (URL: https://ncses.nsf.gov/pubs/nsb202333/publication-output-by-region-country-or-economy-and-by-scientific-field) ---"
+                            },
+                            {
+                                "quote": "In 2022, nearly 1.6 million articles were OA (classified in one of four OA categories), compared with about 1.5 million traditional closed-access journal articles. Just 10 years prior, OA articles accounted for around a third of all articles with a known access status.",
+                                "source": "--- Source (URL: https://ncses.nsf.gov/pubs/nsb202333/publication-output-by-region-country-or-economy-and-by-scientific-field) ---"
+                            }
+                        ]
+                    },
+                    {
+                        "claim": "Millions of news articles and search trends daily.",
+                        "conclusion": "INSUFFICIENT_INFORMATION",
+                        "summary": "The provided context does not contain any direct information about the daily production of news articles or search trends. References to publication output are annual figures (e.g., 3.3 million S&E articles in 2022, equating to about 9,000 per day, not millions). Mentions of 'search trends' appear in unrelated GitHub discussions about repository trends, not general search trends. No evidence supports or contradicts the claim.",
+                        "evidence": []
+                    }
+                ]
+            }
+        },
+        {
+            "page_number": 5,
+            "status": "Skipped",
+            "reason": "The text includes titles, section headers, aspirational marketing statements like 'We provide the edge to spot the next google,' and a descriptive overview of a system architecture via diagram labels, but lacks any specific statistics, data points, or verifiable factual assertions."
+        },
+        {
+            "page_number": 6,
+            "status": "Skipped",
+            "reason": "The text consists of slide titles, a possible product name ('Butterfly'), a future date ('September 2025'), and a demo label, which are structural or aspirational elements without any statistics, data points, or specific verifiable assertions."
+        },
+        {
+            "page_number": 7,
+            "status": "Skipped",
+            "reason": "The text primarily consists of titles, project descriptions, aspirational statements (e.g., 'Accelerating European innovation'), feature overviews (e.g., 'Implementation of further trend insight with Google Tokens'), and illustrative categories (e.g., 'Top 3 Emerging Opportunities' with examples like 'Air Drone'). There are no statistics, data points, or specific factual assertions that can be independently verified; the date 'September 2025' is a projected timeline rather than a claim."
+        },
+        {
+            "page_number": 8,
+            "status": "Skipped",
+            "reason": "The text is a metaphorical statement evoking the butterfly effect, with no statistics, data points, or specific verifiable assertions; it functions as an aspirational or motivational phrase."
+        },
+        {
+            "page_number": 9,
+            "status": "Skipped",
+            "reason": "The text is a promotional marketing statement with a title 'Pitch' and aspirational claims about creating customizable, beautiful presentations quickly and for free, but it lacks any statistics, data points, or specific verifiable assertions."
+        }
+    ]
+}

@@ -1,0 +1,673 @@
+--- STARTING FULL DOCUMENT ANALYSIS & VALIDATION WORKFLOW ---
+--- PRE-ANALYSIS: Establishing document context from title page ---
+Agent [Extractor-Image]: Extracting page 1 as image...
+Agent [Extractor-Image]: Page extracted successfully as an image.
+Agent [Analyzer]: Synthesizing extracted text with multimodal image analysis...
+Agent [Analyzer]: Comprehensive analysis and synthesis complete.
+Context established: 'Butterfly
+
+Supercharging Europe’s innovation ecosystem by uncovering opportunities driving next gen startups.
+
+Butterfly'
+
+--- Processing Page 1/9 ---
+Agent [Extractor-Text]: Extracting text from page 1...
+Agent [Extractor-Text]: Text extracted successfully.
+Agent [Extractor-Image]: Extracting page 1 as image...
+Agent [Extractor-Image]: Page extracted successfully as an image.
+Agent [Analyzer]: Synthesizing extracted text with multimodal image analysis...
+Agent [Analyzer]: Comprehensive analysis and synthesis complete.
+Agent [Triage]: Assessing if page contains verifiable claims...
+Agent [Triage]: Assessment complete. Verifiable claims: False
+
+--- Processing Page 2/9 ---
+Agent [Extractor-Text]: Extracting text from page 2...
+Agent [Extractor-Text]: Text extracted successfully.
+Agent [Extractor-Image]: Extracting page 2 as image...
+Agent [Extractor-Image]: Page extracted successfully as an image.
+Agent [Analyzer]: Synthesizing extracted text with multimodal image analysis...
+Agent [Analyzer]: Comprehensive analysis and synthesis complete.
+Agent [Triage]: Assessing if page contains verifiable claims...
+Agent [Triage]: Assessment complete. Verifiable claims: False
+
+--- Processing Page 3/9 ---
+Agent [Extractor-Text]: Extracting text from page 3...
+Agent [Extractor-Text]: Text extracted successfully.
+Agent [Extractor-Image]: Extracting page 3 as image...
+Agent [Extractor-Image]: Page extracted successfully as an image.
+Agent [Analyzer]: Synthesizing extracted text with multimodal image analysis...
+Agent [Analyzer]: Comprehensive analysis and synthesis complete.
+Agent [Triage]: Assessing if page contains verifiable claims...
+Agent [Triage]: Assessment complete. Verifiable claims: True
+
+--- STARTING CLAIM VALIDATION SUB-WORKFLOW ---
+Agent [Decomposer]: Breaking down text into individual claims...
+
+--- Decomposer INPUT ---
+Text to decompose (first 500 chars):
+Unicorns don’t wait.
+
+The Problem
+
+50.000.000/year
+startups are launching.
+VCs are drowning with 137k
+startups arising every day.
+
+2h/day is spent on
+gathering information.
+
+Missed opportunities
+multiply into costs.
+Data is scattered across various
+applications and channels.
+Every overlooked signal is a
+deal lost and ROI.
+
+They’re lost in noise by the time VCs spot trends.
+
+Butterfly
+September 2025
+
+1 Microsoft 2020: Startups disrupting industries and changing the world—and d...
+------------------------
+
+
+--- Decomposer OUTPUT ---
+Extracted claims:
+[
+  "50,000,000 startups are launching per year.",
+  "137,000 startups are arising every day.",
+  "2 hours per day is spent on gathering information."
+]
+Successfully decomposed into 3 claims.
+-------------------------
+
+Agent [Planner]: Creating an efficient, context-aware search plan...
+Agent [Search]: Executing 2 search(es)...
+
+--- Searching Query 1/2: 'global number of new startups launched per year statistics' ---
+Found 5 results for query.
+
+--- Searching Query 2/2: 'average daily time spent gathering information per person or employee' ---
+Found 5 results for query.
+
+--- Search Agent FINAL OUTPUT ---
+Retrieved content from 10 unique sources.
+Total consolidated context length: 1059402 characters.
+---------------------------------
+
+Agent [Reputability]: Evaluating source credibility...
+
+--- Reputability INPUT ---
+Sources to evaluate:
+- Startup Statistics (2025): Numbers By Country & Success Rates: https://www.demandsage.com/startup-statistics/
+- How Many New Businesses Start Each Year? (2025 Data): https://www.commerceinstitute.com/new-businesses-started-every-year/
+- [PDF] Ecosystem Report 2025 - Startup Genome: https://startupgenome.com/contents/report/gser-2025_4786.pdf
+- 37 New Startup Statistics for 2025 - Exploding Topics: https://explodingtopics.com/blog/startup-stats
+- Top Countries by Total Startup Output 2025 - StartupBlink: https://www.startupblink.com/blog/top-countries-by-total-startup-output/    
+- Various Survey Statistics: Workers Spend Too Much Time Searching ...: https://cottrillresearch.com/various-survey-statistics-workers-spend-too-much-time-searching-for-information/
+- Cognitive University for Watson Systems SmartSeller - IBM: https://www.ibm.com/support/pages/cognitive-university-watson-systems-smartseller
+- How much time do people spend searching for information?: https://www.unleash.so/a/community/productivity/how-much-time-do-people-spend-searching-for-information
+- Does Your Workforce Spend Too Much Time Searching for Information: https://www.proprofskb.com/blog/workforce-spend-much-time-searching-information/
+- The ideal work environment: increasing productivity through instant ...: https://www.woodwing.com/blog/the-ideal-work-environment-increasing-productivity-through-instant-information-access
+--------------------------
+
+
+--- Reputability OUTPUT ---
+Evaluations:
+[
+  {
+    "url": "https://www.demandsage.com/startup-statistics/",
+    "reputability_score": 6,
+    "reputability_justification": "Aggregates startup data from various sources but lacks primary research; commercial blog with potential for selective stats."
+  },
+  {
+    "url": "https://www.commerceinstitute.com/new-businesses-started-every-year/",
+    "reputability_score": 6,
+    "reputability_justification": "Business analytics site citing government data, but presentation is blog-style with possible marketing slant."
+  },
+  {
+    "url": "https://startupgenome.com/contents/report/gser-2025_4786.pdf",
+    "reputability_score": 9,
+    "reputability_justification": "Official report from Startup Genome, a recognized authority on global startup ecosystems with rigorous methodology."
+  },
+  {
+    "url": "https://explodingtopics.com/blog/startup-stats",
+    "reputability_score": 7,
+    "reputability_justification": "Data-driven trend analysis site with citations, but relies on secondary sources and has a promotional tone."
+  },
+  {
+    "url": "https://www.startupblink.com/blog/top-countries-by-total-startup-output/",
+    "reputability_score": 8,
+    "reputability_justification": "Reputable startup ranking platform using proprietary data and global indices for objective insights." 
+  },
+  {
+    "url": "https://cottrillresearch.com/various-survey-statistics-workers-spend-too-much-time-searching-for-information/",
+    "reputability_score": 7,
+    "reputability_justification": "Research consultancy compiling survey data from credible sources, though selective and not peer-reviewed."
+  },
+  {
+    "url": "https://www.ibm.com/support/pages/cognitive-university-watson-systems-smartseller",
+    "reputability_score": 10,
+    "reputability_justification": "Official IBM documentation from a leading tech corporation, highly reliable for enterprise insights." 
+  },
+  {
+    "url": "https://www.unleash.so/a/community/productivity/how-much-time-do-people-spend-searching-for-information",
+    "reputability_score": 5,
+    "reputability_justification": "Community-driven productivity forum with user-submitted info, lacking verification and prone to anecdotal content."
+  },
+  {
+    "url": "https://www.proprofskb.com/blog/workforce-spend-much-time-searching-information/",
+    "reputability_score": 6,
+    "reputability_justification": "Knowledge management blog citing studies, but commercial focus may introduce bias in interpretations."
+  },
+  {
+    "url": "https://www.woodwing.com/blog/the-ideal-work-environment-increasing-productivity-through-instant-information-access",        
+    "reputability_score": 5,
+    "reputability_justification": "Company blog promoting WoodWing's solutions, with stats supporting sales narrative rather than neutral analysis."
+  }
+]
+---------------------------
+
+
+--- Starting Individual Claim Validation Loop ---
+
+>>> Validating Claim 1/3: '50,000,000 startups are launching per year.'
+Agent [Validation]: Now validating the claim: '50,000,000 startups are launching per year.'
+
+--- Validation Agent INPUT ---
+Claim to validate: 50,000,000 startups are launching per year.
+Context length: 1059402 characters.
+------------------------------
+
+
+--- Validation Agent OUTPUT ---
+{
+  "claim": "50,000,000 startups are launching per year.",
+  "conclusion": "INSUFFICIENT_INFORMATION",
+  "summary": "The provided context does not contain any information, statistics, or data regarding the number of startups launching per year, including the figure of 50,000,000. The sources focus on topics such as startup ecosystems, funding, failure rates, and time spent searching for information, but none address or reference annual startup launch figures.",
+  "evidence": []
+}
+-------------------------------
+
+
+>>> Validating Claim 2/3: '137,000 startups are arising every day.'
+Agent [Validation]: Now validating the claim: '137,000 startups are arising every day.'
+
+--- Validation Agent INPUT ---
+Claim to validate: 137,000 startups are arising every day.
+Context length: 1059402 characters.
+------------------------------
+
+
+--- Validation Agent OUTPUT ---
+{
+  "claim": "137,000 startups are arising every day.",
+  "conclusion": "SUPPORTED",
+  "summary": "The claim is directly supported by a statement in the Demandsage source, which states that an average of 137K startups are launched every day, matching the number in the claim.",
+  "evidence": [
+    "\"On average, 137K startups are launched every day.\" --- Source (URL: https://www.demandsage.com/startup-statistics/) ---"
+  ]
+}
+-------------------------------
+
+
+>>> Validating Claim 3/3: '2 hours per day is spent on gathering information.'
+Agent [Validation]: Now validating the claim: '2 hours per day is spent on gathering information.'
+
+--- Validation Agent INPUT ---
+Claim to validate: 2 hours per day is spent on gathering information.
+Context length: 1059402 characters.
+------------------------------
+
+
+--- Validation Agent OUTPUT ---
+{
+  "claim": "2 hours per day is spent on gathering information.",
+  "conclusion": "SUPPORTED",
+  "summary": "Multiple sources in the context confirm that employees spend approximately 2 hours per day searching and gathering information, with specific references to 1.8 hours (McKinsey) and 2.5 hours (IDC), closely aligning with the claim.",
+  "evidence": [
+    "According to a McKinsey report, employees spend 1.8 hours every day\u20149.3 hours per week, on average\u2014searching and gathering information.",
+    "According to a McKinsey report, employees spend 1.8 hours every day\u20149.3 hours per week, on average\u2014searching and gathering information.",
+    "According to a McKinsey report, employees spend 1.8 hours every day\u20149.3 hours per week, on average\u2014searching and gathering information.",
+    "According to a study by IDC, knowledge workers spend an average of 2.5 hours per day searching for information, which adds up to 8.8 hours per week or more than one full workday. Another study by McKinsey found that employees spend up to 1.8 hours per day \u2014 or 9.3 hours per week \u2014 searching and gathering information.",
+    "According to a McKinsey report, employees spend 1.8 hours every day\u20149.3 hours per week, on average\u2014searching and gathering information.",
+    "According to a McKinsey report, employees spend an average of 1.8 hours per day - more than 9 hours per week - searching and gathering information."
+  ]
+}
+-------------------------------
+
+--- Individual Claim Validation Loop COMPLETED ---
+
+--- CLAIM VALIDATION SUB-WORKFLOW COMPLETED ---
+
+
+--- Processing Page 4/9 ---
+Agent [Extractor-Text]: Extracting text from page 4...
+Agent [Extractor-Text]: Text extracted successfully.
+Agent [Extractor-Image]: Extracting page 4 as image...
+Agent [Extractor-Image]: Page extracted successfully as an image.
+Agent [Analyzer]: Synthesizing extracted text with multimodal image analysis...
+Agent [Analyzer]: Comprehensive analysis and synthesis complete.
+Agent [Triage]: Assessing if page contains verifiable claims...
+Agent [Triage]: Assessment complete. Verifiable claims: True
+
+--- STARTING CLAIM VALIDATION SUB-WORKFLOW ---
+Agent [Decomposer]: Breaking down text into individual claims...
+
+--- Decomposer INPUT ---
+Text to decompose (first 500 chars):
+The Solution
+Butterfly
+September 2025
+
+Anticipate tomorrow’s opportunities, today.
+
+| 1 | 2 | 3 |
+|---|----|----|
+| **Source trending**<br/>**code repositories.**<br/><br/>![GitHub logo](GitHub)<br/>**1,100+ GitHub**<br/>**repositories**<br/>**updated every hour** | **Detect innovation potential**<br/>**before competitors do.**<br/><br/>![arXiv logo](arXiv)<br/>**200+ research papers**<br/>**published every minute** | **Stay up-to-date with**<br/>**freshly published news.**<br/><br/>...
+------------------------
+
+
+--- Decomposer OUTPUT ---
+Extracted claims:
+[
+  "1,100+ GitHub repositories updated every hour.",
+  "200+ research papers published every minute.",
+  "Millions of news articles and search trends daily."
+]
+Successfully decomposed into 3 claims.
+-------------------------
+
+Agent [Planner]: Creating an efficient, context-aware search plan...
+Agent [Search]: Executing 4 search(es)...
+
+--- Searching Query 1/4: 'how many GitHub repositories are updated per hour globally' ---
+Found 5 results for query.
+
+--- Searching Query 2/4: 'global scientific papers published per minute statistics' ---
+Found 5 results for query.
+
+--- Searching Query 3/4: 'daily worldwide news articles publication volume' ---
+Found 5 results for query.
+
+--- Searching Query 4/4: 'global daily search trends volume statistics' ---
+Found 5 results for query.
+
+--- Search Agent FINAL OUTPUT ---
+Retrieved content from 20 unique sources.
+Total consolidated context length: 681398 characters.
+---------------------------------
+
+Agent [Reputability]: Evaluating source credibility...
+
+--- Reputability INPUT ---
+Sources to evaluate:
+- Rate limits for the REST API - GitHub Docs: https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api
+- Do you know when trending repositories on GitHub are usually ...: https://github.com/orgs/community/discussions/64295
+- Allow the user to set fetch intervals, or set it to every half-hour #8551: https://github.com/desktop/desktop/issues/8551
+- REST API endpoints for repository statistics - GitHub Docs: https://docs.github.com/en/rest/metrics/statistics
+- How many time to refresh the repository in the GitHub API?: https://stackoverflow.com/questions/55971150/how-many-time-to-refresh-the-repository-in-the-github-api
+- Publication Output by Region, Country, or Economy and by Scientific ...: https://ncses.nsf.gov/pubs/nsb202333/publication-output-by-region-country-or-economy-and-by-scientific-field
+- Publications Output: U.S. Trends and International Comparisons | NSF: https://ncses.nsf.gov/pubs/nsb202333
+- The rate of growth in scientific publication and the decline in ...: https://pmc.ncbi.nlm.nih.gov/articles/PMC2909426/
+- Excessive growth in the number of scientific publications: https://www.ouvrirlascience.fr/excessive-growth-in-the-number-of-scientific-publications/
+- More is not better: the developing crisis of scientific publishing: https://council.science/blog/more-is-not-better-the-developing-crisis-of-scientific-publishing/
+- Most popular websites for news in the world: Monthly top 50 listing: https://pressgazette.co.uk/media-audience-and-business-data/media_metrics/most-popular-websites-news-world-monthly-2/
+- Newspapers Fact Sheet - Pew Research Center: https://www.pewresearch.org/journalism/fact-sheet/newspapers/
+- Digital 2024 Global News Report - DataReportal: https://datareportal.com/reports/digital-2024-global-news-report
+- Digital Newspapers & Magazines - Worldwide | Forecast - Statista: https://www.statista.com/outlook/amo/media/newspapers-magazines/digital-newspapers-magazines/worldwide
+- Top Ten Most Read Newspaper in World - IJR News: https://www.internationaljournalofresearch.org/2024/03/top-ten-most-read-newspaper-in-world.html
+- How Many Google Searches Are There Per Day? August 2025: https://explodingtopics.com/blog/google-searches-per-day
+- Google Search Statistics - Internet Live Stats: https://www.internetlivestats.com/google-search-statistics/
+- How to See Absolute Number of Searches in Google Trends - Glimpse: https://meetglimpse.com/google-trends/search-volume/
+- Top 50 Google Statistics You Should Know - Digital Silk: https://www.digitalsilk.com/digital-trends/top-google-statistics/
+- Google Trends Search Volume - Keywords Everywhere: https://keywordseverywhere.com/google-trends.html
+--------------------------
+
+
+--- Reputability OUTPUT ---
+Evaluations:
+[
+  {
+    "url": "https://docs.github.com/en/rest/using-the-rest-api/rate-limits-for-the-rest-api",
+    "reputability_score": 10,
+    "reputability_justification": "Official GitHub documentation, authoritative and directly from the platform's developers."
+  },
+  {
+    "url": "https://github.com/orgs/community/discussions/64295",
+    "reputability_score": 7,
+    "reputability_justification": "GitHub community discussion forum; user-generated content on an official platform, moderated but not peer-reviewed."
+  },
+  {
+    "url": "https://github.com/desktop/desktop/issues/8551",
+    "reputability_score": 8,
+    "reputability_justification": "Official GitHub repository issue tracker; reliable for development discussions, though contributor-dependent."
+  },
+  {
+    "url": "https://docs.github.com/en/rest/metrics/statistics",
+    "reputability_score": 10,
+    "reputability_justification": "Official GitHub API documentation, highly accurate and maintained by GitHub."
+  },
+  {
+    "url": "https://stackoverflow.com/questions/55971150/how-many-time-to-refresh-the-repository-in-the-github-api",
+    "reputability_score": 8,
+    "reputability_justification": "Stack Overflow, established developer Q&A site with community-voted answers, generally reliable for technical queries."
+  },
+  {
+    "url": "https://ncses.nsf.gov/pubs/nsb202333/publication-output-by-region-country-or-economy-and-by-scientific-field",
+    "reputability_score": 10,
+    "reputability_justification": "National Science Foundation (NSF) publication; government-backed research, rigorous and data-driven." 
+  },
+  {
+    "url": "https://ncses.nsf.gov/pubs/nsb202333",
+    "reputability_score": 10,
+    "reputability_justification": "Official NSF report; authoritative source for scientific trends and statistics."
+  },
+  {
+    "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC2909426/",
+    "reputability_score": 10,
+    "reputability_justification": "PubMed Central peer-reviewed article; high academic standards from NIH repository."
+  },
+  {
+    "url": "https://www.ouvrirlascience.fr/excessive-growth-in-the-number-of-scientific-publications/",
+    "reputability_score": 6,
+    "reputability_justification": "Open science advocacy site; informative but potentially biased toward policy views, not peer-reviewed."
+  },
+  {
+    "url": "https://council.science/blog/more-is-not-better-the-developing-crisis-of-scientific-publishing/",
+    "reputability_score": 9,
+    "reputability_justification": "International Science Council blog; reputable global organization, expert analysis with minimal bias."
+  },
+  {
+    "url": "https://pressgazette.co.uk/media-audience-and-business-data/media_metrics/most-popular-websites-news-world-monthly-2/",      
+    "reputability_score": 8,
+    "reputability_justification": "Press Gazette, established media industry publication; reliable for news metrics and audience data."  
+  },
+  {
+    "url": "https://www.pewresearch.org/journalism/fact-sheet/newspapers/",
+    "reputability_score": 10,
+    "reputability_justification": "Pew Research Center; non-partisan think tank with rigorous, data-based journalism analysis."
+  },
+  {
+    "url": "https://datareportal.com/reports/digital-2024-global-news-report",
+    "reputability_score": 9,
+    "reputability_justification": "DataReportal; specialized in digital trends with sourced data from reputable providers like We Are Social."
+  },
+  {
+    "url": "https://www.statista.com/outlook/amo/media/newspapers-magazines/digital-newspapers-magazines/worldwide",
+    "reputability_score": 9,
+    "reputability_justification": "Statista; leading statistics platform with verified data, widely used in research."
+  },
+  {
+    "url": "https://www.internationaljournalofresearch.org/2024/03/top-ten-most-read-newspaper-in-world.html",
+    "reputability_score": 5,
+    "reputability_justification": "International Journal of Research; lesser-known academic-style blog, potential for unverified claims and lower editorial standards."
+  },
+  {
+    "url": "https://explodingtopics.com/blog/google-searches-per-day",
+    "reputability_score": 7,
+    "reputability_justification": "Exploding Topics; data-driven trend blog, useful insights but secondary analysis with possible estimation errors."
+  },
+  {
+    "url": "https://www.internetlivestats.com/google-search-statistics/",
+    "reputability_score": 8,
+    "reputability_justification": "Internet Live Stats; specialized in real-time web metrics, reliable for high-level search data."      
+  },
+  {
+    "url": "https://meetglimpse.com/google-trends/search-volume/",
+    "reputability_score": 6,
+    "reputability_justification": "Glimpse; marketing tool blog, practical advice but commercial and not a primary data source."
+  },
+  {
+    "url": "https://www.digitalsilk.com/digital-trends/top-google-statistics/",
+    "reputability_score": 6,
+    "reputability_justification": "Digital Silk agency blog; promotional content with aggregated stats, reliable but not deeply sourced."
+  },
+  {
+    "url": "https://keywordseverywhere.com/google-trends.html",
+    "reputability_score": 7,
+    "reputability_justification": "Keywords Everywhere; SEO tool provider, accurate for trends but commercial with potential affiliate bias."
+  }
+]
+---------------------------
+
+
+--- Starting Individual Claim Validation Loop ---
+
+>>> Validating Claim 1/3: '1,100+ GitHub repositories updated every hour.'
+Agent [Validation]: Now validating the claim: '1,100+ GitHub repositories updated every hour.'
+
+--- Validation Agent INPUT ---
+Claim to validate: 1,100+ GitHub repositories updated every hour.
+Context length: 681398 characters.
+------------------------------
+
+
+--- Validation Agent OUTPUT ---
+{
+  "claim": "1,100+ GitHub repositories updated every hour.",
+  "conclusion": "INSUFFICIENT_INFORMATION",
+  "summary": "The provided context does not mention GitHub repositories, updates to repositories, or any statistics related to the number of updates. The sources discuss topics like API rate limits, scientific publications, news websites, and general trends, but none address the claim.",
+  "evidence": []
+}
+-------------------------------
+
+
+>>> Validating Claim 2/3: '200+ research papers published every minute.'
+Agent [Validation]: Now validating the claim: '200+ research papers published every minute.'
+
+--- Validation Agent INPUT ---
+Claim to validate: 200+ research papers published every minute.
+Context length: 681398 characters.
+------------------------------
+
+
+--- Validation Agent OUTPUT ---
+{
+  "claim": "200+ research papers published every minute.",
+  "conclusion": "CONTRADICTED",
+  "summary": "The provided context indicates that total worldwide S&E publication output reached 3.3 million articles in 2022, which equates to approximately 6 papers per minute. This directly contradicts the claim of 200+ papers per minute, as 3.3 million annually is far below the 105 million that would be required for 200 per minute.",
+  "evidence": [
+    {
+      "quote": "Total worldwide S&E publication output reached 3.3 million articles in 2022, based on entries in the Scopus database.",  
+      "source": "--- Source (URL: https://ncses.nsf.gov/pubs/nsb202333/publication-output-by-region-country-or-economy-and-by-scientific-field) ---"
+    },
+    {
+      "quote": "In 2022, nearly 1.6 million articles were OA (classified in one of four OA categories), compared with about 1.5 million traditional closed-access journal articles. Just 10 years prior, OA articles accounted for around a third of all articles with a known access status.",
+      "source": "--- Source (URL: https://ncses.nsf.gov/pubs/nsb202333/publication-output-by-region-country-or-economy-and-by-scientific-field) ---"
+    }
+  ]
+}
+-------------------------------
+
+
+>>> Validating Claim 3/3: 'Millions of news articles and search trends daily.'
+Agent [Validation]: Now validating the claim: 'Millions of news articles and search trends daily.'
+
+--- Validation Agent INPUT ---
+Claim to validate: Millions of news articles and search trends daily.
+Context length: 681398 characters.
+------------------------------
+
+
+--- Validation Agent OUTPUT ---
+{
+  "claim": "Millions of news articles and search trends daily.",
+  "conclusion": "INSUFFICIENT_INFORMATION",
+  "summary": "The provided context does not contain any direct information about the daily production of news articles or search trends. References to publication output are annual figures (e.g., 3.3 million S&E articles in 2022, equating to about 9,000 per day, not millions). Mentions of 'search trends' appear in unrelated GitHub discussions about repository trends, not general search trends. No evidence supports or contradicts the claim.",
+  "evidence": []
+}
+-------------------------------
+
+--- Individual Claim Validation Loop COMPLETED ---
+
+--- CLAIM VALIDATION SUB-WORKFLOW COMPLETED ---
+
+
+--- Processing Page 5/9 ---
+Agent [Extractor-Text]: Extracting text from page 5...
+Agent [Extractor-Text]: Text extracted successfully.
+Agent [Extractor-Image]: Extracting page 5 as image...
+Agent [Extractor-Image]: Page extracted successfully as an image.
+Agent [Analyzer]: Synthesizing extracted text with multimodal image analysis...
+Agent [Analyzer]: Comprehensive analysis and synthesis complete.
+Agent [Triage]: Assessing if page contains verifiable claims...
+Agent [Triage]: Assessment complete. Verifiable claims: False
+
+--- Processing Page 6/9 ---
+Agent [Extractor-Text]: Extracting text from page 6...
+Agent [Extractor-Text]: Text extracted successfully.
+Agent [Extractor-Image]: Extracting page 6 as image...
+Agent [Extractor-Image]: Page extracted successfully as an image.
+Agent [Analyzer]: Synthesizing extracted text with multimodal image analysis...
+Agent [Analyzer]: Comprehensive analysis and synthesis complete.
+Agent [Triage]: Assessing if page contains verifiable claims...
+Agent [Triage]: Assessment complete. Verifiable claims: False
+
+--- Processing Page 7/9 ---
+Agent [Extractor-Text]: Extracting text from page 7...
+Agent [Extractor-Text]: Text extracted successfully.
+Agent [Extractor-Image]: Extracting page 7 as image...
+Agent [Extractor-Image]: Page extracted successfully as an image.
+Agent [Analyzer]: Synthesizing extracted text with multimodal image analysis...
+Agent [Analyzer]: Comprehensive analysis and synthesis complete.
+Agent [Triage]: Assessing if page contains verifiable claims...
+Agent [Triage]: Assessment complete. Verifiable claims: False
+
+--- Processing Page 8/9 ---
+Agent [Extractor-Text]: Extracting text from page 8...
+Agent [Extractor-Text]: Text extracted successfully.
+Agent [Extractor-Image]: Extracting page 8 as image...
+Agent [Extractor-Image]: Page extracted successfully as an image.
+Agent [Analyzer]: Synthesizing extracted text with multimodal image analysis...
+Agent [Analyzer]: Comprehensive analysis and synthesis complete.
+Agent [Triage]: Assessing if page contains verifiable claims...
+Agent [Triage]: Assessment complete. Verifiable claims: False
+
+--- Processing Page 9/9 ---
+Agent [Extractor-Text]: Extracting text from page 9...
+Agent [Extractor-Text]: No native text found on this page.
+Agent [Extractor-Image]: Extracting page 9 as image...
+Agent [Extractor-Image]: Page extracted successfully as an image.
+Agent [Analyzer]: Synthesizing extracted text with multimodal image analysis...
+Agent [Analyzer]: Comprehensive analysis and synthesis complete.
+Agent [Triage]: Assessing if page contains verifiable claims...
+Agent [Triage]: Assessment complete. Verifiable claims: False
+
+--- FULL DOCUMENT ANALYSIS & VALIDATION WORKFLOW COMPLETED ---
+
+
+--- FINAL COMPREHENSIVE REPORT ---
+{
+  "document_analysis_report": [
+    {
+      "page_number": 1,
+      "status": "Skipped",
+      "reason": "The text is a title or promotional tagline for an initiative named 'Butterfly,' presenting an aspirational description of its objectives without any statistics, data points, or specific verifiable assertions."
+    },
+    {
+      "page_number": 2,
+      "status": "Skipped",
+      "reason": "The text is a rhetorical, empathetic statement describing a general problem or pain point for VCs, using metaphorical language like 'mountain of information' and 'flooded with fragmented data,' without any specific statistics, data points, or verifiable assertions."
+    },
+    {
+      "page_number": 3,
+      "status": "Analyzed",
+      "validation_results": {
+        "validation_results": [
+          {
+            "claim": "50,000,000 startups are launching per year.",
+            "conclusion": "INSUFFICIENT_INFORMATION",
+            "summary": "The provided context does not contain any information, statistics, or data regarding the number of startups launching per year, including the figure of 50,000,000. The sources focus on topics such as startup ecosystems, funding, failure rates, and time spent searching for information, but none address or reference annual startup launch figures.",
+            "evidence": []
+          },
+          {
+            "claim": "137,000 startups are arising every day.",
+            "conclusion": "SUPPORTED",
+            "summary": "The claim is directly supported by a statement in the Demandsage source, which states that an average of 137K startups are launched every day, matching the number in the claim.",
+            "evidence": [
+              "\"On average, 137K startups are launched every day.\" --- Source (URL: https://www.demandsage.com/startup-statistics/) ---"
+            ]
+          },
+          {
+            "claim": "2 hours per day is spent on gathering information.",
+            "conclusion": "SUPPORTED",
+            "summary": "Multiple sources in the context confirm that employees spend approximately 2 hours per day searching and gathering information, with specific references to 1.8 hours (McKinsey) and 2.5 hours (IDC), closely aligning with the claim.",
+            "evidence": [
+              "According to a McKinsey report, employees spend 1.8 hours every day\u20149.3 hours per week, on average\u2014searching and gathering information.",
+              "According to a McKinsey report, employees spend 1.8 hours every day\u20149.3 hours per week, on average\u2014searching and gathering information.",
+              "According to a McKinsey report, employees spend 1.8 hours every day\u20149.3 hours per week, on average\u2014searching and gathering information.",
+              "According to a study by IDC, knowledge workers spend an average of 2.5 hours per day searching for information, which adds up to 8.8 hours per week or more than one full workday. Another study by McKinsey found that employees spend up to 1.8 hours per day \u2014 or 9.3 hours per week \u2014 searching and gathering information.",
+              "According to a McKinsey report, employees spend 1.8 hours every day\u20149.3 hours per week, on average\u2014searching and gathering information.",
+              "According to a McKinsey report, employees spend an average of 1.8 hours per day - more than 9 hours per week - searching and gathering information."
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "page_number": 4,
+      "status": "Analyzed",
+      "validation_results": {
+        "validation_results": [
+          {
+            "claim": "1,100+ GitHub repositories updated every hour.",
+            "conclusion": "INSUFFICIENT_INFORMATION",
+            "summary": "The provided context does not mention GitHub repositories, updates to repositories, or any statistics related to the number of updates. The sources discuss topics like API rate limits, scientific publications, news websites, and general trends, but none address the claim.",
+            "evidence": []
+          },
+          {
+            "claim": "200+ research papers published every minute.",
+            "conclusion": "CONTRADICTED",
+            "summary": "The provided context indicates that total worldwide S&E publication output reached 3.3 million articles in 2022, which equates to approximately 6 papers per minute. This directly contradicts the claim of 200+ papers per minute, as 3.3 million annually is far below the 105 million that would be required for 200 per minute.",
+            "evidence": [
+              {
+                "quote": "Total worldwide S&E publication output reached 3.3 million articles in 2022, based on entries in the Scopus database.",
+                "source": "--- Source (URL: https://ncses.nsf.gov/pubs/nsb202333/publication-output-by-region-country-or-economy-and-by-scientific-field) ---"
+              },
+              {
+                "quote": "In 2022, nearly 1.6 million articles were OA (classified in one of four OA categories), compared with about 1.5 million traditional closed-access journal articles. Just 10 years prior, OA articles accounted for around a third of all articles with a known access status.",
+                "source": "--- Source (URL: https://ncses.nsf.gov/pubs/nsb202333/publication-output-by-region-country-or-economy-and-by-scientific-field) ---"
+              }
+            ]
+          },
+          {
+            "claim": "Millions of news articles and search trends daily.",
+            "conclusion": "INSUFFICIENT_INFORMATION",
+            "summary": "The provided context does not contain any direct information about the daily production of news articles or search trends. References to publication output are annual figures (e.g., 3.3 million S&E articles in 2022, equating to about 9,000 per day, not millions). Mentions of 'search trends' appear in unrelated GitHub discussions about repository trends, not general search trends. No evidence supports or contradicts the claim.",
+            "evidence": []
+          }
+        ]
+      }
+    },
+    {
+      "page_number": 5,
+      "status": "Skipped",
+      "reason": "The text includes titles, section headers, aspirational marketing statements like 'We provide the edge to spot the next google,' and a descriptive overview of a system architecture via diagram labels, but lacks any specific statistics, data points, or verifiable factual assertions."
+    },
+    {
+      "page_number": 6,
+      "status": "Skipped",
+      "reason": "The text consists of slide titles, a possible product name ('Butterfly'), a future date ('September 2025'), and a demo label, which are structural or aspirational elements without any statistics, data points, or specific verifiable assertions."
+    },
+    {
+      "page_number": 7,
+      "status": "Skipped",
+      "reason": "The text primarily consists of titles, project descriptions, aspirational statements (e.g., 'Accelerating European innovation'), feature overviews (e.g., 'Implementation of further trend insight with Google Tokens'), and illustrative categories (e.g., 'Top 3 Emerging Opportunities' with examples like 'Air Drone'). There are no statistics, data points, or specific factual assertions that can be independently verified; the date 'September 2025' is a projected timeline rather than a claim."
+    },
+    {
+      "page_number": 8,
+      "status": "Skipped",
+      "reason": "The text is a metaphorical statement evoking the butterfly effect, with no statistics, data points, or specific verifiable assertions; it functions as an aspirational or motivational phrase."
+    },
+    {
+      "page_number": 9,
+      "status": "Skipped",
+      "reason": "The text is a promotional marketing statement with a title 'Pitch' and aspirational claims about creating customizable, beautiful presentations quickly and for free, but it lacks any statistics, data points, or specific verifiable assertions."
+    }
+  ]
+}
+
+--- Report successfully saved to: reports\example-presentation_20250917_154335_report.json ---
