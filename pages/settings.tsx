@@ -131,7 +131,7 @@ export default function SettingsPage(){
       <div className="max-w-5xl space-y-10">
         <header className="space-y-4">
           <div className="flex items-center gap-4">
-            <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary-100">
+            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary-100">
               <CogIcon className="h-6 w-6 text-primary-600" />
             </div>
             <div>
@@ -158,153 +158,151 @@ export default function SettingsPage(){
           </div>
         </header>
 
-        <div className="grid grid-cols-1 gap-8 xl:grid-cols-[minmax(0,1.5fr)_minmax(0,1fr)]">
-          <section className="space-y-6">
-            <div className="card">
-              <div className="flex items-center justify-between gap-3">
-                <div className="flex items-center gap-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent-100">
-                    <CpuChipIcon className="h-5 w-5 text-accent-600" />
-                  </div>
-                  <div>
-                    <h2 className="text-xl font-semibold text-neutral-900">Analysis Agents</h2>
-                    <p className="text-sm text-neutral-600">Choose which AI specialists contribute to each run.</p>
-                  </div>
+        <section className="space-y-6">
+          <div className="card">
+            <div className="flex items-center justify-between gap-3">
+              <div className="flex items-center gap-3">
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary-100">
+                  <CpuChipIcon className="h-5 w-5 text-primary-600" />
                 </div>
-                <span className="rounded-full bg-neutral-100 px-3 py-1 text-xs font-medium text-neutral-600">
-                  {selectedAgents} active
-                </span>
+                <div>
+                  <h2 className="text-xl font-semibold text-neutral-900">Analysis Agents</h2>
+                  <p className="text-sm text-neutral-600">Choose which AI specialists contribute to each run.</p>
+                </div>
               </div>
-
-              <div className="mt-6 space-y-4">
-                {agentOptions.map(({ key, label, description, icon: Icon }) => {
-                  const enabled = prefs.agents[key]
-                  return (
-                    <label
-                      key={key}
-                      className={`group flex cursor-pointer gap-4 rounded-2xl border p-4 transition-all duration-200 ${
-                        enabled
-                          ? 'border-primary-200 bg-primary-50/70 shadow-soft'
-                          : 'border-neutral-200 bg-white hover:border-primary-200 hover:bg-primary-50/50'
-                      }`}
-                    >
-                      <input
-                        type="checkbox"
-                        checked={enabled}
-                        onChange={() => toggleAgent(key)}
-                        className="sr-only"
-                      />
-                      <div className={`flex h-11 w-11 items-center justify-center rounded-xl ${
-                        enabled ? 'bg-primary-100 text-primary-600' : 'bg-neutral-100 text-neutral-400 group-hover:text-primary-600'
-                      }`}>
-                        <Icon className="h-5 w-5" />
-                      </div>
-                      <div className="min-w-0 flex-1">
-                        <p className="font-semibold text-neutral-900">{label}</p>
-                        <p className="mt-1 text-sm leading-relaxed text-neutral-600">{description}</p>
-                      </div>
-                      <div className={`flex h-6 w-6 items-center justify-center rounded-full ${
-                        enabled ? 'bg-success-100 text-success-600' : 'bg-neutral-100 text-neutral-400'
-                      }`}>
-                        <CheckCircleIcon className="h-4 w-4" />
-                      </div>
-                    </label>
-                  )
-                })}
-              </div>
+              <span className="rounded-full bg-neutral-100 px-3 py-1 text-xs font-medium text-neutral-600">
+                {selectedAgents} active
+              </span>
             </div>
-          </section>
 
-          <aside className="space-y-6">
-            <div className="card">
-              <div className="mb-6 flex items-center gap-3">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary-100">
-                  <LanguageIcon className="h-5 w-5 text-primary-600" />
-                </div>
-                <div>
-                  <h2 className="text-xl font-semibold text-neutral-900">General</h2>
-                  <p className="text-sm text-neutral-600">Language and risk targeting preferences.</p>
-                </div>
-              </div>
-
-              <div className="space-y-6">
-                <div>
-                  <label className="mb-2 block text-sm font-medium text-neutral-900">
-                    Interface language
-                  </label>
-                  <select
-                    className="input w-full"
-                    value={prefs.language}
-                    onChange={(e)=>setPrefs(p=>({...p, language: e.target.value as Prefs['language']}))}
-                  >
-                    <option value="en">English (US)</option>
-                    <option value="de">German</option>
-                    <option value="fr">French</option>
-                  </select>
-                  <p className="mt-1 text-sm text-neutral-500">
-                    Impacts report output as well as on-screen copy.
-                  </p>
-                </div>
-
-                <div>
-                  <span className="mb-2 block text-sm font-medium text-neutral-900">Target risk profile</span>
-                  <div className="grid gap-3 sm:grid-cols-3">
-                    {riskProfiles.map(({ value, label, description }) => {
-                      const active = prefs.riskProfile === value
-                      return (
-                        <label
-                          key={value}
-                          className={`group flex cursor-pointer flex-col rounded-2xl border p-4 text-left transition-all duration-200 ${
-                            active
-                              ? 'border-primary-200 bg-primary-50/70 shadow-soft'
-                              : 'border-neutral-200 bg-white hover:border-primary-200 hover:bg-primary-50/50'
-                          }`}
-                        >
-                          <input
-                            type="radio"
-                            name="risk-profile"
-                            value={value}
-                            checked={active}
-                            onChange={() => setPrefs(p => ({ ...p, riskProfile: value }))}
-                            className="sr-only"
-                          />
-                          <span className="text-sm font-semibold text-neutral-900">{label}</span>
-                          <span className="mt-1 text-xs text-neutral-500 leading-relaxed">{description}</span>
-                        </label>
-                      )
-                    })}
-                  </div>
-                  <p className="mt-2 text-sm text-neutral-500">
-                    Determines how assertive the recommendations and diligence depth should be.
-                  </p>
-                </div>
-
-                <div className="border-t border-neutral-100 pt-4">
-                  <button
-                    onClick={save}
-                    disabled={!hasChanges}
-                    className={`btn w-full ${
-                      saved
-                        ? 'btn-success'
-                        : hasChanges
-                          ? 'btn-primary'
-                          : 'btn-secondary opacity-60 cursor-not-allowed'
+            <div className="mt-6 space-y-4">
+              {agentOptions.map(({ key, label, description, icon: Icon }) => {
+                const enabled = prefs.agents[key]
+                return (
+                  <label
+                    key={key}
+                    className={`group flex cursor-pointer gap-4 rounded-2xl border p-4 transition-all duration-200 ${
+                      enabled
+                        ? 'border-primary-200 bg-primary-50/70 shadow-soft'
+                        : 'border-neutral-200 bg-white hover:border-primary-200 hover:bg-primary-50/50'
                     }`}
                   >
-                    {saved ? (
-                      <div className="flex items-center justify-center gap-2">
-                        <CheckCircleIcon className="h-5 w-5" />
-                        <span>Preferences saved</span>
-                      </div>
-                    ) : (
-                      'Save preferences'
-                    )}
-                  </button>
-                </div>
+                    <input
+                      type="checkbox"
+                      checked={enabled}
+                      onChange={() => toggleAgent(key)}
+                      className="sr-only"
+                    />
+                    <div className={`flex h-11 w-11 items-center justify-center rounded-full ${
+                      enabled ? 'bg-primary-100 text-primary-600' : 'bg-neutral-100 text-neutral-400 group-hover:text-primary-600'
+                    }`}>
+                      <Icon className="h-5 w-5" />
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <p className="font-semibold text-neutral-900">{label}</p>
+                      <p className="mt-1 text-sm leading-relaxed text-neutral-600">{description}</p>
+                    </div>
+                    <div className={`flex h-6 w-6 items-center justify-center rounded-full ${
+                      enabled ? 'bg-success-100 text-success-600' : 'bg-neutral-100 text-neutral-400'
+                    }`}>
+                      <CheckCircleIcon className="h-4 w-4" />
+                    </div>
+                  </label>
+                )
+              })}
+            </div>
+          </div>
+        </section>
+
+        <section className="space-y-6">
+          <div className="card">
+            <div className="mb-6 flex items-center gap-3">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary-100">
+                <LanguageIcon className="h-5 w-5 text-primary-600" />
+              </div>
+              <div>
+                <h2 className="text-xl font-semibold text-neutral-900">General</h2>
+                <p className="text-sm text-neutral-600">Language and risk targeting preferences.</p>
               </div>
             </div>
-          </aside>
-        </div>
+
+            <div className="space-y-6">
+              <div>
+                <label className="mb-2 block text-sm font-medium text-neutral-900">
+                  Interface language
+                </label>
+                <select
+                  className="input w-full"
+                  value={prefs.language}
+                  onChange={(e)=>setPrefs(p=>({...p, language: e.target.value as Prefs['language']}))}
+                >
+                  <option value="en">English (US)</option>
+                  <option value="de">German</option>
+                  <option value="fr">French</option>
+                </select>
+                <p className="mt-1 text-sm text-neutral-500">
+                  Impacts report output as well as on-screen copy.
+                </p>
+              </div>
+
+              <div>
+                <span className="mb-2 block text-sm font-medium text-neutral-900">Target risk profile</span>
+                <div className="grid gap-3 sm:grid-cols-3">
+                  {riskProfiles.map(({ value, label, description }) => {
+                    const active = prefs.riskProfile === value
+                    return (
+                      <label
+                        key={value}
+                        className={`group flex cursor-pointer flex-col rounded-2xl border p-4 text-left transition-all duration-200 ${
+                          active
+                            ? 'border-primary-200 bg-primary-50/70 shadow-soft'
+                            : 'border-neutral-200 bg-white hover:border-primary-200 hover:bg-primary-50/50'
+                        }`}
+                      >
+                        <input
+                          type="radio"
+                          name="risk-profile"
+                          value={value}
+                          checked={active}
+                          onChange={() => setPrefs(p => ({ ...p, riskProfile: value }))}
+                          className="sr-only"
+                        />
+                        <span className="text-sm font-semibold text-neutral-900">{label}</span>
+                        <span className="mt-1 text-xs text-neutral-500 leading-relaxed">{description}</span>
+                      </label>
+                    )
+                  })}
+                </div>
+                <p className="mt-2 text-sm text-neutral-500">
+                  Determines how assertive the recommendations and diligence depth should be.
+                </p>
+              </div>
+
+              <div className="border-t border-neutral-100 pt-4">
+                <button
+                  onClick={save}
+                  disabled={!hasChanges}
+                  className={`btn w-full ${
+                    saved
+                      ? 'btn-success'
+                      : hasChanges
+                        ? 'btn-primary'
+                        : 'btn-secondary opacity-60 cursor-not-allowed'
+                  }`}
+                >
+                  {saved ? (
+                    <div className="flex items-center justify-center gap-2">
+                      <CheckCircleIcon className="h-5 w-5" />
+                      <span>Preferences saved</span>
+                    </div>
+                  ) : (
+                    'Save preferences'
+                  )}
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
     </Layout>
   )

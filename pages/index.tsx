@@ -13,22 +13,22 @@ const heroHighlights = [
     title: 'Document Analysis',
     description: 'Upload pitch decks, financials, and business plans',
     icon: DocumentTextIcon,
-    iconWrapper: 'bg-primary-100',
-    iconColor: 'text-primary-600'
+    iconTint: 'text-primary-600',
+    badgeBg: 'bg-primary-100'
   },
   {
     title: 'AI-Powered Insights',
     description: 'Get detailed analysis from specialized AI agents',
     icon: SparklesIcon,
-    iconWrapper: 'bg-accent-100',
-    iconColor: 'text-accent-600'
+    iconTint: 'text-primary-600',
+    badgeBg: 'bg-primary-100'
   },
   {
     title: 'Comprehensive Reports',
     description: 'Receive detailed investment recommendations',
     icon: CpuChipIcon,
-    iconWrapper: 'bg-success-100',
-    iconColor: 'text-success-600'
+    iconTint: 'text-primary-600',
+    badgeBg: 'bg-primary-100'
   }
 ]
 
@@ -121,15 +121,15 @@ export default function InputPage(){
         </div>
 
         <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-          {heroHighlights.map(({ title, description, icon: Icon, iconWrapper, iconColor }) => (
-            <div key={title} className="card text-left">
+          {heroHighlights.map(({ title, description, icon: Icon, iconTint, badgeBg }) => (
+            <div key={title} className="card">
               <div className="flex items-start gap-4">
-                <div className={`flex h-12 w-12 items-center justify-center rounded-xl ${iconWrapper}`}>
-                  <Icon className={`h-6 w-6 ${iconColor}`} />
+                <div className={`flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full ${badgeBg} text-primary-600 shadow-inner`}>
+                  <Icon className={`h-6 w-6 ${iconTint}`} />
                 </div>
-                <div>
-                  <h3 className="font-semibold text-neutral-900">{title}</h3>
-                  <p className="mt-1 text-sm leading-relaxed text-neutral-600">{description}</p>
+                <div className="space-y-2">
+                  <h3 className="text-lg font-semibold text-neutral-900">{title}</h3>
+                  <p className="text-sm leading-relaxed text-neutral-600">{description}</p>
                 </div>
               </div>
             </div>
@@ -201,3 +201,4 @@ export default function InputPage(){
     </Layout>
   )
 }
+

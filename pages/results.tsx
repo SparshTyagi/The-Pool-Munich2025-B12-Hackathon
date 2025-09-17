@@ -94,12 +94,10 @@ export default function ResultsPage(){
                 <p className="text-sm font-semibold uppercase tracking-wide text-neutral-500">Focus areas</p>
                 <div className="mt-4 grid gap-4">
                   {focusAreas.map((insight: any, index: number) => {
-                    const tone = index === 2 ? 'warning' : index === 1 ? 'primary' : 'success'
-                    const bg = tone === 'warning' ? 'bg-warning-50 border-warning-100' : tone === 'primary' ? 'bg-primary-50 border-primary-100' : 'bg-success-50 border-success-100'
-                    const text = tone === 'warning' ? 'text-warning-800' : tone === 'primary' ? 'text-primary-800' : 'text-success-800'
+                    const accentColor = index === 0 ? 'bg-primary-50 text-primary-800 border-primary-100' : index === 1 ? 'bg-primary-50 text-primary-800 border-primary-100' : 'bg-neutral-50 text-neutral-700 border-neutral-200'
                     return (
-                      <div key={`${insight.title}-${index}`} className={`rounded-2xl border ${bg} p-4`}>
-                        <p className={`text-xs font-semibold uppercase tracking-wide ${text}`}>
+                      <div key={`${insight.title}-${index}`} className={`rounded-2xl border ${accentColor} p-4`}>
+                        <p className="text-xs font-semibold uppercase tracking-wide text-neutral-500">
                           {focusAreaThemes[index] || insight.title}
                         </p>
                         <p className="mt-2 text-sm leading-relaxed text-neutral-700">{insight.summary}</p>
@@ -115,12 +113,12 @@ export default function ResultsPage(){
         {main && (
           <section className="space-y-4">
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent-100">
-                <SparklesIcon className="h-5 w-5 text-accent-600" />
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary-100">
+                <SparklesIcon className="h-5 w-5 text-primary-600" />
               </div>
               <h2 className="text-2xl font-bold text-neutral-900">Key Recommendation</h2>
             </div>
-            <div className="rounded-3xl border border-accent-200 bg-accent-50/70 p-6 shadow-soft">
+            <div className="rounded-3xl border border-primary-100 bg-white p-6 shadow-soft">
               <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
                 <div className="max-w-3xl">
                   <p className="text-lg font-semibold text-neutral-900">
@@ -132,7 +130,7 @@ export default function ResultsPage(){
                       <ul className="mt-2 space-y-2 text-sm text-neutral-700">
                         {additionalActions.map((item: string, idx: number) => (
                           <li key={`${item}-${idx}`} className="flex items-start gap-2">
-                            <span className="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-accent-400" aria-hidden="true"></span>
+                            <span className="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary-400" aria-hidden="true"></span>
                             <span>{item}</span>
                           </li>
                         ))}
@@ -140,7 +138,7 @@ export default function ResultsPage(){
                     </div>
                   )}
                 </div>
-                <div className="flex items-center gap-2 self-start rounded-full bg-primary-100 px-4 py-2 text-sm font-semibold text-primary-700 shadow-soft">
+                <div className="flex items-center gap-2 self-start rounded-full bg-primary-50 px-4 py-2 text-sm font-semibold text-primary-700">
                   <span className="h-2 w-2 rounded-full bg-primary-500"></span>
                   {`${readinessLabel}: ${readinessValue}`}
                 </div>
@@ -152,7 +150,7 @@ export default function ResultsPage(){
         {supportingInsights.length > 0 && (
           <section className="space-y-4">
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary-100">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary-100">
                 <DocumentTextIcon className="h-5 w-5 text-primary-600" />
               </div>
               <h2 className="text-2xl font-bold text-neutral-900">Detailed Insights</h2>
@@ -177,3 +175,4 @@ export default function ResultsPage(){
     </Layout>
   )
 }
+
