@@ -1,8 +1,29 @@
 import React, { useCallback, useRef, useState } from 'react'
-import { CloudArrowUpIcon, DocumentIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import {
+  CloudArrowUpIcon,
+  DocumentIcon,
+  XMarkIcon,
+  PresentationChartLineIcon,
+  DocumentTextIcon,
+  ChartBarSquareIcon,
+  DocumentArrowDownIcon
+} from '@heroicons/react/24/outline'
 
 type DropzoneProps = {
   onFiles: (files: File[]) => void
+}
+
+const fileIconMap: Array<{ match: RegExp; icon: React.ComponentType<{ className?: string }> }> = [
+  { match: /(ppt|pptx)$/i, icon: PresentationChartLineIcon },
+  { match: /(csv|xlsx|xls)$/i, icon: ChartBarSquareIcon },
+  { match: /(txt|doc|docx)$/i, icon: DocumentTextIcon },
+  { match: /(pdf)$/i, icon: DocumentArrowDownIcon }
+]
+
+const getIconForFile = (name: string) => {
+  const extension = name.split('.').pop() || ''
+  const mapping = fileIconMap.find(entry => entry.match.test(extension))
+  return mapping?.icon || DocumentIcon
 }
 
 export default function Dropzone({ onFiles }: DropzoneProps){
@@ -65,7 +86,7 @@ export default function Dropzone({ onFiles }: DropzoneProps){
         </div>
 
         <div className="relative z-10 flex max-w-xl flex-col items-center">
-          <div className={`mb-4 flex h-16 w-16 items-center justify-center rounded-2xl transition-all duration-300 ${
+          <div className={`mb-4 flex h-16 w-16 items-center justify-center rounded-full transition-all duration-300 ${
             drag ? 'bg-primary-500 text-white shadow-glow' : 'bg-primary-100 text-primary-500'
           }`}>
             <CloudArrowUpIcon className="h-8 w-8" />
@@ -85,7 +106,7 @@ export default function Dropzone({ onFiles }: DropzoneProps){
             {['PDF', 'DOC', 'PPT', 'XLS'].map((type) => (
               <span
                 key={type}
-                className="rounded-lg bg-neutral-100 px-3 py-1"
+                className="rounded-full bg-neutral-100 px-3 py-1"
               >
                 .{type.toLowerCase()}
               </span>
@@ -111,30 +132,33 @@ export default function Dropzone({ onFiles }: DropzoneProps){
               </h4>
             </div>
             <div className="space-y-3">
-              {files.map((file, index) => (
-                <div
-                  key={`${file.name}-${index}`}
-                  className="group flex items-center gap-3 rounded-xl border border-transparent bg-neutral-50 p-3 transition-all duration-200 hover:border-primary-200 hover:bg-white"
-                >
-                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary-100">
-                    <DocumentIcon className="h-5 w-5 text-primary-600" />
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="truncate font-medium text-neutral-900">{file.name}</p>
-                    <p className="text-sm text-neutral-500">{formatFileSize(file.size)}</p>
-                  </div>
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation()
-                      removeFile(index)
-                    }}
-                    className="rounded-lg p-1.5 text-neutral-400 opacity-0 transition-all duration-200 hover:bg-red-100 hover:text-red-600 group-hover:opacity-100"
-                    aria-label={`Remove ${file.name}`}
+              {files.map((file, index) => {
+                const IconComponent = getIconForFile(file.name)
+                return (
+                  <div
+                    key={`${file.name}-${index}`}
+                    className="group flex items-center gap-3 rounded-xl border border-transparent bg-neutral-50 p-3 transition-all duration-200 hover:border-primary-200 hover:bg-white"
                   >
-                    <XMarkIcon className="h-4 w-4" />
-                  </button>
-                </div>
-              ))}
+                    <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary-100">
+                      <IconComponent className="h-5 w-5 text-primary-600" />
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="truncate font-medium text-neutral-900">{file.name}</p>
+                      <p className="text-sm text-neutral-500">{formatFileSize(file.size)}</p>
+                    </div>
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        removeFile(index)
+                      }}
+                      className="rounded-lg p-1.5 text-neutral-400 opacity-0 transition-all duration-200 hover:bg-red-100 hover:text-red-600 group-hover:opacity-100"
+                      aria-label={`Remove ${file.name}`}
+                    >
+                      <XMarkIcon className="h-4 w-4" />
+                    </button>
+                  </div>
+                )
+              })}
             </div>
           </div>
         </div>

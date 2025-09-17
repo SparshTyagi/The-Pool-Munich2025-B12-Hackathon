@@ -22,11 +22,6 @@ export default function ResultsPage(){
   const main = insights[0]
   const supportingInsights = insights.slice(1)
 
-  const confidence = useMemo(() => {
-    if (!main || typeof main.score !== 'number') return null
-    return Math.round(main.score * 100)
-  }, [main])
-
   const recommendationSegments = useMemo(() => {
     if (!main?.summary) return []
     return main.summary
@@ -53,11 +48,11 @@ export default function ResultsPage(){
     )
   }
 
+  const readinessLabel = data.mainKpi?.label || 'Investment Readiness'
+  const readinessValue = data.mainKpi?.value || 'B+'
+
   const primaryRecommendation = recommendationSegments[0] || main?.summary || 'Analysis complete'
   const additionalActions = recommendationSegments.slice(1)
-
-  const focusAreas = supportingInsights.slice(0, 3)
-  const focusAreaThemes = ['Growth signals', 'Financial outlook', 'Risk watchlist']
 
   return (
     <Layout>
@@ -77,70 +72,24 @@ export default function ResultsPage(){
           </div>
         </section>
 
-        <section className="grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1.6fr)_minmax(0,1fr)]">
+        <section>
           <TopKPI
-            label={data.mainKpi?.label || 'Investment Readiness'}
-            value={data.mainKpi?.value || 'B+'}
+            label={readinessLabel}
+            value={readinessValue}
             context={data.mainKpi?.context || 'Strong traction with moderate technical risk'}
-            className="h-full text-left"
+            className="mx-auto max-w-3xl"
           />
-
-          <div className="card h-full">
-            <h3 className="text-lg font-semibold text-neutral-900">Analysis Snapshot</h3>
-            <p className="mt-2 text-sm leading-relaxed text-neutral-600">
-              A summary of how the agents evaluated your submission across growth, financial health, and operational risks.
-            </p>
-
-            {confidence !== null && (
-              <div className="mt-6">
-                <div className="flex items-center justify-between text-sm font-medium text-neutral-900">
-                  <span>Confidence Score</span>
-                  <span>{confidence}%</span>
-                </div>
-                <div className="mt-2 h-2 w-full rounded-full bg-neutral-200">
-                  <div
-                    className="h-full rounded-full bg-success-500"
-                    style={{ width: `${Math.min(100, Math.max(0, confidence))}%` }}
-                  />
-                </div>
-                <p className="mt-2 text-xs text-neutral-500">
-                  Indicates how strongly the platform supports the recommendation based on the uploaded material.
-                </p>
-              </div>
-            )}
-
-            {focusAreas.length > 0 && (
-              <div className="mt-6">
-                <p className="text-sm font-semibold uppercase tracking-wide text-neutral-500">Focus areas</p>
-                <div className="mt-4 grid gap-4">
-                  {focusAreas.map((insight: any, index: number) => {
-                    const tone = index === 2 ? 'warning' : index === 1 ? 'primary' : 'success'
-                    const bg = tone === 'warning' ? 'bg-warning-50 border-warning-100' : tone === 'primary' ? 'bg-primary-50 border-primary-100' : 'bg-success-50 border-success-100'
-                    const text = tone === 'warning' ? 'text-warning-800' : tone === 'primary' ? 'text-primary-800' : 'text-success-800'
-                    return (
-                      <div key={`${insight.title}-${index}`} className={`rounded-2xl border ${bg} p-4`}>
-                        <p className={`text-xs font-semibold uppercase tracking-wide ${text}`}>
-                          {focusAreaThemes[index] || insight.title}
-                        </p>
-                        <p className="mt-2 text-sm leading-relaxed text-neutral-700">{insight.summary}</p>
-                      </div>
-                    )
-                  })}
-                </div>
-              </div>
-            )}
-          </div>
         </section>
 
         {main && (
           <section className="space-y-4">
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent-100">
-                <SparklesIcon className="h-5 w-5 text-accent-600" />
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary-100">
+                <SparklesIcon className="h-5 w-5 text-primary-600" />
               </div>
               <h2 className="text-2xl font-bold text-neutral-900">Key Recommendation</h2>
             </div>
-            <div className="rounded-3xl border border-accent-200 bg-accent-50/70 p-6 shadow-soft">
+            <div className="rounded-3xl border border-primary-100 bg-white p-6 shadow-soft">
               <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
                 <div className="max-w-3xl">
                   <p className="text-lg font-semibold text-neutral-900">
@@ -152,7 +101,7 @@ export default function ResultsPage(){
                       <ul className="mt-2 space-y-2 text-sm text-neutral-700">
                         {additionalActions.map((item: string, idx: number) => (
                           <li key={`${item}-${idx}`} className="flex items-start gap-2">
-                            <span className="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-accent-400" aria-hidden="true"></span>
+                            <span className="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary-400" aria-hidden="true"></span>
                             <span>{item}</span>
                           </li>
                         ))}
@@ -160,12 +109,10 @@ export default function ResultsPage(){
                     </div>
                   )}
                 </div>
-                {confidence !== null && (
-                  <div className="flex items-center gap-2 self-start rounded-full bg-white/80 px-4 py-2 text-sm font-semibold text-success-700 shadow-soft">
-                    <span className="h-2 w-2 rounded-full bg-success-500"></span>
-                    Confidence {confidence}%
-                  </div>
-                )}
+                <div className="flex items-center gap-2 self-start rounded-full bg-primary-50 px-4 py-2 text-sm font-semibold text-primary-700">
+                  <span className="h-2 w-2 rounded-full bg-primary-500"></span>
+                  {`${readinessLabel}: ${readinessValue}`}
+                </div>
               </div>
             </div>
           </section>
@@ -174,7 +121,7 @@ export default function ResultsPage(){
         {supportingInsights.length > 0 && (
           <section className="space-y-4">
             <div className="flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary-100">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary-100">
                 <DocumentTextIcon className="h-5 w-5 text-primary-600" />
               </div>
               <h2 className="text-2xl font-bold text-neutral-900">Detailed Insights</h2>
@@ -185,18 +132,17 @@ export default function ResultsPage(){
             <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
               {supportingInsights.map((ins: any, idx: number) => (
                 <div key={idx} className="animate-fade-in" style={{ animationDelay: `${idx * 120}ms` }}>
-                  <InsightCard insight={ins} index={idx} />
+                  <InsightCard insight={ins} index={idx} colorTheme={idx === 0 ? 'champagne' : 'primary'} />
                 </div>
               ))}
             </div>
           </section>
         )}
 
-        <section className="flex justify-center pt-8 border-t border-neutral-200">
+        <section className="flex justify-center border-t border-neutral-200 pt-8">
           <PDFDownloadButton href={data.reportUrl || getReportPdfUrl(String(jobId || 'demo'))} />
         </section>
       </div>
     </Layout>
   )
 }
-
