@@ -10,6 +10,7 @@ import {
   ScaleIcon
 } from '@heroicons/react/24/outline'
 import React from 'react'
+import { saveSettings, SaveSettingsRequest } from '@/lib/api'
 
 type Prefs = {
   language: 'en' | 'de' | 'fr'
@@ -92,6 +93,8 @@ export default function SettingsPage(){
   const [prefs, setPrefs] = useState<Prefs>(DEFAULTS)
   const [saved, setSaved] = useState(false)
   const [hasChanges, setHasChanges] = useState(false)
+  const [saving, setSaving] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   useEffect(()=>{
     try {
@@ -112,11 +115,40 @@ export default function SettingsPage(){
     }
   }, [prefs])
 
-  const save = () => {
-    localStorage.setItem('vc-settings', JSON.stringify(prefs))
-    setSaved(true)
-    setHasChanges(false)
-    setTimeout(()=>setSaved(false), 2000)
+  const save = async () => {
+    setSaving(true)
+    setError(null)
+
+    try {
+      // Save to API
+      const settingsData: SaveSettingsRequest = {
+        language: prefs.language,
+        riskProfile: prefs.riskProfile,
+        agents: prefs.agents
+      }
+
+      const response = await saveSettings(settingsData)
+
+      if (response.success) {
+        // Save to localStorage as backup
+        localStorage.setItem('vc-settings', JSON.stringify(prefs))
+        setSaved(true)
+        setHasChanges(false)
+        setTimeout(() => setSaved(false), 2000)
+      } else {
+        throw new Error(response.message || 'Failed to save settings')
+      }
+    } catch (err) {
+      console.error('Failed to save settings:', err)
+      setError(err instanceof Error ? err.message : 'Failed to save settings')
+      // Still save to localStorage as fallback
+      localStorage.setItem('vc-settings', JSON.stringify(prefs))
+      setSaved(true)
+      setHasChanges(false)
+      setTimeout(() => setSaved(false), 2000)
+    } finally {
+      setSaving(false)
+    }
   }
 
   const selectedAgents = useMemo(() => (
@@ -280,18 +312,28 @@ export default function SettingsPage(){
               </div>
 
               <div className="border-t border-neutral-100 pt-4">
+                {error && (
+                  <div className="mb-4 rounded-lg bg-red-50 border border-red-200 p-4">
+                    <p className="text-sm text-red-600">{error}</p>
+                  </div>
+                )}
                 <button
                   onClick={save}
-                  disabled={!hasChanges}
+                  disabled={!hasChanges || saving}
                   className={`btn w-full ${
                     saved
                       ? 'btn-success'
-                      : hasChanges
+                      : hasChanges && !saving
                         ? 'btn-primary'
                         : 'btn-secondary opacity-60 cursor-not-allowed'
                   }`}
                 >
-                  {saved ? (
+                  {saving ? (
+                    <div className="flex items-center justify-center gap-2">
+                      <div className="h-5 w-5 animate-spin rounded-full border-2 border-white border-t-transparent"></div>
+                      <span>Saving...</span>
+                    </div>
+                  ) : saved ? (
                     <div className="flex items-center justify-center gap-2">
                       <CheckCircleIcon className="h-5 w-5" />
                       <span>Preferences saved</span>

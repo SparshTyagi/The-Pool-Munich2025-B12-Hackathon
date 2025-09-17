@@ -32,26 +32,6 @@ export async function startAnalysis(payload: FormData): Promise<StartResponse> {
   return res.json();
 }
 
-export async function getJobStatus(jobId: string): Promise<AgentStatus[]> {
-  if (!API_BASE) {
-    // Demo: fake progression
-    const now = Date.now();
-    const base = (now % 100000) / 1000;
-    const progressRates = [17, 14, 10]; // Different rates for each agent
-    const progressMods = [110, 120, 130]; // Different modulo values
-
-    return demoData.agents.map((agent, index) => ({
-      ...agent,
-      status: 'running' as const,
-      progress: Math.min(100, Math.floor((base * progressRates[index]) % progressMods[index])),
-      updatedAt: new Date().toISOString()
-    }));
-  }
-  const res = await fetch(`${API_BASE}/status/${jobId}`);
-  if (!res.ok) throw new Error('Failed to fetch status');
-  return res.json();
-}
-
 export type Insight = {
   title: string;
   summary: string;
@@ -63,6 +43,7 @@ export type Results = {
   insights: Insight[]; // up to 4 where [0] is main
   reportUrl?: string; // optional PDF link served by backend
 };
+
 
 
 
@@ -79,4 +60,37 @@ export async function getResults(jobId: string): Promise<Results> {
 export function getReportPdfUrl(jobId: string): string {
   if (!API_BASE) return '/demo/report.pdf';
   return `${API_BASE}/report/${jobId}.pdf`;
+}
+
+export type SaveSettingsRequest = {
+  userId?: string; // optional user identifier
+  language: 'en' | 'de' | 'fr';
+  riskProfile: 'low' | 'medium' | 'high';
+  agents: { marketFit: boolean; financials: boolean; tech: boolean; legal: boolean };
+};
+
+export type SaveSettingsResponse = {
+  success: boolean;
+  message?: string;
+};
+
+export async function saveSettings(settings: SaveSettingsRequest): Promise<SaveSettingsResponse> {
+  if (!API_BASE) {
+    // Demo fallback - just return success
+    return {
+      success: true,
+      message: 'Settings saved (demo mode)'
+    };
+  }
+
+  const res = await fetch(`${API_BASE}/settings`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(settings)
+  });
+
+  if (!res.ok) throw new Error('Failed to save settings');
+  return res.json();
 }
