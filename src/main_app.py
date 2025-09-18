@@ -16,8 +16,9 @@ app.add_middleware(
 )
 
 @app.post("/start")
-async def start_analysis():
-    print("Starting Analysis...")  # debug log to verify call
+async def start_analysis(
+    context: str = Form(...)):
+    print(f"Starting Analysis with context {context}")  # debug log to verify call
     # Receive multipart/form-data with key "file"
     #contents = await file.read()
 
