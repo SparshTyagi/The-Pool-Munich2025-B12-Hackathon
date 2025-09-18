@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { supabase } from '@/lib/supabaseClient'
 
 type SoftForm = {
   investmentPhilosophy: string
@@ -40,6 +41,8 @@ function TextArea(props: React.TextareaHTMLAttributes<HTMLTextAreaElement>){
 export default function SoftForm(){
   const [form, setForm] = useState<SoftForm>(DEFAULT_SOFT)
   const [saved, setSaved] = useState(false)
+  const [isSaving, setIsSaving] = useState(false)
+  const DEMO_USER_ID = '9da0eefb-b471-4b70-99fa-761e8b39c542'
 
   // Load from localStorage
   useEffect(() => {
@@ -63,6 +66,35 @@ export default function SoftForm(){
 
   const set = <K extends keyof SoftForm>(key: K, val: SoftForm[K]) =>
     setForm(prev => ({ ...prev, [key]: val }))
+
+  const handleSave = async () => {
+    try {
+      setIsSaving(true)
+      if (!supabase) {
+        alert('Supabase is not configured. Saved locally only (demo).')
+        return
+      }
+      const payload: string[] = [
+        form.investmentPhilosophy,
+        form.founderView,
+        form.marketView,
+        form.diligenceFocus,
+        form.collaborationStyle,
+        form.additionalNotes
+      ]
+      const { error } = await supabase
+        .from('profil')
+        .update({ investment_soft: payload })
+        .eq('user_id', DEMO_USER_ID)
+      if (error) throw error
+      alert('Vision & philosophy saved')
+    } catch (e: any) {
+      console.error(e)
+      alert(`Failed to save: ${e?.message || 'Unknown error'}`)
+    } finally {
+      setIsSaving(false)
+    }
+  }
 
   return (
     <div className="space-y-8">
@@ -129,6 +161,20 @@ export default function SoftForm(){
             value={form.additionalNotes}
             onChange={e => set('additionalNotes', e.target.value)}
           />
+        </div>
+      </div>
+
+      {/* Footer action */}
+      <div className="rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm">
+        <div className="flex items-center justify-center">
+          <button
+            type="button"
+            onClick={handleSave}
+            disabled={isSaving}
+            className={`rounded-lg px-5 py-2.5 text-sm font-medium text-white transition-all duration-200 ${isSaving ? 'bg-neutral-400' : 'bg-neutral-900 hover:bg-neutral-800'}`}
+          >
+            {isSaving ? 'Saving…' : 'Save'}
+          </button>
         </div>
       </div>
     </div>

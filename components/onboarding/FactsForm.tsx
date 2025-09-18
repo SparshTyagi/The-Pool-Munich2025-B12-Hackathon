@@ -1,5 +1,5 @@
-import { useEffect, useMemo, useState } from 'react'
-import { useRouter } from 'next/router'
+import { useEffect, useState } from 'react'
+import { supabase } from '@/lib/supabaseClient'
 
 // ---- Types ----
 export type VCSettings = {
@@ -270,9 +270,10 @@ function RadioRow<T extends string>({
 }
 
 export default function FactsForm(){
-  const router = useRouter()
   const [form, setForm] = useState<VCSettings>(DEFAULT_SETTINGS)
   const [saved, setSaved] = useState(false)
+  const [isSaving, setIsSaving] = useState(false)
+  const DEMO_USER_ID = '9da0eefb-b471-4b70-99fa-761e8b39c542'
 
   // Load from localStorage on mount
   useEffect(() => {
@@ -300,15 +301,34 @@ export default function FactsForm(){
   const set = <K extends keyof VCSettings>(key: K, val: VCSettings[K]) =>
     setForm(prev => ({ ...prev, [key]: val }))
 
-  const handleReset = () => {
-    setForm(DEFAULT_SETTINGS)
+  const saveToSupabase = async () => {
+    try {
+      setIsSaving(true)
+      if (!supabase) {
+        if (typeof window !== 'undefined') {
+          localStorage.setItem('vc-settings', JSON.stringify(form))
+        }
+        alert('Supabase not configured. Saved locally only (demo).')
+        return true
+      }
+      const { error } = await supabase
+        .from('profil')
+        .update({ investment_facts: form })
+        .eq('user_id', DEMO_USER_ID)
+      if (error) throw error
+      return true
+    } catch (e: any) {
+      console.error(e)
+      alert(`Failed to save: ${e?.message || 'Unknown error'}`)
+      return false
+    } finally {
+      setIsSaving(false)
+    }
   }
 
-  const handleContinue = () => {
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('vc-settings', JSON.stringify(form))
-    }
-    router.push('/')
+  const handleSave = async () => {
+    const ok = await saveToSupabase()
+    if (ok) alert('Hard facts saved')
   }
 
   return (
@@ -588,36 +608,16 @@ export default function FactsForm(){
         </div>
       </Section>
 
-      {/* Footer actions */}
+      {/* Footer action */}
       <div className="rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm">
-        <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
-          <div className="flex items-center gap-3">
-            <button
-              type="button"
-              className="rounded-lg border border-neutral-300 bg-white px-4 py-2 text-sm font-medium text-neutral-700 transition-all duration-200 hover:bg-neutral-50 hover:border-neutral-400"
-              onClick={() => {
-                const raw = JSON.stringify(form, null, 2)
-                // naive preview via alert or console; consumer page may render a dedicated preview
-                try { console.log('VC settings preview', raw) } catch {}
-                alert('Settings JSON printed to console')
-              }}
-            >
-              Preview JSON
-            </button>
-            <button
-              type="button"
-              className="rounded-lg border border-neutral-300 bg-white px-4 py-2 text-sm font-medium text-neutral-500 transition-all duration-200 hover:bg-neutral-50 hover:border-neutral-400 hover:text-neutral-700"
-              onClick={handleReset}
-            >
-              Reset to defaults
-            </button>
-          </div>
+        <div className="flex items-center justify-center">
           <button
             type="button"
-            onClick={handleContinue}
-            className="rounded-lg bg-neutral-900 px-5 py-2.5 text-sm font-medium text-white transition-all duration-200 hover:bg-neutral-800"
+            className={`rounded-lg px-5 py-2.5 text-sm font-medium text-white transition-all duration-200 ${isSaving ? 'bg-neutral-400' : 'bg-neutral-900 hover:bg-neutral-800'}`}
+            onClick={handleSave}
+            disabled={isSaving}
           >
-            Save & Continue
+            {isSaving ? 'Saving…' : 'Save'}
           </button>
         </div>
       </div>
