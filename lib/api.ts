@@ -1,4 +1,4 @@
-import demoData from '../utils/demoData.json';
+import demoData from '../utils/dreamOutput.json';
 import { supabase } from './supabaseClient';
 
 export type AgentStatus = {
@@ -76,12 +76,14 @@ export async function getJobStatus(jobId: string): Promise<AgentStatus[]> {
 export type Insight = {
   title: string;
   summary: string;
-  score?: number;
+  score?: number | string;
 }
 
 export type Results = {
   mainKpi: { label: string; value: string | number; context?: string };
-  insights: Insight[]; // up to 4 where [0] is main
+  insights: Insight[];
+  flag_summary?: Array<{ green_flags?: string[]; red_flags?: string[] }>;
+  Deep_dive?: Array<{ title: string; summary: string }>;
   reportUrl?: string; // optional PDF link served by backend
 };
 

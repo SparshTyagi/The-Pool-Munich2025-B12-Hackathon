@@ -18,19 +18,12 @@ export default function ResultsPage(){
     getResults(id).then(res => { setData(res); setLoading(false) })
   }, [jobId])
 
-  const insights = data?.insights || []
-  // New shape: "key recommendation" as a separate array
-  const mainArray = data?.["key recommendation"] || []
-  const main = mainArray[0] || insights[0]
-  const supportingInsights = insights
+  const insights = (data?.insights || []).slice(0, 3)
+  const flagSummary = (data as any)?.flag_summary?.[0] || { green_flags: [], red_flags: [] }
+  const deepDive = (data as any)?.Deep_dive || []
 
-  const recommendationSegments = useMemo(() => {
-    if (!main?.summary) return []
-    return main.summary
-      .split(/;|\./)
-      .map((part: string) => part.trim())
-      .filter(Boolean)
-  }, [main])
+  // Deprecated: key recommendation removed in favor of deep dive
+  const recommendationSegments: string[] = []
 
   if (loading || !data) {
     return (
@@ -53,8 +46,8 @@ export default function ResultsPage(){
   const readinessLabel = data.mainKpi?.label || 'Investment Readiness'
   const readinessValue = data.mainKpi?.value || 'B+'
 
-  const primaryRecommendation = recommendationSegments[0] || main?.summary || 'Analysis complete'
-  const additionalActions = recommendationSegments.slice(1)
+  const primaryRecommendation = 'Deep dive focus areas'
+  const additionalActions: string[] = []
 
   return (
     <Layout>
@@ -79,48 +72,93 @@ export default function ResultsPage(){
             label={readinessLabel}
             value={readinessValue}
             context={data.mainKpi?.context || 'Strong traction with moderate technical risk'}
+            executiveSummary={(data as any)?.mainKpi?.executive_summary}
             className="mx-auto max-w-3xl"
           />
         </section>
 
-        {main && (
+        {/* Flag Summary */}
+        {(flagSummary.green_flags?.length || flagSummary.red_flags?.length) && (
           <section className="space-y-4">
             <div className="flex items-center gap-3">
               <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary-100">
                 <SparklesIcon className="h-5 w-5 text-primary-600" />
               </div>
-              <h2 className="text-2xl font-bold text-neutral-900">Key Recommendation</h2>
+              <h2 className="text-2xl font-bold text-neutral-900">Flag Summary</h2>
             </div>
-            <div className="rounded-3xl border border-primary-100 bg-white p-6 shadow-soft">
-              <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
-                <div className="max-w-3xl">
-                  <p className="text-lg font-semibold text-neutral-900">
-                    {primaryRecommendation}
-                  </p>
-                  {additionalActions.length > 0 && (
-                    <div className="mt-4">
-                      <p className="text-sm font-semibold text-neutral-800">Supporting actions</p>
-                      <ul className="mt-2 space-y-2 text-sm text-neutral-700">
-                        {additionalActions.map((item: string, idx: number) => (
-                          <li key={`${item}-${idx}`} className="flex items-start gap-2">
-                            <span className="mt-1 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-primary-400" aria-hidden="true"></span>
-                            <span>{item}</span>
-                          </li>
-                        ))}
-                      </ul>
+            <div className="rounded-3xl border border-neutral-200 bg-white p-8 shadow-soft">
+              <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+                <div>
+                  <div className="mb-4 flex items-center gap-3">
+                    <div className="flex h-8 w-8 items-center justify-center rounded-full bg-success-100">
+                      <div className="h-3 w-3 rounded-full bg-success-500"></div>
                     </div>
-                  )}
+                    <h3 className="text-base font-semibold text-neutral-900">Positive Signals</h3>
+                  </div>
+                  <div className="space-y-3">
+                    {(flagSummary.green_flags || []).map((item: string, idx: number) => (
+                      <div key={`g-${idx}`} className="flex items-start gap-3">
+                        <div className="mt-1.5 h-1 w-1 flex-shrink-0 rounded-full bg-success-500"></div>
+                        <span className="text-sm text-neutral-700 leading-relaxed">{item}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-                <div className="flex items-center gap-2 self-start rounded-full bg-primary-50 px-4 py-2 text-sm font-semibold text-primary-700">
-                  <span className="h-2 w-2 rounded-full bg-primary-500"></span>
-                  {`${readinessLabel}: ${readinessValue}`}
+                <div>
+                  <div className="mb-4 flex items-center gap-3">
+                    <div className="flex h-8 w-8 items-center justify-center rounded-full bg-amber-100">
+                      <div className="h-3 w-3 rounded-full bg-amber-500"></div>
+                    </div>
+                    <h3 className="text-base font-semibold text-neutral-900">Areas of Concern</h3>
+                  </div>
+                  <div className="space-y-3">
+                    {(flagSummary.red_flags || []).map((item: string, idx: number) => (
+                      <div key={`r-${idx}`} className="flex items-start gap-3">
+                        <div className="mt-1.5 h-1 w-1 flex-shrink-0 rounded-full bg-amber-500"></div>
+                        <span className="text-sm text-neutral-700 leading-relaxed">{item}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
           </section>
         )}
 
-        {supportingInsights.length > 0 && (
+        {/* Deep Dive replaces Key Recommendation */}
+        {deepDive.length > 0 && (
+          <section className="space-y-4">
+            <div className="flex items-center gap-3">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary-100">
+                <SparklesIcon className="h-5 w-5 text-primary-600" />
+              </div>
+              <h2 className="text-2xl font-bold text-neutral-900">Deep Dive</h2>
+            </div>
+            <div className="rounded-3xl border border-primary-100 bg-white p-6 shadow-soft">
+              <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
+                <div className="max-w-3xl">
+                  <p className="text-sm text-neutral-700">Focus on the following to reach a firm investment decision.</p>
+                  <ol className="mt-4 space-y-3 text-sm text-neutral-800">
+                    {deepDive.map((item: any, idx: number) => (
+                      <li key={`d-${idx}`} className="flex items-start gap-3">
+                        <span className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-primary-100 text-xs font-medium text-primary-700">
+                          {idx + 1}
+                        </span>
+                        <span>
+                          <span className="font-semibold">{item.title}: </span>
+                          <span className="text-neutral-700">{item.summary}</span>
+                        </span>
+                      </li>
+                    ))}
+                  </ol>
+                </div>
+
+              </div>
+            </div>
+          </section>
+        )}
+
+        {insights.length > 0 && (
           <section className="space-y-4">
             <div className="flex items-center gap-3">
               <div className="flex h-10 w-10 items-center justify-center rounded-full bg-primary-100">
@@ -132,7 +170,7 @@ export default function ResultsPage(){
               Dive deeper into the findings that informed this recommendation. Each card highlights one of the high-impact observations surfaced by the agents.
             </p>
             <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
-              {supportingInsights.map((ins: any, idx: number) => (
+              {insights.map((ins: any, idx: number) => (
                 <div key={idx} className="animate-fade-in" style={{ animationDelay: `${idx * 120}ms` }}>
                   <InsightCard insight={ins} index={idx} colorTheme={idx === 0 ? 'champagne' : 'primary'} />
                 </div>
