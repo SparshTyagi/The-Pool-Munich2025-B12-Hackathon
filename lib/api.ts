@@ -153,6 +153,83 @@ export function getReportPdfUrl(jobId: string): string {
   return `${API_BASE}/report/${jobId}.pdf`;
 }
 
+// ----------------------------
+// Supabase Storage - Uploads
+// ----------------------------
+
+export type UploadedFile = {
+  name: string;
+  path: string;
+  publicUrl?: string;
+};
+
+export type UploadFilesResult = {
+  success: boolean;
+  bucket: string;
+  prefix: string;
+  files: UploadedFile[];
+  errors?: Array<{ name: string; message: string }>;
+};
+
+function slugifyFilename(name: string): string {
+  const [base, ...extParts] = name.split('.');
+  const ext = extParts.length ? `.${extParts.pop()}` : '';
+  const safeBase = base
+    .toLowerCase()
+    .replace(/[^a-z0-9-_]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+    .slice(0, 64);
+  return `${safeBase || 'file'}${ext}`;
+}
+
+export async function uploadFilesToStorage(
+  files: File[],
+  opts?: { bucket?: string; prefix?: string }
+): Promise<UploadFilesResult> {
+  if (!supabase) {
+    return {
+      success: false,
+      bucket: opts?.bucket || process.env.NEXT_PUBLIC_SUPABASE_STORAGE_BUCKET || 'uploads',
+      prefix: opts?.prefix || '',
+      files: [],
+      errors: [{ name: 'all', message: 'Supabase is not configured (missing env vars).' }]
+    };
+  }
+
+  const bucket = opts?.bucket || process.env.NEXT_PUBLIC_SUPABASE_STORAGE_BUCKET || 'uploads';
+  const uniquePrefix = opts?.prefix || `anonymous/${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
+
+  const results: UploadedFile[] = [];
+  const errors: Array<{ name: string; message: string }> = [];
+
+  await Promise.all(
+    files.map(async (file) => {
+      const safeName = slugifyFilename(file.name);
+      const path = `${uniquePrefix}/${safeName}`;
+      const { error } = await supabase.storage
+        .from(bucket)
+        .upload(path, file, { upsert: false, contentType: file.type || undefined });
+
+      if (error) {
+        errors.push({ name: file.name, message: error.message });
+        return;
+      }
+
+      // Attempt to create a public URL (works if bucket is public)
+      const { data: pub } = supabase.storage.from(bucket).getPublicUrl(path);
+      results.push({ name: file.name, path, publicUrl: pub?.publicUrl });
+    })
+  );
+
+  return {
+    success: errors.length === 0 && results.length > 0,
+    bucket,
+    prefix: uniquePrefix,
+    files: results,
+    errors: errors.length ? errors : undefined
+  };
+}
+
 export type SaveSettingsRequest = {
   userId?: string; // optional user identifier
   language: 'en' | 'de' | 'fr';

@@ -62,6 +62,12 @@ export default function Dropzone({ onFiles }: DropzoneProps){
     return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i]
   }
 
+  const handleClearAll = (e: React.MouseEvent) => {
+    e.stopPropagation()
+    setFiles([])
+    onFiles([])
+  }
+
   return (
     <div className="space-y-6">
       <div
@@ -159,6 +165,12 @@ export default function Dropzone({ onFiles }: DropzoneProps){
                   </div>
                 )
               })}
+            </div>
+
+            <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+              <div className="flex items-center gap-3">
+                <button onClick={handleClearAll} className="btn btn-ghost">Clear</button>
+              </div>
             </div>
           </div>
         </div>

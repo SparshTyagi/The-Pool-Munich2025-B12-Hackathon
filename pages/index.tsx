@@ -4,50 +4,8 @@ import Dropzone from '@/components/Dropzone'
 import ContextField from '@/components/ContextField'
 import StartButton from '@/components/StartButton'
 import AgentStatusCard from '@/components/AgentStatusCard'
-import { startAnalysis, getJobStatus, AgentStatus } from '@/lib/api'
+import { startAnalysis, getJobStatus, AgentStatus, uploadFilesToStorage } from '@/lib/api'
 import { useRouter } from 'next/router'
-import { SparklesIcon, DocumentTextIcon, CpuChipIcon, ShieldCheckIcon, ClockIcon } from '@heroicons/react/24/outline'
-
-const heroHighlights = [
-  {
-    title: 'Document Analysis',
-    description: 'Upload pitch decks, financials, and business plans',
-    icon: DocumentTextIcon,
-    iconTint: 'text-primary-600',
-    badgeBg: 'bg-primary-100'
-  },
-  {
-    title: 'AI-Powered Insights',
-    description: 'Get detailed analysis from specialized AI agents',
-    icon: SparklesIcon,
-    iconTint: 'text-champagne-600',
-    badgeBg: 'bg-champagne-100'
-  },
-  {
-    title: 'Comprehensive Reports',
-    description: 'Receive detailed investment recommendations',
-    icon: CpuChipIcon,
-    iconTint: 'text-primary-600',
-    badgeBg: 'bg-primary-100'
-  }
-]
-
-const actionCallouts = [
-  {
-    title: 'Secure by default',
-    description: 'Documents are encrypted in transit and removed after analysis completes.',
-    icon: ShieldCheckIcon,
-    iconColor: 'text-champagne-600',
-    bgColor: 'bg-champagne-50/80'
-  },
-  {
-    title: 'Fast turnaround',
-    description: 'Agents usually deliver a first pass in under three minutes once you submit.',
-    icon: ClockIcon,
-    iconColor: 'text-secondary-600',
-    bgColor: 'bg-secondary-50/80'
-  }
-]
 
 const isDemoEnvironment = !process.env.NEXT_PUBLIC_API_BASE_URL
 
@@ -71,6 +29,11 @@ export default function InputPage(){
     form.append('context', context)
     form.append('preferences', JSON.stringify(settings))
     try {
+      // Kick off Supabase storage upload in parallel (non-blocking)
+      const uploadTask = files.length > 0
+        ? uploadFilesToStorage(files).catch(e => { console.warn('storage upload failed', e) })
+        : Promise.resolve(null)
+
       const res = await startAnalysis(form)
       setJobId(res.jobId)
       const incomingAgents = res.agents ?? []
@@ -83,6 +46,8 @@ export default function InputPage(){
           }))
         : incomingAgents
       setAgents(normalizedAgents)
+      // Ensure any upload error is surfaced to console without blocking UX
+      uploadTask?.catch(()=>{})
     } catch (e) {
       alert('Failed to start analysis. Check console.'); console.error(e)
     } finally {
@@ -123,46 +88,9 @@ export default function InputPage(){
             Upload your startup documents and let our AI agents provide comprehensive investment analysis
           </p>
         </div>
-
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-          {heroHighlights.map(({ title, description, icon: Icon, iconTint, badgeBg }) => (
-            <div key={title} className="card">
-              <div className="flex items-start gap-4">
-                <div className={`flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full ${badgeBg} shadow-inner`}>
-                  <Icon className={`h-6 w-6 ${iconTint}`} />
-                </div>
-                <div className="space-y-2">
-                  <h3 className="text-lg font-semibold text-neutral-900">{title}</h3>
-                  <p className="text-sm leading-relaxed text-neutral-600">{description}</p>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
       </section>
 
       <section className="mt-6 border-t border-neutral-200 pt-12">
-        <div className="mb-10 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-          <div>
-            <p className="text-sm font-medium uppercase tracking-wide text-accent-600">Submission</p>
-            <h2 className="mt-2 text-3xl font-semibold text-neutral-900">Upload materials and share context</h2>
-            <p className="mt-3 max-w-2xl text-neutral-600">
-              Provide the documents and narrative your partners need. Combine board decks, financials, product notes, and add any additional color so the agents can tailor their diligence.
-            </p>
-          </div>
-          <div className="grid gap-4 sm:grid-cols-2">
-            {actionCallouts.map(({ title, description, icon: Icon, iconColor, bgColor }) => (
-              <div key={title} className={`rounded-2xl border border-neutral-200 ${bgColor} p-4 shadow-soft`}>
-                <div className="mb-3 flex items-center gap-2 text-sm font-semibold text-neutral-900">
-                  <Icon className={`h-5 w-5 ${iconColor}`} />
-                  <span>{title}</span>
-                </div>
-                <p className="text-sm leading-relaxed text-neutral-600">{description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-
         <div className="mx-auto max-w-4xl space-y-8">
           <div className="animate-slide-in">
             <Dropzone onFiles={setFiles} />
