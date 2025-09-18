@@ -9,7 +9,7 @@ from dotenv import load_dotenv
 # Add the 'src' directory to the Python path
 sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
-# Import all necessary agents and the sub-orchestrator
+# Import all necessary Agents and the sub-orchestrator
 from document_agents.pdf_extractor_agent import PdfExtractorAgent
 from document_agents.multimodal_analysis_agent import MultimodalAnalysisAgent
 from document_agents.triage_agent import TriageAgent
@@ -26,7 +26,7 @@ class DocumentAnalysisOrchestrator:
         if not self.llm_api_key or not self.tavily_api_key:
             raise ValueError("API keys not found. Check your .env file.")
 
-        # Instantiate all agents
+        # Instantiate all Agents
         self.extractor = PdfExtractorAgent()
         self.analyzer = MultimodalAnalysisAgent(model=self.model, api_key=self.llm_api_key)
         self.triage = TriageAgent(model=self.model, api_key=self.llm_api_key)

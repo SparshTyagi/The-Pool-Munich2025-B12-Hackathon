@@ -1,6 +1,6 @@
 # src/validation_agents/reputability_agent.py
 import json
-from .base_agent import BaseAgent
+from Agents.base_agent import BaseAgent
 
 class ReputabilityAgent(BaseAgent):
     """An agent that evaluates the credibility of a list of sources."""
