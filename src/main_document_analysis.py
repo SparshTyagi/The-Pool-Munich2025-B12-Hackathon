@@ -14,6 +14,7 @@ from document_agents.pdf_extractor_agent import PdfExtractorAgent
 from document_agents.multimodal_analysis_agent import MultimodalAnalysisAgent
 from document_agents.triage_agent import TriageAgent
 from orchestrator_validation import ValidationOrchestrator
+from orchestrator_market_insight import MarketInsightOrchestrator
 
 class DocumentAnalysisOrchestrator:
     def __init__(self):
@@ -33,6 +34,7 @@ class DocumentAnalysisOrchestrator:
         self.validator = ValidationOrchestrator(
             llm_api_key=self.llm_api_key, tavily_api_key=self.tavily_api_key, model=self.model
         )
+        self.market_insight_orchestrator = MarketInsightOrchestrator(llm_api_key=self.llm_api_key, tavily_api_key=self.tavily_api_key, model=self.model)
 
     def _pre_analyze_for_context(self, pdf_path: str) -> str | None:
         """Analyzes the first page to establish the document's primary subject."""
@@ -62,7 +64,36 @@ class DocumentAnalysisOrchestrator:
             return {"error": f"Failed to open or read PDF: {e}"}
 
         document_context = self._pre_analyze_for_context(pdf_path)
-        full_report = {"document_analysis_report": []}
+        # Initialize report (market insights first)
+        full_report = {
+            "market_insights": [],  # always a list
+            "document_analysis_report": []  # per-page analysis
+        }
+
+        print("\n--- STARTING FULL DOCUMENT ANALYSIS ---")
+
+        # Step 0: Generate market insights
+        print("\n--- Calling Market Insight Orchestrator ---")
+        mi = self.market_insight_orchestrator.run(pdf_path=pdf_path, target_words=500) or {}
+
+        # Create a structured entry for this run
+        if "error" in mi:
+            print(f"Error in Market Insight Orchestrator: {mi['error']}")
+            entry = {
+                "timestamp": datetime.now().isoformat(timespec="seconds"),
+                "status": "error",
+                "error": mi["error"]
+            }
+        else:
+            print("Market Insight generated successfully!")
+            entry = {
+                "timestamp": datetime.now().isoformat(timespec="seconds"),
+                "status": "ok",
+                "conclusion": mi.get("conclusion")
+            }
+
+        # Append to the list
+        full_report["market_insights"].append(entry)
 
         # Main loop now uses 1-based numbering for clarity in logs and reports
         for page_num_1_based in range(1, num_pages + 1):
