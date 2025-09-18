@@ -16,7 +16,7 @@ export type StartResponse = {
 
 const API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL;
 
-export async function startAnalysis(payload: FormData): Promise<StartResponse> {
+export async function startAnalysis(): Promise<StartResponse> {
   if (!API_BASE) {
     // Demo fallback
     return {
@@ -28,7 +28,7 @@ export async function startAnalysis(payload: FormData): Promise<StartResponse> {
       }))
     }
   }
-  const res = await fetch(`${API_BASE}/start`, { method: 'POST', body: payload });
+  const res = await fetch(`${API_BASE}/start`, { method: 'POST' });
   if (!res.ok) throw new Error('Failed to start analysis');
   return res.json();
 }
