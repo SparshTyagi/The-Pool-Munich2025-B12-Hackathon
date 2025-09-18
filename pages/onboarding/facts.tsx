@@ -2,6 +2,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { useRouter } from 'next/router'
 import Layout from '@/components/Layout'
+import OnboardingTabs from '@/components/OnboardingTabs'
 
 // ---- Types ----
 type VCSettings = {
@@ -335,6 +336,8 @@ export default function OnboardingPage() {
             {saved ? 'Changes saved' : 'Autosaving…'}
           </div>
         </header>
+
+        <OnboardingTabs />
 
         {/* Identity & Mandate */}
         <Section title="Identity & Mandate" subtitle="Who you are and any constraints we should respect.">
