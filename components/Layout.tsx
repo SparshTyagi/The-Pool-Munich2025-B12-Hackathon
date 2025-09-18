@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { ReactNode } from 'react'
-import { HomeIcon, ChartBarIcon, CogIcon, DocumentTextIcon } from '@heroicons/react/24/outline'
+import { HomeIcon, ChartBarIcon, CogIcon, DocumentTextIcon, ClipboardDocumentListIcon } from '@heroicons/react/24/outline'
 
 const NavItem = ({ href, label, icon: Icon }:{href:string, label:string, icon: any}) => {
   const { pathname } = useRouter()
@@ -28,6 +28,7 @@ const NavItem = ({ href, label, icon: Icon }:{href:string, label:string, icon: a
 }
 
 const navigation = [
+  { href: '/onboarding', label: 'Profile', icon: ClipboardDocumentListIcon },
   { href: '/', label: 'Input Analysis', icon: HomeIcon },
   { href: '/results', label: 'Results', icon: ChartBarIcon },
   { href: '/settings', label: 'Settings', icon: CogIcon }
