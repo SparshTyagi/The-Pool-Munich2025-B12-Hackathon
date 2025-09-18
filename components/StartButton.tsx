@@ -13,7 +13,7 @@ export default function StartButton({ onClick, disabled, loading, className }: S
   return (
     <button
       className={`btn btn-primary text-lg font-semibold px-8 py-4 ${
-        isDisabled ? 'cursor-not-allowed opacity-80' : 'hover:scale-[1.02]'
+        isDisabled ? 'opacity-80' : 'hover:scale-[1.02]'
       } ${className ?? ''}`}
       onClick={onClick}
       disabled={isDisabled}
