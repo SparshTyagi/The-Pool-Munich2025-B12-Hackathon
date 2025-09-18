@@ -4,7 +4,7 @@ import Dropzone from '@/components/Dropzone'
 import ContextField from '@/components/ContextField'
 import StartButton from '@/components/StartButton'
 import AgentStatusCard from '@/components/AgentStatusCard'
-import { startAnalysis, getJobStatus, AgentStatus } from '@/lib/api'
+import { startAnalysis, getJobStatus, AgentStatus, uploadFilesToStorage } from '@/lib/api'
 import { useRouter } from 'next/router'
 
 const isDemoEnvironment = !process.env.NEXT_PUBLIC_API_BASE_URL
@@ -29,6 +29,11 @@ export default function InputPage(){
     form.append('context', context)
     form.append('preferences', JSON.stringify(settings))
     try {
+      // Kick off Supabase storage upload in parallel (non-blocking)
+      const uploadTask = files.length > 0
+        ? uploadFilesToStorage(files).catch(e => { console.warn('storage upload failed', e) })
+        : Promise.resolve(null)
+
       const res = await startAnalysis(form)
       setJobId(res.jobId)
       const incomingAgents = res.agents ?? []
@@ -41,6 +46,8 @@ export default function InputPage(){
           }))
         : incomingAgents
       setAgents(normalizedAgents)
+      // Ensure any upload error is surfaced to console without blocking UX
+      uploadTask?.catch(()=>{})
     } catch (e) {
       alert('Failed to start analysis. Check console.'); console.error(e)
     } finally {
