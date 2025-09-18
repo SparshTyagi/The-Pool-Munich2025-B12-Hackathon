@@ -16,13 +16,13 @@ export default function OnboardingTabs({ active, onChange, className }: Props){
   const isFacts = active ? active === 'facts' : routeIsFacts && !routeIsSoft
   const isSoft = active ? active === 'soft' : routeIsSoft
 
-  const container = `inline-flex w-full max-w-md items-center gap-0 rounded-xl border border-neutral-200 bg-neutral-50 p-1 shadow-sm ${className || ''}`
-  const base = 'flex-1 rounded-lg px-4 py-2 text-center text-sm font-semibold transition-all'
-  const activeCls = 'bg-white text-neutral-900 shadow-sm border border-neutral-200'
-  const inactiveCls = 'text-neutral-700 hover:text-neutral-900 hover:bg-white/70'
+  const container = `flex w-full max-w-xl items-center rounded-2xl border border-primary-100 bg-white/90 p-1 shadow-soft backdrop-blur ${className || ''}`
+  const base = 'flex-1 rounded-xl px-5 py-3 text-center text-sm font-semibold transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-400 focus-visible:ring-offset-2'
+  const activeCls = 'bg-gradient-primary text-white shadow-glow'
+  const inactiveCls = 'text-neutral-600 hover:bg-primary-50/70 hover:text-neutral-900'
 
   return (
-    <nav className="mb-6 flex items-center justify-center">
+    <nav className="flex items-center justify-center">
       <div className={container}>
         {onChange ? (
           <>
@@ -30,6 +30,7 @@ export default function OnboardingTabs({ active, onChange, className }: Props){
               type="button"
               onClick={() => onChange('facts')}
               className={`${base} ${isFacts ? activeCls : inactiveCls}`}
+              aria-pressed={isFacts}
             >
               Hard facts
             </button>
@@ -37,16 +38,23 @@ export default function OnboardingTabs({ active, onChange, className }: Props){
               type="button"
               onClick={() => onChange('soft')}
               className={`${base} ${isSoft ? activeCls : inactiveCls}`}
+              aria-pressed={isSoft}
             >
               Vision & philosophy
             </button>
           </>
         ) : (
           <>
-            <Link href="/onboarding/facts" className={`${base} ${isFacts ? activeCls : inactiveCls}`}>
+            <Link
+              href="/onboarding/facts"
+              className={`${base} ${isFacts ? activeCls : inactiveCls}`}
+            >
               Hard facts
             </Link>
-            <Link href="/onboarding/soft" className={`${base} ${isSoft ? activeCls : inactiveCls}`}>
+            <Link
+              href="/onboarding/soft"
+              className={`${base} ${isSoft ? activeCls : inactiveCls}`}
+            >
               Vision & philosophy
             </Link>
           </>
@@ -55,5 +63,8 @@ export default function OnboardingTabs({ active, onChange, className }: Props){
     </nav>
   )
 }
+
+
+
 
 

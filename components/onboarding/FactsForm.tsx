@@ -160,10 +160,10 @@ const FORMATS = ['PDF','Notion','Slide deck'] as const
 // ---- Small helpers ----
 function Section({ title, subtitle, children }: { title: string; subtitle?: string; children: React.ReactNode }) {
   return (
-    <section className="rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm">
-      <div className="mb-4">
-        <h2 className="text-xl font-semibold">{title}</h2>
-        {subtitle && <p className="mt-1 text-sm text-neutral-600">{subtitle}</p>}
+    <section className="rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm mb-8">
+      <div className="mb-6">
+        <h2 className="text-xl font-semibold text-neutral-900 mb-2">{title}</h2>
+        {subtitle && <p className="text-sm text-neutral-600">{subtitle}</p>}
       </div>
       <div className="grid gap-4">{children}</div>
     </section>
@@ -172,7 +172,7 @@ function Section({ title, subtitle, children }: { title: string; subtitle?: stri
 
 function Label({ children, hint }: { children: React.ReactNode; hint?: string }) {
   return (
-    <div className="flex items-end justify-between">
+    <div className="flex items-end justify-between mb-3">
       <label className="text-sm font-medium text-neutral-800">{children}</label>
       {hint && <span className="text-xs text-neutral-500">{hint}</span>}
     </div>
@@ -183,7 +183,7 @@ function TextInput(props: React.InputHTMLAttributes<HTMLInputElement>) {
   return (
     <input
       {...props}
-      className={`w-full rounded-lg border border-neutral-300 px-3 py-2 text-sm outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-100 ${props.className || ''}`}
+      className={`w-full rounded-lg border border-neutral-300 px-3 py-2 text-sm text-neutral-900 placeholder-neutral-400 outline-none transition-all duration-200 ease-in-out focus:border-neutral-400 focus:bg-neutral-50/50 hover:border-neutral-350 ${props.className || ''}`}
     />
   )
 }
@@ -193,7 +193,7 @@ function TextArea(props: React.TextareaHTMLAttributes<HTMLTextAreaElement>) {
     <textarea
       rows={4}
       {...props}
-      className={`w-full rounded-lg border border-neutral-300 px-3 py-2 text-sm outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-100 ${props.className || ''}`}
+      className={`w-full rounded-lg border border-neutral-300 px-3 py-2 text-sm text-neutral-900 placeholder-neutral-400 outline-none transition-all duration-200 ease-in-out focus:border-neutral-400 focus:bg-neutral-50/50 hover:border-neutral-350 resize-none ${props.className || ''}`}
     />
   )
 }
@@ -228,10 +228,10 @@ function MultiCheck({
           key={opt}
           type="button"
           onClick={() => toggle(opt)}
-          className={`rounded-lg border px-3 py-2 text-sm transition
+          className={`rounded-lg border px-3 py-2 text-sm transition-all duration-200
             ${value.includes(opt)
               ? 'border-primary-500 bg-primary-50 text-primary-700'
-              : 'border-neutral-300 hover:bg-neutral-50'}`}
+              : 'border-neutral-300 text-neutral-600 hover:bg-neutral-50 hover:border-neutral-350'}`}
         >
           {opt}
         </button>
@@ -254,7 +254,7 @@ function RadioRow<T extends string>({
   return (
     <div className="flex flex-wrap gap-3">
       {options.map(opt => (
-        <label key={opt} className={`cursor-pointer rounded-lg border px-3 py-2 text-sm ${value === opt ? 'border-primary-500 bg-primary-50 text-primary-700' : 'border-neutral-300'}`}>
+        <label key={opt} className={`cursor-pointer rounded-lg border px-3 py-2 text-sm transition-all duration-200 ${value === opt ? 'border-primary-500 bg-primary-50 text-primary-700' : 'border-neutral-300 text-neutral-600 hover:bg-neutral-50 hover:border-neutral-350'}`}>
           <input
             type="radio"
             name={name}
@@ -312,8 +312,15 @@ export default function FactsForm(){
   }
 
   return (
-    <div className="mx-auto max-w-5xl space-y-8">
-      <div className="text-center text-xs text-neutral-500">{saved ? 'Changes saved' : 'Autosaving…'}</div>
+    <div className="space-y-10">
+      {/* Auto-save indicator */}
+      <div className="flex justify-end">
+        <div className={`px-3 py-1 rounded-md text-xs font-medium transition-all duration-200 ${saved 
+          ? 'bg-neutral-100 text-neutral-600' 
+          : 'bg-neutral-50 text-neutral-500'}`}>
+          {saved ? 'Saved' : 'Autosaving…'}
+        </div>
+      </div>
 
       {/* Identity & Mandate */}
       <Section title="Identity & Mandate" subtitle="Who you are and any constraints we should respect.">
@@ -582,38 +589,41 @@ export default function FactsForm(){
       </Section>
 
       {/* Footer actions */}
-      <div className="flex flex-col items-center justify-between gap-3 sm:flex-row">
-        <div className="flex items-center gap-3">
+      <div className="rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm">
+        <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
+          <div className="flex items-center gap-3">
+            <button
+              type="button"
+              className="rounded-lg border border-neutral-300 bg-white px-4 py-2 text-sm font-medium text-neutral-700 transition-all duration-200 hover:bg-neutral-50 hover:border-neutral-400"
+              onClick={() => {
+                const raw = JSON.stringify(form, null, 2)
+                // naive preview via alert or console; consumer page may render a dedicated preview
+                try { console.log('VC settings preview', raw) } catch {}
+                alert('Settings JSON printed to console')
+              }}
+            >
+              Preview JSON
+            </button>
+            <button
+              type="button"
+              className="rounded-lg border border-neutral-300 bg-white px-4 py-2 text-sm font-medium text-neutral-500 transition-all duration-200 hover:bg-neutral-50 hover:border-neutral-400 hover:text-neutral-700"
+              onClick={handleReset}
+            >
+              Reset to defaults
+            </button>
+          </div>
           <button
             type="button"
-            className="rounded-xl border border-neutral-300 px-4 py-2 text-sm hover:bg-neutral-50"
-            onClick={() => {
-              const raw = JSON.stringify(form, null, 2)
-              // naive preview via alert or console; consumer page may render a dedicated preview
-              try { console.log('VC settings preview', raw) } catch {}
-              alert('Settings JSON printed to console')
-            }}
+            onClick={handleContinue}
+            className="rounded-lg bg-neutral-900 px-5 py-2.5 text-sm font-medium text-white transition-all duration-200 hover:bg-neutral-800"
           >
-            Preview JSON
-          </button>
-          <button
-            type="button"
-            className="rounded-xl border border-rose-300 px-4 py-2 text-sm text-rose-700 hover:bg-rose-50"
-            onClick={handleReset}
-          >
-            Reset to defaults
+            Save & Continue
           </button>
         </div>
-        <button
-          type="button"
-          onClick={handleContinue}
-          className="rounded-xl bg-primary-600 px-5 py-2.5 text-sm font-medium text-white shadow-sm hover:bg-primary-700"
-        >
-          Save & Continue
-        </button>
       </div>
     </div>
   )
 }
+
 
 

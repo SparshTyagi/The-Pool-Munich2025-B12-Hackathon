@@ -20,8 +20,8 @@ const DEFAULT_SOFT: SoftForm = {
 
 function Label({ children, hint }: { children: React.ReactNode; hint?: string }){
   return (
-    <div className="flex items-end justify-between">
-      <label className="text-sm font-medium text-neutral-800">{children}</label>
+    <div className="flex items-end justify-between mb-4">
+      <label className="text-base font-medium text-neutral-800">{children}</label>
       {hint && <span className="text-xs text-neutral-500">{hint}</span>}
     </div>
   )
@@ -32,7 +32,7 @@ function TextArea(props: React.TextareaHTMLAttributes<HTMLTextAreaElement>){
     <textarea
       rows={5}
       {...props}
-      className={`w-full rounded-lg border border-neutral-300 px-3 py-2 text-sm outline-none focus:border-primary-500 focus:ring-2 focus:ring-primary-100 ${props.className || ''}`}
+      className={`w-full rounded-xl border border-neutral-200 bg-white px-4 py-3 text-sm text-neutral-900 placeholder-neutral-400 outline-none transition-all duration-200 ease-in-out focus:border-neutral-300 focus:bg-neutral-50/50 hover:border-neutral-250 resize-none ${props.className || ''}`}
     />
   )
 }
@@ -65,9 +65,18 @@ export default function SoftForm(){
     setForm(prev => ({ ...prev, [key]: val }))
 
   return (
-    <section className="rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm">
-      <div className="mb-2 text-right text-xs text-neutral-500">{saved ? 'Saved' : 'Autosaving…'}</div>
-      <div className="grid gap-6">
+    <div className="space-y-8">
+      {/* Auto-save indicator */}
+      <div className="flex justify-end">
+        <div className={`px-3 py-1 rounded-md text-xs font-medium transition-all duration-200 ${saved 
+          ? 'bg-neutral-100 text-neutral-600' 
+          : 'bg-neutral-50 text-neutral-500'}`}>
+          {saved ? 'Saved' : 'Autosaving…'}
+        </div>
+      </div>
+
+      {/* Form Sections */}
+      <div className="space-y-8">
         <div>
           <Label hint="Why you invest the way you do; what great looks like to you">Investment philosophy</Label>
           <TextArea
@@ -122,7 +131,7 @@ export default function SoftForm(){
           />
         </div>
       </div>
-    </section>
+    </div>
   )
 }
 
