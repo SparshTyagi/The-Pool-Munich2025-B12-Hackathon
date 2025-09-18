@@ -100,20 +100,25 @@ export default function InputPage(){
           </div>
         </div>
 
-        <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-          <StartButton
-            onClick={handleStart}
-            disabled={!canStart}
-            loading={starting}
-            className="self-start"
-          />
-          <p className="text-sm text-neutral-500">
-            {showDemoPrompt
-              ? 'This interactive demo will use sample data if you start without uploads.'
-              : baseCanStart
-                ? 'Review your inputs before launching the analysis. You can adjust files or context at any time.'
-                : 'Upload at least one document or add contextual notes to enable the analysis button.'}
-          </p>
+        <div className="mt-10 flex flex-col gap-3">
+          {!baseCanStart && (
+            <p className="text-sm text-neutral-500 text-center">
+              Upload at least one document or add contextual notes to enable the analysis button.
+            </p>
+          )}
+          <div className={`flex ${baseCanStart ? 'flex-col gap-3 sm:flex-row sm:items-center sm:justify-center' : 'justify-center'}`}>
+            <StartButton
+              onClick={handleStart}
+              disabled={!canStart}
+              loading={starting}
+              className=""
+            />
+            {baseCanStart && (
+              <p className="text-sm text-neutral-500">
+                Review your inputs before launching the analysis. You can adjust files or context at any time.
+              </p>
+            )}
+          </div>
         </div>
       </section>
 
