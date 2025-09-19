@@ -133,6 +133,18 @@ export async function getResults(jobId: string): Promise<Results> {
         }
       }
 
+      // Try by report_id (uuid string)
+      const byReportId = await supabase
+        .from(tableName)
+        .select('data')
+        .eq('report_id', jobId)
+        .order('created_at', { ascending: false })
+        .limit(1)
+        .maybeSingle();
+      if (!byReportId.error && byReportId.data?.data) {
+        return byReportId.data.data as Results;
+      }
+
       // Fallback to latest row
       const latest = await supabase
         .from(tableName)
@@ -159,6 +171,59 @@ export async function getResults(jobId: string): Promise<Results> {
 export function getReportPdfUrl(jobId: string): string {
   if (!API_BASE) return '/demo/report.pdf';
   return `${API_BASE}/report/${jobId}.pdf`;
+}
+
+// ----------------------------
+// Reports listing for user
+// ----------------------------
+
+export type ReportMeta = {
+  id: number;
+  created_at: string;
+  report_id?: string | null;
+};
+
+/**
+ * List reports for a given user, newest first.
+ * If user scoping is not available in the DB schema, falls back to all reports.
+ */
+export async function listReportsForUser(userId: string): Promise<ReportMeta[]> {
+  if (!supabase) {
+    // Demo mode: single pseudo report
+    return [
+      { id: 0, created_at: new Date().toISOString(), report_id: 'demo' }
+    ];
+  }
+
+  const tryTables = ['results', 'Results'] as const;
+  const selectCols = 'id, created_at, report_id';
+
+  for (const tableName of tryTables) {
+    // Try filtering by user_id
+    let q = supabase.from(tableName).select(selectCols).order('created_at', { ascending: false });
+
+    // Attempt to apply user filters; if column does not exist, the request will error
+    let byUser = await q.eq('user_id', userId);
+    if (!byUser.error) {
+      return (byUser.data || []) as ReportMeta[];
+    }
+
+    // Try alternative column name userId
+    q = supabase.from(tableName).select(selectCols).order('created_at', { ascending: false });
+    byUser = await q.eq('userId', userId);
+    if (!byUser.error) {
+      return (byUser.data || []) as ReportMeta[];
+    }
+
+    // Fallback to no filter
+    const allRes = await supabase
+      .from(tableName)
+      .select(selectCols)
+      .order('created_at', { ascending: false });
+    if (!allRes.error && allRes.data) return allRes.data as ReportMeta[];
+  }
+
+  return [];
 }
 
 // ----------------------------

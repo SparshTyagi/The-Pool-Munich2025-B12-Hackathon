@@ -1,13 +1,13 @@
 {
   "mainKpi": {
     "label": "Investment Readiness",
-    "value": "C+",
+    "value": "B+",
     "context": "Strong traction, moderate tech risk",
-    "executive_summary": "The startup has strong traction in the market and is a good fit for the investment. The startup has a good team and is a good fit for the investment."
+    "executive_summary": "The startup has strong traction in the market and is a good fit for your strategy and investor profile. The tech is promising considering the market outlook and the team shows potential."
   },
   "flag_summary": [{
-    "green_flags": ["green ocean", "great team", "new technology"],
-    "red_flags": ["exagerated market size", "high tech risk"]
+    "green_flags": ["Blue ocean with strong expert outlook", "Great 2-person team, expertise in area", "TAM > $5B"],
+    "red_flags": ["Exagerated market size in pitch deck", "Big players (BigCorpA) consider entering"]
   }],
   "Deep_dive": [
     {
@@ -31,12 +31,12 @@
     },
     {
       "title": "Competitor landscape",
-      "summary": "Two critical IP dependencies; escrow or alternative vendors needed.",
+      "summary": "Top competitors are BigCorpA and BigCorpB. Two critical IP dependencies; escrow or alternative vendors needed.",
       "score": "weak"
     },
     {
       "title": "Team potential",
-      "summary": "Gross margin sustainable at 68% per cohort analysis.",
+      "summary": "Team went through 2 founder programs, know each other since university. Founders also worked together at BigCorpA.",
       "score": "average"
     }
   ],
