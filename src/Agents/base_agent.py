@@ -1,9 +1,9 @@
-# agents/base_agent.py
+# Agents/base_agent.py
 import json
 from openai import OpenAI
 
 class BaseAgent:
-    """A base class for agents that use an LLM, providing a shared client."""
+    """A base class for Agents that use an LLM, providing a shared client."""
     def __init__(self, model: str, api_key: str, site_url: str = None, site_name: str = None):
         self.client = OpenAI(
             base_url="https://openrouter.ai/api/v1",
