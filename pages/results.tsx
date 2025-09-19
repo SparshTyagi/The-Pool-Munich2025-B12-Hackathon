@@ -3,7 +3,7 @@ import PageHeader from '@/components/PageHeader'
 import TopKPI from '@/components/TopKPI'
 import InsightCard from '@/components/InsightCard'
 import PDFDownloadButton from '@/components/PDFDownloadButton'
-import { getReportPdfUrl, getResults } from '@/lib/api'
+import { getReportPdfUrl, getResults, listReportsForUser, type ReportMeta } from '@/lib/api'
 import { useEffect, useMemo, useState } from 'react'
 import { useRouter } from 'next/router'
 import { DocumentTextIcon, SparklesIcon } from '@heroicons/react/24/outline'
@@ -13,11 +13,29 @@ export default function ResultsPage(){
   const { jobId } = router.query
   const [loading, setLoading] = useState(true)
   const [data, setData] = useState<any>(null)
+  const [reports, setReports] = useState<ReportMeta[]>([])
+
+  // Demo/no-auth user id per request
+  const DEMO_USER_ID = '2657d124-9a8c-405e-96bf-41d7376b47fc'
+
+  // Load available reports for current user
+  useEffect(() => {
+    listReportsForUser(DEMO_USER_ID).then((rows) => setReports(rows || []))
+  }, [])
 
   useEffect(()=>{
     const id = String(jobId || 'demo')
     getResults(id).then(res => { setData(res); setLoading(false) })
   }, [jobId])
+
+  // If no jobId in URL, default to latest report for this user
+  useEffect(() => {
+    if (!jobId && reports.length > 0) {
+      const latest = reports[0]
+      const latestKey = latest.report_id || String(latest.id)
+      router.replace({ pathname: router.pathname, query: { ...router.query, jobId: latestKey } }, undefined, { shallow: true })
+    }
+  }, [jobId, reports])
 
   const insights = (data?.insights || []).slice(0, 3)
   const flagSummary = (data as any)?.flag_summary?.[0] || { green_flags: [], red_flags: [] }
@@ -57,6 +75,42 @@ export default function ResultsPage(){
           title="Analysis Results"
           description="Comprehensive investment analysis completed"
         />
+
+        {/* Report selector */}
+        {reports.length > 0 && (
+          <section className="-mt-6">
+            <div className="mx-auto flex max-w-3xl items-center justify-between rounded-2xl border border-neutral-200 bg-white/70 px-4 py-3 shadow-soft backdrop-blur">
+              <div className="flex items-center gap-2 text-sm text-neutral-700">
+                <span className="font-medium text-neutral-900">Report</span>
+                <span className="hidden text-neutral-400 md:inline">•</span>
+                <span className="hidden text-neutral-500 md:inline">{reports.length} available</span>
+              </div>
+              <div>
+                <label htmlFor="report-select" className="sr-only">Select report</label>
+                <select
+                  id="report-select"
+                  className="w-64 rounded-xl border border-neutral-300 bg-white px-3 py-1.5 text-sm text-neutral-800 focus:border-primary-500 focus:outline-none"
+                  value={String(jobId || '')}
+                  onChange={(e) => {
+                    const value = e.target.value
+                    router.push({ pathname: router.pathname, query: { ...router.query, jobId: value } }, undefined, { shallow: true })
+                    setLoading(true)
+                  }}
+                >
+                  {reports.map((r) => {
+                    const key = r.report_id || String(r.id)
+                    const label = new Date(r.created_at).toLocaleString()
+                    return (
+                      <option key={`${key}`} value={key}>
+                        {label} {r.report_id ? `• ${r.report_id.slice(0, 8)}` : `• #${r.id}`}
+                      </option>
+                    )
+                  })}
+                </select>
+              </div>
+            </div>
+          </section>
+        )}
 
         <section>
           <TopKPI
