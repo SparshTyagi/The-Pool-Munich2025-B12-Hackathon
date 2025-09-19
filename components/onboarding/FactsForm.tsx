@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { supabase } from '@/lib/supabaseClient'
+import { ChevronDownIcon } from '@heroicons/react/24/outline'
 
 // ---- Types ----
 export type VCSettings = {
@@ -158,14 +159,42 @@ const LANGS = ['English','German','French'] as const
 const FORMATS = ['PDF','Notion','Slide deck'] as const
 
 // ---- Small helpers ----
-function Section({ title, subtitle, children }: { title: string; subtitle?: string; children: React.ReactNode }) {
+function Section({ 
+  title, 
+  subtitle, 
+  children, 
+  isOpen, 
+  onToggle 
+}: { 
+  title: string; 
+  subtitle?: string; 
+  children: React.ReactNode; 
+  isOpen: boolean;
+  onToggle: () => void;
+}) {
   return (
-    <section className="rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm mb-8">
-      <div className="mb-6">
-        <h2 className="text-xl font-semibold text-neutral-900 mb-2">{title}</h2>
-        {subtitle && <p className="text-sm text-neutral-600">{subtitle}</p>}
-      </div>
-      <div className="grid gap-4">{children}</div>
+    <section className={`rounded-2xl border border-neutral-200 bg-white shadow-sm transition-all duration-200 hover:border-primary-200/70 ${isOpen ? 'mb-8' : 'mb-3'}`}>
+      <button
+        type="button"
+        onClick={onToggle}
+        aria-expanded={isOpen}
+        className={`group flex w-full items-start justify-between gap-3 text-left transition-all duration-200 hover:bg-primary-50/30 ${isOpen ? 'p-6' : 'p-4'}`}
+      >
+        <div className="min-w-0 flex-1">
+          <h2 className={`font-semibold text-neutral-900 transition-all duration-200 ${isOpen ? 'text-xl' : 'text-lg'}`}>{title}</h2>
+          {subtitle && (
+            <p className={`mt-1 text-neutral-600 transition-all duration-200 ${isOpen ? 'text-sm' : 'text-xs'}`}>
+              {subtitle}
+            </p>
+          )}
+        </div>
+        <ChevronDownIcon className={`flex-shrink-0 text-neutral-500 transition-all duration-200 group-hover:text-primary-600 ${isOpen ? 'rotate-180 h-5 w-5' : 'h-4 w-4'}`} />
+      </button>
+      {isOpen && (
+        <div className="animate-fadeIn grid gap-4 px-6 pb-6">
+          {children}
+        </div>
+      )}
     </section>
   )
 }
@@ -273,6 +302,7 @@ export default function FactsForm(){
   const [form, setForm] = useState<VCSettings>(DEFAULT_SETTINGS)
   const [saved, setSaved] = useState(false)
   const [isSaving, setIsSaving] = useState(false)
+  const [openSection, setOpenSection] = useState<string>('identity') // accordion state
   const DEMO_USER_ID = '9da0eefb-b471-4b70-99fa-761e8b39c542'
 
   // Load from localStorage on mount
@@ -300,6 +330,10 @@ export default function FactsForm(){
 
   const set = <K extends keyof VCSettings>(key: K, val: VCSettings[K]) =>
     setForm(prev => ({ ...prev, [key]: val }))
+
+  const toggleSection = (sectionId: string) => {
+    setOpenSection(current => current === sectionId ? '' : sectionId)
+  }
 
   const saveToSupabase = async () => {
     try {
@@ -332,7 +366,7 @@ export default function FactsForm(){
   }
 
   return (
-    <div className="space-y-10">
+    <div className="space-y-6">
       {/* Auto-save indicator */}
       <div className="flex justify-end">
         <div className={`px-3 py-1 rounded-md text-xs font-medium transition-all duration-200 ${saved 
@@ -343,7 +377,12 @@ export default function FactsForm(){
       </div>
 
       {/* Identity & Mandate */}
-      <Section title="Identity & Mandate" subtitle="Who you are and any constraints we should respect.">
+      <Section 
+        title="Identity & Mandate" 
+        subtitle="Who you are and any constraints we should respect."
+        isOpen={openSection === 'identity'}
+        onToggle={() => toggleSection('identity')}
+      >
         <div className="grid gap-4 sm:grid-cols-2">
           <div>
             <Label>Full name</Label>
@@ -386,7 +425,12 @@ export default function FactsForm(){
       </Section>
 
       {/* Scope */}
-      <Section title="Investment Scope" subtitle="Where you like to play and your round posture.">
+      <Section 
+        title="Investment Scope" 
+        subtitle="Where you like to play and your round posture."
+        isOpen={openSection === 'scope'}
+        onToggle={() => toggleSection('scope')}
+      >
         <div className="grid gap-4">
           <div>
             <Label>Stage focus</Label>
@@ -428,7 +472,12 @@ export default function FactsForm(){
       </Section>
 
       {/* Focus areas */}
-      <Section title="Focus Areas" subtitle="Sectors, themes, geographies and models.">
+      <Section 
+        title="Focus Areas" 
+        subtitle="Sectors, themes, geographies and models."
+        isOpen={openSection === 'focus'}
+        onToggle={() => toggleSection('focus')}
+      >
         <div className="grid gap-4">
           <div>
             <Label>Regions</Label>
@@ -464,7 +513,12 @@ export default function FactsForm(){
       </Section>
 
       {/* Diligence preferences */}
-      <Section title="Diligence Preferences" subtitle="What matters most when we evaluate a deal for you.">
+      <Section 
+        title="Diligence Preferences" 
+        subtitle="What matters most when we evaluate a deal for you."
+        isOpen={openSection === 'diligence'}
+        onToggle={() => toggleSection('diligence')}
+      >
         <div className="grid gap-4">
           <div>
             <Label>Must-have documents</Label>
@@ -532,7 +586,11 @@ export default function FactsForm(){
       </Section>
 
       {/* Co-investing & networks */}
-      <Section title="Co-investors & Network">
+      <Section 
+        title="Co-investors & Network"
+        isOpen={openSection === 'coinvestors'}
+        onToggle={() => toggleSection('coinvestors')}
+      >
         <div className="grid gap-4 sm:grid-cols-2">
           <div>
             <Label>Preferred co-investors (comma-separated)</Label>
@@ -550,12 +608,20 @@ export default function FactsForm(){
       </Section>
 
       {/* Value-add */}
-      <Section title="Where You Add the Most Value">
+      <Section 
+        title="Where You Add the Most Value"
+        isOpen={openSection === 'valueadd'}
+        onToggle={() => toggleSection('valueadd')}
+      >
         <MultiCheck options={VALUE_ADD} value={form.valueAddAreas} onChange={v => set('valueAddAreas', v)} columns={3} />
       </Section>
 
       {/* Sourcing & comms */}
-      <Section title="Sourcing & Communication">
+      <Section 
+        title="Sourcing & Communication"
+        isOpen={openSection === 'sourcing'}
+        onToggle={() => toggleSection('sourcing')}
+      >
         <div className="grid gap-4">
           <div>
             <Label>Inbound policy</Label>
@@ -579,7 +645,12 @@ export default function FactsForm(){
       </Section>
 
       {/* Output preferences */}
-      <Section title="Output Preferences" subtitle="How should we package and update our work for you?">
+      <Section 
+        title="Output Preferences" 
+        subtitle="How should we package and update our work for you?"
+        isOpen={openSection === 'output'}
+        onToggle={() => toggleSection('output')}
+      >
         <div className="grid gap-4">
           <div className="grid gap-4 sm:grid-cols-3">
             <div>

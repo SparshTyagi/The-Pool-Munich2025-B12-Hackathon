@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import Layout from '@/components/Layout'
+import PageHeader from '@/components/PageHeader'
 import Dropzone from '@/components/Dropzone'
 import ContextField from '@/components/ContextField'
 import StartButton from '@/components/StartButton'
@@ -79,16 +80,10 @@ export default function InputPage(){
 
   return (
     <Layout>
-      <section className="mb-12 animate-fade-in">
-        <div className="mb-10 text-center">
-          <h1 className="mb-4 text-4xl font-bold text-gradient">
-            Investment Analysis Platform
-          </h1>
-          <p className="mx-auto max-w-2xl text-xl text-neutral-600">
-            Upload your startup documents and let our AI agents provide comprehensive investment analysis
-          </p>
-        </div>
-      </section>
+      <PageHeader
+        title="Investment Analysis Platform"
+        description="Upload your startup documents and let our AI agents provide comprehensive investment analysis"
+      />
 
       <section className="mt-6 border-t border-neutral-200 pt-12">
         <div className="mx-auto max-w-4xl space-y-8">

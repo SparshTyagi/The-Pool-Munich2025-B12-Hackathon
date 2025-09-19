@@ -1,11 +1,12 @@
 ﻿import Layout from '@/components/Layout'
+import PageHeader from '@/components/PageHeader'
 import TopKPI from '@/components/TopKPI'
 import InsightCard from '@/components/InsightCard'
 import PDFDownloadButton from '@/components/PDFDownloadButton'
 import { getReportPdfUrl, getResults } from '@/lib/api'
 import { useEffect, useMemo, useState } from 'react'
 import { useRouter } from 'next/router'
-import { ArrowLeftIcon, DocumentTextIcon, SparklesIcon } from '@heroicons/react/24/outline'
+import { DocumentTextIcon, SparklesIcon } from '@heroicons/react/24/outline'
 
 export default function ResultsPage(){
   const router = useRouter()
@@ -52,20 +53,10 @@ export default function ResultsPage(){
   return (
     <Layout>
       <div className="space-y-12">
-        <section className="border-b border-neutral-200 pb-8">
-          <div className="flex flex-wrap items-center gap-4">
-            <button
-              onClick={() => router.back()}
-              className="btn btn-ghost p-2"
-            >
-              <ArrowLeftIcon className="h-5 w-5" />
-            </button>
-            <div>
-              <h1 className="text-3xl font-bold text-gradient">Analysis Results</h1>
-              <p className="mt-1 text-neutral-600">Comprehensive investment analysis completed</p>
-            </div>
-          </div>
-        </section>
+        <PageHeader
+          title="Analysis Results"
+          description="Comprehensive investment analysis completed"
+        />
 
         <section>
           <TopKPI
