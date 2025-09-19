@@ -1,7 +1,7 @@
 import Layout from '@/components/Layout'
+import PageHeader from '@/components/PageHeader'
 import { useEffect, useMemo, useState } from 'react'
 import {
-  CogIcon,
   LanguageIcon,
   CpuChipIcon,
   CheckCircleIcon,
@@ -189,16 +189,12 @@ export default function SettingsPage(){
   return (
     <Layout>
       <div className="max-w-5xl space-y-10">
+        <PageHeader
+          title="Settings"
+          description="Configure how the analysis agents evaluate your submissions."
+          className="p-8"
+        />
         <header className="space-y-4">
-          <div className="flex items-center gap-4">
-            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary-100">
-              <CogIcon className="h-6 w-6 text-primary-600" />
-            </div>
-            <div>
-              <h1 className="text-3xl font-bold text-gradient">Settings</h1>
-              <p className="text-neutral-600">Configure how the analysis agents evaluate your submissions.</p>
-            </div>
-          </div>
           <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
             <div className="rounded-2xl border border-primary-100 bg-primary-50/70 p-4 shadow-soft">
               <p className="text-xs font-semibold uppercase tracking-wide text-primary-600">Active agents</p>

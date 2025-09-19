@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { supabase } from '@/lib/supabaseClient'
+import { ChevronDownIcon } from '@heroicons/react/24/outline'
 
 type SoftForm = {
   investmentPhilosophy: string
@@ -38,10 +39,50 @@ function TextArea(props: React.TextareaHTMLAttributes<HTMLTextAreaElement>){
   )
 }
 
+// Collapsible Section (matches FactsForm styling/behavior)
+function Section({ 
+  title,
+  subtitle,
+  isOpen,
+  onToggle,
+  children
+}:{
+  title: string
+  subtitle?: string
+  isOpen: boolean
+  onToggle: () => void
+  children: React.ReactNode
+}){
+  return (
+    <section className={`rounded-2xl border border-neutral-200 bg-white shadow-sm transition-all duration-200 hover:border-primary-200/70 ${isOpen ? 'mb-8' : 'mb-3'}`}>
+      <button
+        type="button"
+        onClick={onToggle}
+        aria-expanded={isOpen}
+        className={`group flex w-full items-start justify-between gap-3 text-left transition-all duration-200 hover:bg-primary-50/30 ${isOpen ? 'p-6' : 'p-4'}`}
+      >
+        <div className="min-w-0 flex-1">
+          <h2 className={`font-semibold text-neutral-900 transition-all duration-200 ${isOpen ? 'text-xl' : 'text-lg'}`}>{title}</h2>
+          {subtitle && (
+            <p className={`mt-1 text-neutral-600 transition-all duration-200 ${isOpen ? 'text-sm' : 'text-xs'}`}>{subtitle}</p>
+          )}
+        </div>
+        <ChevronDownIcon className={`flex-shrink-0 text-neutral-500 transition-all duration-200 group-hover:text-primary-600 ${isOpen ? 'rotate-180 h-5 w-5' : 'h-4 w-4'}`} />
+      </button>
+      {isOpen && (
+        <div className="animate-fadeIn grid gap-4 px-6 pb-6">
+          {children}
+        </div>
+      )}
+    </section>
+  )
+}
+
 export default function SoftForm(){
   const [form, setForm] = useState<SoftForm>(DEFAULT_SOFT)
   const [saved, setSaved] = useState(false)
   const [isSaving, setIsSaving] = useState(false)
+  const [openSection, setOpenSection] = useState<string>('philosophy')
   const DEMO_USER_ID = '9da0eefb-b471-4b70-99fa-761e8b39c542'
 
   // Load from localStorage
@@ -66,6 +107,8 @@ export default function SoftForm(){
 
   const set = <K extends keyof SoftForm>(key: K, val: SoftForm[K]) =>
     setForm(prev => ({ ...prev, [key]: val }))
+
+  const toggleSection = (id: string) => setOpenSection(curr => curr === id ? '' : id)
 
   const handleSave = async () => {
     try {
@@ -97,7 +140,7 @@ export default function SoftForm(){
   }
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-6">
       {/* Auto-save indicator */}
       <div className="flex justify-end">
         <div className={`px-3 py-1 rounded-md text-xs font-medium transition-all duration-200 ${saved 
@@ -107,61 +150,84 @@ export default function SoftForm(){
         </div>
       </div>
 
-      {/* Form Sections */}
-      <div className="space-y-8">
-        <div>
-          <Label hint="Why you invest the way you do; what great looks like to you">Investment philosophy</Label>
+      {/* Form Sections (Accordion) */}
+      <div className="space-y-2">
+        <Section
+          title="Investment philosophy"
+          subtitle="Why you invest the way you do; what great looks like to you"
+          isOpen={openSection === 'philosophy'}
+          onToggle={() => toggleSection('philosophy')}
+        >
           <TextArea
             placeholder="Describe your overall investing philosophy, portfolio construction ideas, and what you optimize for…"
             value={form.investmentPhilosophy}
             onChange={e => set('investmentPhilosophy', e.target.value)}
           />
-        </div>
+        </Section>
 
-        <div>
-          <Label hint="Team attributes you value; founder-market fit; culture">How you evaluate founding teams</Label>
+        <Section
+          title="How you evaluate founding teams"
+          subtitle="Team attributes you value; founder-market fit; culture"
+          isOpen={openSection === 'founders'}
+          onToggle={() => toggleSection('founders')}
+        >
           <TextArea
             placeholder="What founder qualities matter to you? How do you weigh experience vs. insight, grit, ethics, team dynamics…"
             value={form.founderView}
             onChange={e => set('founderView', e.target.value)}
           />
-        </div>
+        </Section>
 
-        <div>
-          <Label hint="Market structure, timing, competitive dynamics, pricing power">Your view on markets</Label>
+        <Section
+          title="Your view on markets"
+          subtitle="Market structure, timing, competitive dynamics, pricing power"
+          isOpen={openSection === 'markets'}
+          onToggle={() => toggleSection('markets')}
+        >
           <TextArea
             placeholder="What market characteristics do you look for? How do you assess timing, wedge, defensibility, category creation…"
             value={form.marketView}
             onChange={e => set('marketView', e.target.value)}
           />
-        </div>
+        </Section>
 
-        <div>
-          <Label hint="Signals you trust; red flags; areas to double-click">What you want us to emphasize in diligence</Label>
+        <Section
+          title="What you want us to emphasize in diligence"
+          subtitle="Signals you trust; red flags; areas to double-click"
+          isOpen={openSection === 'diligence'}
+          onToggle={() => toggleSection('diligence')}
+        >
           <TextArea
             placeholder="Where should our analysis go deeper or be stricter? What red flags to watch, which signals to prioritize…"
             value={form.diligenceFocus}
             onChange={e => set('diligenceFocus', e.target.value)}
           />
-        </div>
+        </Section>
 
-        <div>
-          <Label hint="How you like to collaborate with founders and co-investors">Collaboration style</Label>
+        <Section
+          title="Collaboration style"
+          subtitle="How you like to collaborate with founders and co-investors"
+          isOpen={openSection === 'collaboration'}
+          onToggle={() => toggleSection('collaboration')}
+        >
           <TextArea
             placeholder="Describe your typical involvement post-investment, cadence, decision-making preferences, and communication style…"
             value={form.collaborationStyle}
             onChange={e => set('collaborationStyle', e.target.value)}
           />
-        </div>
+        </Section>
 
-        <div>
-          <Label>Anything else</Label>
+        <Section
+          title="Anything else"
+          isOpen={openSection === 'other'}
+          onToggle={() => toggleSection('other')}
+        >
           <TextArea
             placeholder="Any additional context to tailor analysis, sourcing and recommendations for you…"
             value={form.additionalNotes}
             onChange={e => set('additionalNotes', e.target.value)}
           />
-        </div>
+        </Section>
       </div>
 
       {/* Footer action */}

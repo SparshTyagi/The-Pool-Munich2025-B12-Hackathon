@@ -14,11 +14,8 @@ export default function OnboardingIndex(){
           <div className="pointer-events-none absolute -bottom-20 -left-12 h-60 w-60 rounded-full bg-sky-100/40 blur-3xl" />
           <div className="relative flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
             <div className="space-y-3">
-              <span className="inline-flex items-center gap-2 rounded-full border border-primary-200 bg-primary-50/80 px-3 py-1 text-xs font-semibold text-primary-600">
-                <span className="h-1.5 w-1.5 rounded-full bg-primary-500" />
-                Guided workspace
-              </span>
-              <h1 className="text-4xl font-bold text-neutral-900">Investor Onboarding</h1>
+
+              <h1 className="text-4xl font-bold text-neutral-900">Investor Profile</h1>
               <p className="max-w-2xl text-base leading-relaxed text-neutral-600">
                 Tell us how you invest so we can tailor diligence, sourcing, and recommendations to your mandate.
               </p>

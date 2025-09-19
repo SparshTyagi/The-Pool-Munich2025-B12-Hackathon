@@ -197,7 +197,9 @@ export async function uploadFilesToStorage(
   }
 
   const bucket = opts?.bucket || process.env.NEXT_PUBLIC_SUPABASE_STORAGE_BUCKET || 'uploads';
-  const uniquePrefix = opts?.prefix || `anonymous/${Date.now()}-${Math.random().toString(36).slice(2, 10)}`;
+  // For demo/anonymous uploads, place files directly under `anonymous/` with no extra folder
+  // If a caller passes an explicit prefix, we respect it (e.g., future user-specific paths)
+  const uniquePrefix = opts?.prefix || 'anonymous';
 
   const results: UploadedFile[] = [];
   const errors: Array<{ name: string; message: string }> = [];
