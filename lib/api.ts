@@ -16,7 +16,8 @@ export type StartResponse = {
 
 const API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL;
 
-export async function startAnalysis(payload: FormData): Promise<StartResponse> {
+// Nur Kontext-Text senden
+export async function startAnalysis(context: string): Promise<StartResponse> {
   if (!API_BASE) {
     // Demo fallback
     return {
@@ -28,8 +29,15 @@ export async function startAnalysis(payload: FormData): Promise<StartResponse> {
       }))
     }
   }
-  const res = await fetch(`${API_BASE}/start`, { method: 'POST', body: payload });
-  if (!res.ok) throw new Error('Failed to start analysis');
+
+  const form = new FormData();
+  form.append('context', context);
+
+  const res = await fetch(`${API_BASE}/start`, { method: 'POST', body: form });
+  if (!res.ok) {
+    const text = await res.text().catch(() => '');
+    throw new Error(`Failed to start analysis: ${res.status} ${res.statusText} ${text}`);
+  }
   return res.json();
 }
 
