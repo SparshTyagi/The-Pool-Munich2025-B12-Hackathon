@@ -3,10 +3,11 @@ import PageHeader from '@/components/PageHeader'
 import TopKPI from '@/components/TopKPI'
 import InsightCard from '@/components/InsightCard'
 import PDFDownloadButton from '@/components/PDFDownloadButton'
+import ReportSearchModal from '@/components/ReportSearchModal'
 import { getReportPdfUrl, getResults, listReportsForUser, type ReportMeta } from '@/lib/api'
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
-import { DocumentTextIcon, SparklesIcon } from '@heroicons/react/24/outline'
+import { DocumentTextIcon, SparklesIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline'
 
 export default function ResultsPage(){
   const router = useRouter()
@@ -14,6 +15,7 @@ export default function ResultsPage(){
   const [loading, setLoading] = useState(true)
   const [data, setData] = useState<any>(null)
   const [reports, setReports] = useState<ReportMeta[]>([])
+  const [isSearchOpen, setIsSearchOpen] = useState(false)
 
   // Demo/no-auth user id per request
   const DEMO_USER_ID = '2657d124-9a8c-405e-96bf-41d7376b47fc'
@@ -36,6 +38,8 @@ export default function ResultsPage(){
       router.replace({ pathname: router.pathname, query: { ...router.query, jobId: latestKey } }, undefined, { shallow: true })
     }
   }, [jobId, reports])
+
+  // no-op
 
   const insights = (data?.insights || []).slice(0, 3)
   const flagSummary = (data as any)?.flag_summary?.[0] || { green_flags: [], red_flags: [] }
@@ -74,43 +78,57 @@ export default function ResultsPage(){
         <PageHeader
           title="Analysis Results"
           description="Comprehensive investment analysis completed"
-        />
-
-        {/* Report selector */}
-        {reports.length > 0 && (
-          <section className="-mt-6">
-            <div className="mx-auto flex max-w-3xl items-center justify-between rounded-2xl border border-neutral-200 bg-white/70 px-4 py-3 shadow-soft backdrop-blur">
-              <div className="flex items-center gap-2 text-sm text-neutral-700">
-                <span className="font-medium text-neutral-900">Report</span>
-                <span className="hidden text-neutral-400 md:inline">•</span>
-                <span className="hidden text-neutral-500 md:inline">{reports.length} available</span>
-              </div>
-              <div>
-                <label htmlFor="report-select" className="sr-only">Select report</label>
-                <select
-                  id="report-select"
-                  className="w-64 rounded-xl border border-neutral-300 bg-white px-3 py-1.5 text-sm text-neutral-800 focus:border-primary-500 focus:outline-none"
-                  value={String(jobId || '')}
-                  onChange={(e) => {
-                    const value = e.target.value
-                    router.push({ pathname: router.pathname, query: { ...router.query, jobId: value } }, undefined, { shallow: true })
-                    setLoading(true)
-                  }}
+          action={
+            reports.length > 0 ? (
+              <div className="flex items-center gap-3">
+                <button
+                  type="button"
+                  className="btn btn-ghost p-2 rounded-xl"
+                  onClick={() => setIsSearchOpen(true)}
+                  title="Search reports"
                 >
-                  {reports.map((r) => {
-                    const key = r.report_id || String(r.id)
-                    const label = new Date(r.created_at).toLocaleString()
-                    return (
-                      <option key={`${key}`} value={key}>
-                        {label} {r.report_id ? `• ${r.report_id.slice(0, 8)}` : `• #${r.id}`}
-                      </option>
-                    )
-                  })}
-                </select>
+                  <MagnifyingGlassIcon className="h-5 w-5 text-neutral-700" />
+                </button>
+                <div className="relative">
+                  <label htmlFor="report-select" className="sr-only">Select report</label>
+                  <select
+                    id="report-select"
+                    className="rounded-2xl border border-neutral-300 bg-white/90 px-4 py-2 text-sm text-neutral-800 backdrop-blur-sm transition-all hover:bg-white hover:border-neutral-400 focus:border-primary-500 focus:outline-none focus:ring-2 focus:ring-primary-100 appearance-none pr-10"
+                    value={String(jobId || '')}
+                    onChange={(e) => {
+                      const value = e.target.value
+                      router.push({ pathname: router.pathname, query: { ...router.query, jobId: value } }, undefined, { shallow: true })
+                      setLoading(true)
+                    }}
+                  >
+                    {reports.map((r) => {
+                      const key = r.report_id || String(r.id)
+                      const date = new Date(r.created_at)
+                      const label = date.toLocaleDateString('en-US', { 
+                        month: 'short', 
+                        day: 'numeric', 
+                        year: 'numeric',
+                        hour: '2-digit',
+                        minute: '2-digit'
+                      })
+                      const shortId = r.report_id ? r.report_id.slice(0, 8) : `#${r.id}`
+                      return (
+                        <option key={key} value={key}>
+                          {label} • {shortId}
+                        </option>
+                      )
+                    })}
+                  </select>
+                  <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                    <svg className="h-4 w-4 text-neutral-400" fill="none" viewBox="0 0 20 20" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    </svg>
+                  </div>
+                </div>
               </div>
-            </div>
-          </section>
-        )}
+            ) : undefined
+          }
+        />
 
         <section>
           <TopKPI
@@ -227,6 +245,18 @@ export default function ResultsPage(){
         <section className="flex justify-center border-t border-neutral-200 pt-8">
           <PDFDownloadButton href={data.reportUrl || getReportPdfUrl(String(jobId || 'demo'))} />
         </section>
+
+        <ReportSearchModal
+          open={isSearchOpen}
+          onClose={() => setIsSearchOpen(false)}
+          reports={reports}
+          fetchResults={(key) => getResults(key)}
+          onSelect={(key) => {
+            setIsSearchOpen(false)
+            router.push({ pathname: router.pathname, query: { ...router.query, jobId: key } }, undefined, { shallow: true })
+            setLoading(true)
+          }}
+        />
       </div>
     </Layout>
   )

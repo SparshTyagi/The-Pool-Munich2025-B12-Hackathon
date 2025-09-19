@@ -11,8 +11,6 @@ type TopKPIProps = {
 export default function TopKPI({ label, value, context, executiveSummary, className }: TopKPIProps){
   return (
     <div className={`card relative overflow-hidden ${className ?? 'mx-auto max-w-lg'}`}>
-      <div className="absolute top-0 right-0 h-32 w-32 -translate-y-16 translate-x-16 rounded-full bg-gradient-primary opacity-5"></div>
-
       <div className="relative z-10">
         <div className="flex flex-col items-center gap-6 md:flex-row md:items-start md:gap-8">
           {/* Left side: Score and context */}
