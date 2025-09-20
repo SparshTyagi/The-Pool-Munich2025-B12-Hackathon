@@ -4,7 +4,7 @@ import os
 
 # Ensure the base agent can be found
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from validation_agents.base_agent import BaseAgent
+from Agents.base_agent import BaseAgent
 
 class TriageAgent(BaseAgent):
     """

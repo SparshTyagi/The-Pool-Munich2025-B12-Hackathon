@@ -7,3 +7,16 @@ build/
 *.log
 /src/validation_agents/testing
 .env
+
+# IDE settings
+.idea/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Virtual env
+.venv/
+
+# Reports
+reports/

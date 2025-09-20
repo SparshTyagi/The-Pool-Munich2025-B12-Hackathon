@@ -1,6 +1,6 @@
 # src/validation_agents/validation_agent.py
 import json
-from .base_agent import BaseAgent
+from Agents.base_agent import BaseAgent
 
 class ValidationAgent(BaseAgent):
     """An agent that performs the final synthesis and validation for a SINGLE claim."""

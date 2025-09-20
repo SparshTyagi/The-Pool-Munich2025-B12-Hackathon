@@ -18,6 +18,7 @@ export type StartAnalysisPayload = FormData | Record<string, unknown>;
 
 const API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL;
 
+
 export async function startAnalysis(payload: StartAnalysisPayload): Promise<StartResponse> {
   if (!API_BASE) {
     // Demo fallback
@@ -30,6 +31,7 @@ export async function startAnalysis(payload: StartAnalysisPayload): Promise<Star
       }))
     }
   }
+
   const isForm = typeof FormData !== 'undefined' && payload instanceof FormData;
   const res = await fetch(`${API_BASE}/start`, {
     method: 'POST',
